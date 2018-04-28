@@ -2,26 +2,28 @@ package main
 
 import "fmt"
 import (
-	"github.com/hashicorp/hcl/hcl/printer"
-	"os"
 	"github.com/flosell/iam-policy-json-to-terraform/encoder"
+	"log"
 )
 
 func main() {
 
-	policy_document := encoder.PolicyDocument{
+	policy_document := encoder.DataSource{
+		Type: "aws_iam_policy_document",
 		Name: "deny_access_without_mfa",
-		Statements: encoder.StatementList{
-			Statements: []*encoder.Statement{
-				&encoder.Statement{
-					Sid: "BlockMostAccessUnlessSignedInWithMFA",
-
-				},
+		Statements: []encoder.Statement{
+			encoder.Statement{
+				Sid: "BlockMostAccessUnlessSignedInWithMFA",
 			},
 		},
 	}
 
-	printer.Fprint(os.Stdout, policy_document.Encode())
-	fmt.Printf("\nHello, world.\n")
+	encoded, err := encoder.Encode(policy_document)
+
+	if err != nil {
+		log.Fatal("unable to encode: ", err)
+	}
+
+	fmt.Print(encoded)
 
 }
