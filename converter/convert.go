@@ -1,11 +1,26 @@
 package converter
 
+func convertConditions(conditions map[string]map[string]string) []HCLCondition {
+	result := make([]HCLCondition, 0)
+	for k, v := range conditions {
+		for k2, v2 := range v {
+			result = append(result, HCLCondition{
+				Test:     k,
+				Variable: k2,
+				Values:   []string{v2},
+			})
+		}
+	}
+	return result
+}
+
 func convertStatements(json JSONStatement) HCLStatement {
 	return HCLStatement{
 		Effect: json.Effect,
 		Sid:json.Sid,
 		Resources:[]string {json.Resource},
 		NotActions: json.NotAction,
+		Conditions: convertConditions(json.Condition),
 	}
 }
 

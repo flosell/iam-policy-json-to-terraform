@@ -2,11 +2,18 @@ package converter
 
 import "github.com/flosell/hclencoder"
 
+type HCLCondition struct {
+	Test string `hcl:"test"`
+	Variable string `hcl:"variable"`
+	Values []string `hcl:"values"`
+}
+
 type HCLStatement struct {
 	Sid    string `hcl:"sid"`
 	Effect string `hcl:"effect"`
 	Resources []string `hcl:"resources"`
 	NotActions []string `hcl:"not_actions"`
+	Conditions []HCLCondition `hcl:"condition,squash"`
 }
 
 type HCLDataSource struct {

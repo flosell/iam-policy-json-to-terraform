@@ -19,5 +19,11 @@ data "aws_iam_policy_document" "deny_access_without_mfa" {
       "iam:GetAccountSummary",
       "sts:GetSessionToken",
     ]
+
+    condition {
+      test     = "BoolIfExists"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["false"]
+    }
   }
 }

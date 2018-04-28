@@ -12,6 +12,7 @@ type JSONStatement struct {
 	Effect string
 	Resource string
 	NotAction []string
+	Condition map[string]map[string]string
 }
 
 func Decode(b []byte) ([]JSONStatement, error) {
