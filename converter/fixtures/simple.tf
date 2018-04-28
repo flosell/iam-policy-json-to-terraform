@@ -14,6 +14,18 @@ data "aws_iam_policy_document" "deny_access_without_mfa" {
   }
 
   statement {
+    sid    = "AllowIndividualUserToListOnlyTheirOwnMFA"
+    effect = "Allow"
+
+    resources = [
+      "arn:aws:iam::*:mfa/*",
+      "arn:aws:iam::*:user/$${aws:username}",
+    ]
+
+    actions = ["iam:ListMFADevices"]
+  }
+
+  statement {
     sid       = "BlockMostAccessUnlessSignedInWithMFA"
     effect    = "Deny"
     resources = ["*"]

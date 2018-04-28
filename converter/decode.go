@@ -10,7 +10,7 @@ type JSONPolicyDocument struct {
 type JSONStatement struct {
 	Sid    string
 	Effect string
-	Resource string
+	Resource interface{}
 	Action []string
 	NotAction []string
 	Condition map[string]map[string]string
