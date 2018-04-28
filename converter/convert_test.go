@@ -23,7 +23,7 @@ func TestConvertFromJsonToTerraformHcl(t *testing.T) {
 	}
 
 	assert.EqualValues(t,
-		expectedOutput,
+		string(expectedOutput),
 		actualOutput,
 	)
 }
