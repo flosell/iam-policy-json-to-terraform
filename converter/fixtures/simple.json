@@ -16,9 +16,7 @@
     {
       "Sid": "AllowIndividualUserToListOnlyTheirOwnMFA",
       "Effect": "Allow",
-      "Action": [
-        "iam:ListMFADevices"
-      ],
+      "Action": "iam:ListMFADevices",
       "Resource": [
         "arn:aws:iam::*:mfa/*",
         "arn:aws:iam::*:user/${aws:username}"

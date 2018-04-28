@@ -23,7 +23,11 @@ func convertConditions(conditions map[string]map[string]string) []HCLCondition {
 	return result
 }
 
-func convertStringOrStringArray(v interface{}) []string {
+func convertStringOrStringArray(v StringOrStringArray) []string {
+	if v == nil {
+		return nil
+	}
+
 	resourceArray, arrOk := v.([]interface{})
 	resourceString, _ := v.(string)
 	var resources []string
@@ -43,8 +47,8 @@ func convertStatements(json JSONStatement) HCLStatement {
 		Effect:     json.Effect,
 		Sid:        json.Sid,
 		Resources:  convertStringOrStringArray(json.Resource),
-		Actions:    json.Action,
-		NotActions: json.NotAction,
+		Actions:    convertStringOrStringArray(json.Action),
+		NotActions: convertStringOrStringArray(json.NotAction),
 		Conditions: convertConditions(json.Condition),
 	}
 }

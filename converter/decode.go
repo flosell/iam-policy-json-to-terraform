@@ -7,12 +7,14 @@ type JSONPolicyDocument struct {
 	Statement []JSONStatement
 }
 
+type StringOrStringArray interface{}
+
 type JSONStatement struct {
 	Sid    string
 	Effect string
-	Resource interface{}
-	Action []string
-	NotAction []string
+	Resource StringOrStringArray
+	Action StringOrStringArray
+	NotAction StringOrStringArray
 	Condition map[string]map[string]string
 }
 
