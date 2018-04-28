@@ -10,6 +10,7 @@ func TestDecodeJSON(t *testing.T) {
 	expected := []Statement{
 		{
 			Sid: "BlockMostAccessUnlessSignedInWithMFA",
+			Effect: "Deny",
 		},
 	}
 	jsonString, ferr := ioutil.ReadFile("fixtures/simple.json")

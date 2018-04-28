@@ -2,6 +2,7 @@ package encoder
 
 type Statement struct {
 	Sid string `hcl:"sid"`
+	Effect string `hcl:"effect"`
 }
 
 type DataSource struct {

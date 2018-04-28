@@ -13,6 +13,7 @@ func TestEncodeDataSourceStruct(t *testing.T) {
 		Statements: []Statement{
 			Statement{
 				Sid: "BlockMostAccessUnlessSignedInWithMFA",
+				Effect: "Deny",
 			},
 		},
 	}
