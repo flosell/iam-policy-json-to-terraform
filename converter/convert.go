@@ -69,7 +69,7 @@ func Convert(b []byte) (string, error) {
 
 	dataSource := hclDataSource{
 		Type:       "aws_iam_policy_document",
-		Name:       "deny_access_without_mfa",
+		Name:       "policy",
 		Statements: hclStatements,
 	}
 

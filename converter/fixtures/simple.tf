@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "deny_access_without_mfa" {
+data "aws_iam_policy_document" "policy" {
   statement {
     sid       = "AllowAllUsersToListAccounts"
     effect    = "Allow"
