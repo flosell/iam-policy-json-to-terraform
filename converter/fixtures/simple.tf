@@ -52,4 +52,16 @@ data "aws_iam_policy_document" "deny_access_without_mfa" {
       values   = ["false"]
     }
   }
+
+  statement {
+    sid    = ""
+    effect = "Deny"
+
+    not_resources = [
+      "arn:aws:s3:::HRBucket/Payroll",
+      "arn:aws:s3:::HRBucket/Payroll/*",
+    ]
+
+    actions = ["s3:*"]
+  }
 }

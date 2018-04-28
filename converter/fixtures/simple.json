@@ -46,6 +46,14 @@
           "aws:MultiFactorAuthPresent": "false"
         }
       }
+    },
+    {
+      "Effect": "Deny",
+      "Action": "s3:*",
+      "NotResource": [
+        "arn:aws:s3:::HRBucket/Payroll",
+        "arn:aws:s3:::HRBucket/Payroll/*"
+      ]
     }
   ]
 }

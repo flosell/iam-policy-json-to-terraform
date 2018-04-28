@@ -12,6 +12,7 @@ type HCLStatement struct {
 	Sid    string `hcl:"sid"`
 	Effect string `hcl:"effect"`
 	Resources []string `hcl:"resources"`
+	NotResources []string `hcl:"not_resources"`
 	Actions []string `hcl:"actions"`
 	NotActions []string `hcl:"not_actions"`
 	Conditions []HCLCondition `hcl:"condition,squash"`

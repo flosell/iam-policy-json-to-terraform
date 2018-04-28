@@ -13,6 +13,7 @@ type JSONStatement struct {
 	Sid    string
 	Effect string
 	Resource StringOrStringArray
+	NotResource StringOrStringArray
 	Action StringOrStringArray
 	NotAction StringOrStringArray
 	Condition map[string]map[string]string
