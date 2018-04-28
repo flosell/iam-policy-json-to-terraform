@@ -1,16 +1,29 @@
 package converter
 
+func convertStatements(json JSONStatement) HCLStatement {
+	return HCLStatement{
+		Effect: json.Effect,
+		Sid:json.Sid,
+		Resources:[]string {json.Resource},
+	}
+}
+
 func Convert(b []byte) (string, error) {
 	statementsFromJson, err := Decode(b)
+	hclStatements := make([]HCLStatement , len(statementsFromJson))
+
+	for i, s := range statementsFromJson {
+		hclStatements[i] = convertStatements(s)
+	}
 
 	if err != nil {
 		return "", err
 	}
 
-	data_source := HclDataSource{
+	data_source := HCLDataSource{
 		Type: "aws_iam_policy_document",
 		Name: "deny_access_without_mfa",
-		Statements: statementsFromJson,
+		Statements: hclStatements,
 	}
 
 	tfFromStatements, err := Encode(data_source)

@@ -4,10 +4,16 @@ import "encoding/json"
 
 type JSONPolicyDocument struct {
 	Version string
-	Statement []HclStatement
+	Statement []JSONStatement
 }
 
-func Decode(b []byte) ([]HclStatement, error) {
+type JSONStatement struct {
+	Sid    string
+	Effect string
+	Resource string
+}
+
+func Decode(b []byte) ([]JSONStatement, error) {
 	document := &JSONPolicyDocument{}
 	err := json.Unmarshal(b, document)
 
