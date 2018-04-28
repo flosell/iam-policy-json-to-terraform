@@ -11,6 +11,7 @@ type JSONStatement struct {
 	Sid    string
 	Effect string
 	Resource string
+	NotAction []string
 }
 
 func Decode(b []byte) ([]JSONStatement, error) {

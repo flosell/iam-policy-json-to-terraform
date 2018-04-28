@@ -6,6 +6,7 @@ type HCLStatement struct {
 	Sid    string `hcl:"sid"`
 	Effect string `hcl:"effect"`
 	Resources []string `hcl:"resources"`
+	NotActions []string `hcl:"not_actions"`
 }
 
 type HCLDataSource struct {
