@@ -9,11 +9,11 @@ func convertStrings(s string) string {
 	return strings.Replace(s, "$", "$$", -1)
 }
 
-func convertConditions(conditions map[string]map[string]string) []HCLCondition {
-	result := make([]HCLCondition, 0)
+func convertConditions(conditions map[string]map[string]string) []hclCondition {
+	result := make([]hclCondition, 0)
 	for k, v := range conditions {
 		for k2, v2 := range v {
-			result = append(result, HCLCondition{
+			result = append(result, hclCondition{
 				Test:     k,
 				Variable: k2,
 				Values:   []string{convertStrings(v2)},
@@ -23,7 +23,7 @@ func convertConditions(conditions map[string]map[string]string) []HCLCondition {
 	return result
 }
 
-func convertStringOrStringArray(v StringOrStringArray) []string {
+func convertStringOrStringArray(v stringOrStringArray) []string {
 	if v == nil {
 		return nil
 	}
@@ -42,8 +42,8 @@ func convertStringOrStringArray(v StringOrStringArray) []string {
 	return resources
 }
 
-func convertStatements(json JSONStatement) HCLStatement {
-	return HCLStatement{
+func convertStatements(json jsonStatement) hclStatement {
+	return hclStatement{
 		Effect:     json.Effect,
 		Sid:        json.Sid,
 		Resources:  convertStringOrStringArray(json.Resource),
@@ -54,11 +54,12 @@ func convertStatements(json JSONStatement) HCLStatement {
 	}
 }
 
+// Convert reads a JSON policy document and return a string with a terraform policy document definition
 func Convert(b []byte) (string, error) {
-	statementsFromJson, err := Decode(b)
-	hclStatements := make([]HCLStatement , len(statementsFromJson))
+	statementsFromJSON, err := decode(b)
+	hclStatements := make([]hclStatement, len(statementsFromJSON))
 
-	for i, s := range statementsFromJson {
+	for i, s := range statementsFromJSON {
 		hclStatements[i] = convertStatements(s)
 	}
 
@@ -66,13 +67,13 @@ func Convert(b []byte) (string, error) {
 		return "", err
 	}
 
-	data_source := HCLDataSource{
+	dataSource := hclDataSource{
 		Type: "aws_iam_policy_document",
 		Name: "deny_access_without_mfa",
 		Statements: hclStatements,
 	}
 
-	tfFromStatements, err := Encode(data_source)
+	tfFromStatements, err := encode(dataSource)
 
 	if err != nil {
 		return "", err

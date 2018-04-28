@@ -2,25 +2,25 @@ package converter
 
 import "encoding/json"
 
-type JSONPolicyDocument struct {
+type jsonPolicyDocument struct {
 	Version string
-	Statement []JSONStatement
+	Statement []jsonStatement
 }
 
-type StringOrStringArray interface{}
+type stringOrStringArray interface{}
 
-type JSONStatement struct {
-	Sid    string
-	Effect string
-	Resource StringOrStringArray
-	NotResource StringOrStringArray
-	Action StringOrStringArray
-	NotAction StringOrStringArray
-	Condition map[string]map[string]string
+type jsonStatement struct {
+	Sid         string
+	Effect      string
+	Resource    stringOrStringArray
+	NotResource stringOrStringArray
+	Action      stringOrStringArray
+	NotAction   stringOrStringArray
+	Condition   map[string]map[string]string
 }
 
-func Decode(b []byte) ([]JSONStatement, error) {
-	document := &JSONPolicyDocument{}
+func decode(b []byte) ([]jsonStatement, error) {
+	document := &jsonPolicyDocument{}
 	err := json.Unmarshal(b, document)
 
 	if err != nil {
