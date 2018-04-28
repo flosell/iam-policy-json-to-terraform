@@ -4,7 +4,8 @@ Small tool to convert an IAM Policy in JSON format into a Terraform [`aws_iam_po
 
 ## Installation
 
-TODO
+Download the latest binary from the [releases page](https://github.com/flosell/iam-policy-json-to-terraform/releases) and put it into your `PATH` under the name `iam-policy-json-to-terraform`
+
 
 ## Usage
 
