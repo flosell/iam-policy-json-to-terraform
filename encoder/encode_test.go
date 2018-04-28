@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestEncoder(t *testing.T) {
+func TestEncodeDataSourceStruct(t *testing.T) {
 	data_source := DataSource{
 		Type: "aws_iam_policy_document",
 		Name: "deny_access_without_mfa",
@@ -30,7 +30,4 @@ func TestEncoder(t *testing.T) {
 		string(expected),
 		string(actual),
 	)
-
-
-
 }

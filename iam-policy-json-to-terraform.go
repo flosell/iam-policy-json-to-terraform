@@ -4,26 +4,25 @@ import "fmt"
 import (
 	"github.com/flosell/iam-policy-json-to-terraform/encoder"
 	"log"
+	"bufio"
+	"os"
+	"io/ioutil"
 )
 
 func main() {
-
-	policy_document := encoder.DataSource{
-		Type: "aws_iam_policy_document",
-		Name: "deny_access_without_mfa",
-		Statements: []encoder.Statement{
-			encoder.Statement{
-				Sid: "BlockMostAccessUnlessSignedInWithMFA",
-			},
-		},
-	}
-
-	encoded, err := encoder.Encode(policy_document)
+	reader := bufio.NewReader(os.Stdin)
+	b, err := ioutil.ReadAll(reader)
 
 	if err != nil {
-		log.Fatal("unable to encode: ", err)
+		log.Fatal("unable to read stdin: ", err)
 	}
 
-	fmt.Print(encoded)
+	converted, err := encoder.Convert(b)
+
+	if err != nil {
+		log.Fatal("unable to convert: ", err)
+	}
+
+	fmt.Print(converted)
 
 }
