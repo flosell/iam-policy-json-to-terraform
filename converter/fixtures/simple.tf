@@ -3,6 +3,14 @@ data "aws_iam_policy_document" "deny_access_without_mfa" {
     sid       = "AllowAllUsersToListAccounts"
     effect    = "Allow"
     resources = ["*"]
+
+    actions = [
+      "iam:ListAccountAliases",
+      "iam:ListUsers",
+      "iam:ListVirtualMFADevices",
+      "iam:GetAccountPasswordPolicy",
+      "iam:GetAccountSummary",
+    ]
   }
 
   statement {

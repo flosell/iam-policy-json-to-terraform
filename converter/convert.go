@@ -19,6 +19,7 @@ func convertStatements(json JSONStatement) HCLStatement {
 		Effect: json.Effect,
 		Sid:json.Sid,
 		Resources:[]string {json.Resource},
+		Actions: json.Action,
 		NotActions: json.NotAction,
 		Conditions: convertConditions(json.Condition),
 	}

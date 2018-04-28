@@ -11,6 +11,7 @@ type JSONStatement struct {
 	Sid    string
 	Effect string
 	Resource string
+	Action []string
 	NotAction []string
 	Condition map[string]map[string]string
 }
