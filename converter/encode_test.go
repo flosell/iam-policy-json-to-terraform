@@ -1,4 +1,4 @@
-package encoder
+package converter
 
 import (
 	"testing"
@@ -7,11 +7,11 @@ import (
 )
 
 func TestEncodeDataSourceStruct(t *testing.T) {
-	data_source := DataSource{
+	data_source := HclDataSource{
 		Type: "aws_iam_policy_document",
 		Name: "deny_access_without_mfa",
-		Statements: []Statement{
-			Statement{
+		Statements: []HclStatement{
+			HclStatement{
 				Sid: "BlockMostAccessUnlessSignedInWithMFA",
 				Effect: "Deny",
 			},

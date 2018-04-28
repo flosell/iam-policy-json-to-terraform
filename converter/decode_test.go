@@ -1,4 +1,4 @@
-package encoder
+package converter
 
 import (
 	"io/ioutil"
@@ -7,7 +7,7 @@ import (
 )
 
 func TestDecodeJSON(t *testing.T) {
-	expected := []Statement{
+	expected := []HclStatement{
 		{
 			Sid: "BlockMostAccessUnlessSignedInWithMFA",
 			Effect: "Deny",

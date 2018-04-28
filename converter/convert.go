@@ -1,4 +1,4 @@
-package encoder
+package converter
 
 func Convert(b []byte) (string, error) {
 	statementsFromJson, err := Decode(b)
@@ -7,12 +7,11 @@ func Convert(b []byte) (string, error) {
 		return "", err
 	}
 
-	data_source := DataSource{
+	data_source := HclDataSource{
 		Type: "aws_iam_policy_document",
 		Name: "deny_access_without_mfa",
 		Statements: statementsFromJson,
 	}
-
 
 	tfFromStatements, err := Encode(data_source)
 

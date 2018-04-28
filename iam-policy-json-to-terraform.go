@@ -2,11 +2,11 @@ package main
 
 import "fmt"
 import (
-	"github.com/flosell/iam-policy-json-to-terraform/encoder"
 	"log"
 	"bufio"
 	"os"
 	"io/ioutil"
+	"github.com/flosell/iam-policy-json-to-terraform/converter"
 )
 
 func main() {
@@ -17,7 +17,7 @@ func main() {
 		log.Fatal("unable to read stdin: ", err)
 	}
 
-	converted, err := encoder.Convert(b)
+	converted, err := converter.Convert(b)
 
 	if err != nil {
 		log.Fatal("unable to convert: ", err)

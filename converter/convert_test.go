@@ -1,4 +1,4 @@
-package encoder
+package converter
 
 import (
 	"io/ioutil"
