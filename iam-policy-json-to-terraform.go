@@ -2,11 +2,11 @@ package main
 
 import "fmt"
 import (
-	"log"
 	"bufio"
-	"os"
-	"io/ioutil"
 	"github.com/flosell/iam-policy-json-to-terraform/converter"
+	"io/ioutil"
+	"log"
+	"os"
 )
 
 func main() {

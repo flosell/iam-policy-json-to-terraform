@@ -3,7 +3,7 @@ package converter
 import "encoding/json"
 
 type jsonPolicyDocument struct {
-	Version string
+	Version   string
 	Statement []jsonStatement
 }
 

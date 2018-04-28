@@ -1,8 +1,8 @@
 package converter
 
 import (
-	"io/ioutil"
 	"github.com/timfeirg/testify/assert"
+	"io/ioutil"
 	"testing"
 )
 
@@ -27,4 +27,3 @@ func TestConvertFromJsonToTerraformHcl(t *testing.T) {
 		actualOutput,
 	)
 }
-

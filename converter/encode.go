@@ -3,19 +3,19 @@ package converter
 import "github.com/flosell/hclencoder"
 
 type hclCondition struct {
-	Test string `hcl:"test"`
-	Variable string `hcl:"variable"`
-	Values []string `hcl:"values"`
+	Test     string   `hcl:"test"`
+	Variable string   `hcl:"variable"`
+	Values   []string `hcl:"values"`
 }
 
 type hclStatement struct {
-	Sid    string             `hcl:"sid"`
-	Effect string             `hcl:"effect"`
-	Resources []string        `hcl:"resources"`
-	NotResources []string     `hcl:"not_resources"`
-	Actions []string          `hcl:"actions"`
-	NotActions []string       `hcl:"not_actions"`
-	Conditions []hclCondition `hcl:"condition,squash"`
+	Sid          string         `hcl:"sid"`
+	Effect       string         `hcl:"effect"`
+	Resources    []string       `hcl:"resources"`
+	NotResources []string       `hcl:"not_resources"`
+	Actions      []string       `hcl:"actions"`
+	NotActions   []string       `hcl:"not_actions"`
+	Conditions   []hclCondition `hcl:"condition,squash"`
 }
 
 type hclDataSource struct {

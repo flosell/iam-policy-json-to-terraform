@@ -44,13 +44,13 @@ func convertStringOrStringArray(v stringOrStringArray) []string {
 
 func convertStatements(json jsonStatement) hclStatement {
 	return hclStatement{
-		Effect:     json.Effect,
-		Sid:        json.Sid,
-		Resources:  convertStringOrStringArray(json.Resource),
-		NotResources:  convertStringOrStringArray(json.NotResource),
-		Actions:    convertStringOrStringArray(json.Action),
-		NotActions: convertStringOrStringArray(json.NotAction),
-		Conditions: convertConditions(json.Condition),
+		Effect:       json.Effect,
+		Sid:          json.Sid,
+		Resources:    convertStringOrStringArray(json.Resource),
+		NotResources: convertStringOrStringArray(json.NotResource),
+		Actions:      convertStringOrStringArray(json.Action),
+		NotActions:   convertStringOrStringArray(json.NotAction),
+		Conditions:   convertConditions(json.Condition),
 	}
 }
 
@@ -68,8 +68,8 @@ func Convert(b []byte) (string, error) {
 	}
 
 	dataSource := hclDataSource{
-		Type: "aws_iam_policy_document",
-		Name: "deny_access_without_mfa",
+		Type:       "aws_iam_policy_document",
+		Name:       "deny_access_without_mfa",
 		Statements: hclStatements,
 	}
 
