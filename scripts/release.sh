@@ -33,4 +33,15 @@ github-release release \
     --repo ${REPO} \
     --tag ${VERSION} \
     --name ${VERSION} \
-    --description $(chag contents)
+    --description "$(chag contents)"
+
+for i in "${REPO}.exe" "${REPO}_alpine" "${REPO}_amd64" "${REPO}_darwin"; do
+  echo "Uploading ${i}..."
+  github-release upload \
+      --user ${USER} \
+      --repo ${REPO} \
+      --tag ${VERSION} \
+      --name ${i} \
+      --file ${i}
+done
+
