@@ -1,6 +1,6 @@
 .PHONY: build test clean fmt fmtcheck tools
 
-build: iam-policy-json-to-terraform_amd64 iam-policy-json-to-terraform_alpine iam-policy-json-to-terraform_darwin iam-policy-json-to-terraform.exe
+build: test iam-policy-json-to-terraform_amd64 iam-policy-json-to-terraform_alpine iam-policy-json-to-terraform_darwin iam-policy-json-to-terraform.exe
 
 vendor: **/*.go Gopkg.*
 	dep ensure
@@ -21,16 +21,16 @@ fmt: **/*.go
 tools:
 	go get -u golang.org/x/lint/golint
 
-iam-policy-json-to-terraform_amd64: vendor *.go
+iam-policy-json-to-terraform_amd64: vendor **/*.go
 	 GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -o $@ *.go
 
-iam-policy-json-to-terraform_alpine: vendor *.go
+iam-policy-json-to-terraform_alpine: vendor **/*.go
 	 GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o $@ *.go
 
-iam-policy-json-to-terraform_darwin: vendor *.go
+iam-policy-json-to-terraform_darwin: vendor **/*.go
 	GOOS=darwin go build -o $@ *.go
 
-iam-policy-json-to-terraform.exe: vendor *.go
+iam-policy-json-to-terraform.exe: vendor **/*.go
 	GOOS=windows GOARCH=amd64 go build -o $@ *.go
 
 fmtcheck: vendor **/*.go
