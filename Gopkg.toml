@@ -25,3 +25,7 @@
   branch = "multiple-keys"
   name = "github.com/flosell/hclencoder"
 
+[[constraint]]
+  branch = "master"
+  name = "github.com/timfeirg/testify"
+

@@ -29,11 +29,11 @@
   branch = "master"
   name = "github.com/timfeirg/testify"
   packages = ["assert"]
-  revision = "a4019676331462ab77e53ae44f588e948b1cff01"
+  revision = "dabecbabba51fc39e6cb684c8890b689b5e63df4"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "66399ac498043464a4eb8f75b3383ad84ffb688d852493b9536c7efc4a029e66"
+  inputs-digest = "7b1edc00d554ab463416f5c06da1823359e4c8c097f3cd37f55309b159d54b7f"
   solver-name = "gps-cdcl"
   solver-version = 1
