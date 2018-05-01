@@ -11,7 +11,7 @@
   branch = "multiple-keys"
   name = "github.com/flosell/hclencoder"
   packages = ["."]
-  revision = "5cc45bfa88029f17065e181e01f003281865af3f"
+  revision = "f9ddda07e6b68e2f2dcb579f3ff14f0b5e0cb019"
 
 [[projects]]
   branch = "master"
