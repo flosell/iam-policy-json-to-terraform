@@ -53,7 +53,16 @@
       "NotResource": [
         "arn:aws:s3:::HRBucket/Payroll",
         "arn:aws:s3:::HRBucket/Payroll/*"
-      ]
+      ],
+      "Condition": {
+        "StringLike": {
+          "s3:prefix": [
+            "",
+            "home/",
+            "home/${aws:username}/"
+          ]
+        }
+      }
     }
   ]
 }

@@ -21,7 +21,7 @@ fi
 cd ${SCRIPT_DIR}/..
 
 chag update $VERSION
-git commit -m "Release 1.0.0: Update CHANGELOG.md" CHANGELOG.md
+git commit -m "Release ${VERSION}: Update CHANGELOG.md" CHANGELOG.md
 chag tag --sign
 
 git push

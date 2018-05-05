@@ -63,5 +63,16 @@ data "aws_iam_policy_document" "policy" {
     ]
 
     actions = ["s3:*"]
+
+    condition {
+      test     = "StringLike"
+      variable = "s3:prefix"
+
+      values = [
+        "",
+        "home/",
+        "home/$${aws:username}/",
+      ]
+    }
   }
 }

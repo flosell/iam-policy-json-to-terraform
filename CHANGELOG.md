@@ -4,6 +4,12 @@ This changelog contains a loose collection of changes in every release. I will a
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## Unreleased
+
+### Added 
+
+* Support for conditions with multiple values
+
 ## 1.0.0 - 2018-04-28
 
 Initial Release

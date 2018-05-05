@@ -16,7 +16,7 @@ type jsonStatement struct {
 	NotResource stringOrStringArray
 	Action      stringOrStringArray
 	NotAction   stringOrStringArray
-	Condition   map[string]map[string]string
+	Condition   map[string]map[string]stringOrStringArray
 }
 
 func decode(b []byte) ([]jsonStatement, error) {

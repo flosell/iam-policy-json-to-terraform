@@ -9,14 +9,19 @@ func convertStrings(s string) string {
 	return strings.Replace(s, "$", "$$", -1)
 }
 
-func convertConditions(conditions map[string]map[string]string) []hclCondition {
+func convertConditions(conditions map[string]map[string]stringOrStringArray) []hclCondition {
 	result := make([]hclCondition, 0)
 	for k, v := range conditions {
 		for k2, v2 := range v {
+			valueStrings := convertStringOrStringArray(v2)
+			values := make([]string, len(valueStrings))
+			for i, value := range valueStrings {
+				values[i] = value
+			}
 			result = append(result, hclCondition{
 				Test:     k,
 				Variable: k2,
-				Values:   []string{convertStrings(v2)},
+				Values:   values,
 			})
 		}
 	}
