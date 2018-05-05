@@ -9,7 +9,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added 
 
 * Support for `Condition` with multiple values
-* Added support for `Pricipal` and `NotPrincipal`
+* Support for `Pricipal` and `NotPrincipal`
+* Flag `-name` to specify the name of the generated policy
 
 ## 1.0.0 - 2018-04-28
 

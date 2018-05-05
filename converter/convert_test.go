@@ -16,7 +16,7 @@ func TestConvertFromJsonToTerraformHcl(t *testing.T) {
 		t.Fatal(ferr)
 	}
 
-	actualOutput, err := Convert(input)
+	actualOutput, err := Convert("policy", input)
 
 	if err != nil {
 		t.Fatal(err)
