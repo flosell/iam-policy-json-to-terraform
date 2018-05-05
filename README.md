@@ -14,22 +14,3 @@ Download the latest binary from the [releases page](https://github.com/flosell/i
 ```
 $ cat some-policy.json | iam-policy-json-to-terraform
 ```
-
-## TODO:
-
-* [x] Read JSON
-* [x] Format HCL
-* [x] Support all attributes of the datasource
-  * [x] Sid
-  * [x] Effect
-  * [x] Principal
-  * [x] NotPrincipal
-  * [x] Action
-  * [x] NotAction
-  * [x] Resource
-  * [x] NotResource
-  * [x] Condition with single value
-  * [x] Condition with multiple values (e.g. [s3:prefix](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_statement.html))
-* [x] Make data source name configurable
-* [x] `./go`-script or `Makefile`
-* [x] Release (and complete installation instructions)
