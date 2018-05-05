@@ -17,12 +17,12 @@ Initial Release
 
 ### Added
 
-* [x] Read IAM Policy JSON from STDIN and write Terraform HCL to STDOUT
-* [ ] Support for the following properties
-  * [x] Sid
-  * [x] Effect
-  * [x] Action
-  * [x] NotAction
-  * [x] Resource
-  * [x] NotResource
-  * [x] Condition with single value
+* Read IAM Policy JSON from STDIN and write Terraform HCL to STDOUT
+* Support for the following properties
+  * `Sid`
+  * `Effect`
+  * `Action`
+  * `NotAction`
+  * `Resource`
+  * `NotResource`
+  * `Condition` with single value
