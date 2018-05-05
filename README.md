@@ -19,11 +19,11 @@ $ cat some-policy.json | iam-policy-json-to-terraform
 
 * [x] Read JSON
 * [x] Format HCL
-* [ ] Support all attributes of the datasource
+* [x] Support all attributes of the datasource
   * [x] Sid
   * [x] Effect
-  * [ ] Principal
-  * [ ] NotPrincipal
+  * [x] Principal
+  * [x] NotPrincipal
   * [x] Action
   * [x] NotAction
   * [x] Resource

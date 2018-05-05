@@ -75,4 +75,30 @@ data "aws_iam_policy_document" "policy" {
       ]
     }
   }
+
+  statement {
+    sid     = ""
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type = "Service"
+
+      identifiers = [
+        "elasticmapreduce.amazonaws.com",
+        "datapipeline.amazonaws.com",
+      ]
+    }
+  }
+
+  statement {
+    sid     = ""
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+
+    not_principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:sts::1234567:assumed-role/role-name/role-session-name"]
+    }
+  }
 }

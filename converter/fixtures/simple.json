@@ -63,6 +63,21 @@
           ]
         }
       }
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": [
+          "elasticmapreduce.amazonaws.com",
+          "datapipeline.amazonaws.com"
+        ]
+      },
+      "Action": "sts:AssumeRole"
+    },
+    {
+      "Effect": "Allow",
+      "NotPrincipal": { "AWS": "arn:aws:sts::1234567:assumed-role/role-name/role-session-name" },
+      "Action": "sts:AssumeRole"
     }
   ]
 }

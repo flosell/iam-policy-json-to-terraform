@@ -8,14 +8,21 @@ type hclCondition struct {
 	Values   []string `hcl:"values"`
 }
 
+type hclPrincipal struct {
+	Type        string   `hcl:"type"`
+	Identifiers []string `hcl:"identifiers"`
+}
+
 type hclStatement struct {
-	Sid          string         `hcl:"sid"`
-	Effect       string         `hcl:"effect"`
-	Resources    []string       `hcl:"resources"`
-	NotResources []string       `hcl:"not_resources"`
-	Actions      []string       `hcl:"actions"`
-	NotActions   []string       `hcl:"not_actions"`
-	Conditions   []hclCondition `hcl:"condition,squash"`
+	Sid           string         `hcl:"sid"`
+	Effect        string         `hcl:"effect"`
+	Resources     []string       `hcl:"resources"`
+	NotResources  []string       `hcl:"not_resources"`
+	Actions       []string       `hcl:"actions"`
+	NotActions    []string       `hcl:"not_actions"`
+	Conditions    []hclCondition `hcl:"condition,squash"`
+	Principals    []hclPrincipal `hcl:"principals,squash"`
+	NotPrincipals []hclPrincipal `hcl:"not_principals,squash"`
 }
 
 type hclDataSource struct {

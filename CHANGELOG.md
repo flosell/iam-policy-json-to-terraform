@@ -8,7 +8,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Added 
 
-* Support for conditions with multiple values
+* Support for `Condition` with multiple values
+* Added support for `Pricipal` and `NotPrincipal`
 
 ## 1.0.0 - 2018-04-28
 

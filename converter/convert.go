@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-func convertStrings(s string) string {
+func escapeString(s string) string {
 	// Escape TF special characters
 	return strings.Replace(s, "$", "$$", -1)
 }
@@ -13,17 +13,23 @@ func convertConditions(conditions map[string]map[string]stringOrStringArray) []h
 	result := make([]hclCondition, 0)
 	for k, v := range conditions {
 		for k2, v2 := range v {
-			valueStrings := convertStringOrStringArray(v2)
-			values := make([]string, len(valueStrings))
-			for i, value := range valueStrings {
-				values[i] = value
-			}
 			result = append(result, hclCondition{
 				Test:     k,
 				Variable: k2,
-				Values:   values,
+				Values:   convertStringOrStringArray(v2),
 			})
 		}
+	}
+	return result
+}
+
+func convertPrincipals(principals map[string]stringOrStringArray) []hclPrincipal {
+	result := make([]hclPrincipal, 0)
+	for k, v := range principals {
+		result = append(result, hclPrincipal{
+			Type:        k,
+			Identifiers: convertStringOrStringArray(v),
+		})
 	}
 	return result
 }
@@ -39,7 +45,7 @@ func convertStringOrStringArray(v stringOrStringArray) []string {
 	if arrOk {
 		resources = make([]string, len(resourceArray))
 		for i, r := range resourceArray {
-			resources[i] = convertStrings(r.(string))
+			resources[i] = escapeString(r.(string))
 		}
 	} else {
 		resources = []string{resourceString}
@@ -49,13 +55,15 @@ func convertStringOrStringArray(v stringOrStringArray) []string {
 
 func convertStatements(json jsonStatement) hclStatement {
 	return hclStatement{
-		Effect:       json.Effect,
-		Sid:          json.Sid,
-		Resources:    convertStringOrStringArray(json.Resource),
-		NotResources: convertStringOrStringArray(json.NotResource),
-		Actions:      convertStringOrStringArray(json.Action),
-		NotActions:   convertStringOrStringArray(json.NotAction),
-		Conditions:   convertConditions(json.Condition),
+		Effect:        json.Effect,
+		Sid:           json.Sid,
+		Resources:     convertStringOrStringArray(json.Resource),
+		NotResources:  convertStringOrStringArray(json.NotResource),
+		Actions:       convertStringOrStringArray(json.Action),
+		NotActions:    convertStringOrStringArray(json.NotAction),
+		Conditions:    convertConditions(json.Condition),
+		Principals:    convertPrincipals(json.Principal),
+		NotPrincipals: convertPrincipals(json.NotPrincipal),
 	}
 }
 
