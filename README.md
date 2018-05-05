@@ -29,7 +29,7 @@ $ cat some-policy.json | iam-policy-json-to-terraform
   * [x] Resource
   * [x] NotResource
   * [x] Condition with single value
-  * [ ] Condition with multiple values (e.g. [s3:prefix](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_statement.html))
+  * [x] Condition with multiple values (e.g. [s3:prefix](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_statement.html))
 * [ ] Make data source name configurable
 * [x] `./go`-script or `Makefile`
-* [ ] Release (and complete installation instructions)
+* [x] Release (and complete installation instructions)
