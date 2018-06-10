@@ -1,7 +1,7 @@
 package converter
 
 import (
-	"github.com/timfeirg/testify/assert"
+	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"testing"
 )

@@ -16,7 +16,14 @@
 [[projects]]
   branch = "master"
   name = "github.com/hashicorp/hcl"
-  packages = ["hcl/ast","hcl/parser","hcl/printer","hcl/scanner","hcl/strconv","hcl/token"]
+  packages = [
+    "hcl/ast",
+    "hcl/parser",
+    "hcl/printer",
+    "hcl/scanner",
+    "hcl/strconv",
+    "hcl/token"
+  ]
   revision = "ef8a98b0bbce4a65b5aa4c368430a80ddc533168"
 
 [[projects]]
@@ -26,14 +33,14 @@
   version = "v1.0.0"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/timfeirg/testify"
+  name = "github.com/stretchr/testify"
   packages = ["assert"]
-  revision = "dabecbabba51fc39e6cb684c8890b689b5e63df4"
+  revision = "f35b8ab0b5a2cef36673838d662e249dd9c94686"
+  version = "v1.2.2"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "7b1edc00d554ab463416f5c06da1823359e4c8c097f3cd37f55309b159d54b7f"
+  inputs-digest = "bd201d5f413bb27dc44cc6e55323e5291b78f59147316d94abcd3e1086bbfe56"
   solver-name = "gps-cdcl"
   solver-version = 1
