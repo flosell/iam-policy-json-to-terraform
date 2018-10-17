@@ -12,5 +12,5 @@ Download the latest binary from the [releases page](https://github.com/flosell/i
 ## Usage
 
 ```
-$ cat some-policy.json | iam-policy-json-to-terraform
+$ iam-policy-json-to-terraform < some-policy.json
 ```
