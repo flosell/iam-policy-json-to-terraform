@@ -8,6 +8,7 @@ type jsonPolicyDocument struct {
 }
 
 type stringOrStringArray interface{}
+type stringOrMapWithStringOrStringArray interface{}
 
 type jsonStatement struct {
 	Sid          string
@@ -17,8 +18,8 @@ type jsonStatement struct {
 	Action       stringOrStringArray
 	NotAction    stringOrStringArray
 	Condition    map[string]map[string]stringOrStringArray
-	Principal    map[string]stringOrStringArray
-	NotPrincipal map[string]stringOrStringArray
+	Principal    stringOrMapWithStringOrStringArray
+	NotPrincipal stringOrMapWithStringOrStringArray
 }
 
 func decode(b []byte) ([]jsonStatement, error) {

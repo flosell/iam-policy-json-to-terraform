@@ -101,4 +101,22 @@ data "aws_iam_policy_document" "policy" {
       identifiers = ["arn:aws:sts::1234567:assumed-role/role-name/role-session-name"]
     }
   }
+
+  statement {
+    sid       = "DenyUnEncryptedObjectUploads"
+    effect    = "Deny"
+    resources = ["arn:aws:s3:::<bucket_name>/*"]
+    actions   = ["s3:PutObject"]
+
+    condition {
+      test     = "Null"
+      variable = "s3:x-amz-server-side-encryption"
+      values   = [""]
+    }
+
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+  }
 }

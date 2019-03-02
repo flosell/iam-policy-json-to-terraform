@@ -23,7 +23,24 @@ func convertConditions(conditions map[string]map[string]stringOrStringArray) []h
 	return result
 }
 
-func convertPrincipals(principals map[string]stringOrStringArray) []hclPrincipal {
+func convertPrincipals(v stringOrMapWithStringOrStringArray) []hclPrincipal {
+	if v == nil {
+		return nil
+	}
+
+	stringPrincipal, stringOk := v.(string)
+	if stringOk {
+		return []hclPrincipal{
+			{
+				Type:        "*",
+				Identifiers: []string{stringPrincipal},
+			},
+		}
+	}
+	return convertMapPrincipals(v.(map[string]interface{}))
+}
+
+func convertMapPrincipals(principals map[string]interface{}) []hclPrincipal {
 	result := make([]hclPrincipal, 0)
 	for k, v := range principals {
 		result = append(result, hclPrincipal{
