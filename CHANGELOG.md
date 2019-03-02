@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 * Support for wildcard-principal `"Principal": "*"` (#2)
 
+### Fixed
+
+* Booleans in JSON are converted to empty-string instead of their real string representation (#2) 
+
 ## 1.1.0 - 2018-05-05
 
 ### Added 

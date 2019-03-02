@@ -1,6 +1,7 @@
 package converter
 
 import (
+	"strconv"
 	"strings"
 )
 
@@ -52,21 +53,22 @@ func convertMapPrincipals(principals map[string]interface{}) []hclPrincipal {
 }
 
 func convertStringOrStringArray(v stringOrStringArray) []string {
-	if v == nil {
-		return nil
-	}
-
-	resourceArray, arrOk := v.([]interface{})
-	resourceString, _ := v.(string)
 	var resources []string
-	if arrOk {
+
+	switch v.(type) {
+	case []interface{}:
+		resourceArray, _ := v.([]interface{})
 		resources = make([]string, len(resourceArray))
 		for i, r := range resourceArray {
 			resources[i] = escapeString(r.(string))
 		}
-	} else {
+	case string:
+		resourceString, _ := v.(string)
 		resources = []string{resourceString}
+	case bool:
+		resources = []string{strconv.FormatBool(v.(bool))}
 	}
+
 	return resources
 }
 

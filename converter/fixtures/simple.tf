@@ -111,7 +111,7 @@ data "aws_iam_policy_document" "policy" {
     condition {
       test     = "Null"
       variable = "s3:x-amz-server-side-encryption"
-      values   = [""]
+      values   = ["true"]
     }
 
     principals {
