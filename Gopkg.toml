@@ -22,7 +22,9 @@
 
 
 [[constraint]]
-  branch = "multiple-keys"
+  # This PR changes the way hcl code is rendered in a way that we don't want: https://github.com/rodaine/hclencoder/pull/11
+  # so we are using this branch with the PR removed until we figure out what to do with it...
+  branch = "get-rid-of-pr-11"
   name = "github.com/flosell/hclencoder"
 
 [[constraint]]

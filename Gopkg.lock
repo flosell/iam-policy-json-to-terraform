@@ -10,12 +10,12 @@
   version = "v1.1.0"
 
 [[projects]]
-  branch = "multiple-keys"
-  digest = "1:26d869770f5f6b6d77c3f72c0c81cbf8912c616fc6c42e52708355b6ab3881cc"
+  branch = "get-rid-of-pr-11"
+  digest = "1:75fbed11a64f08119a646f298873b83d077a4b1020dce9d05f835a3225d7da01"
   name = "github.com/flosell/hclencoder"
   packages = ["."]
   pruneopts = ""
-  revision = "f9ddda07e6b68e2f2dcb579f3ff14f0b5e0cb019"
+  revision = "b2820d827e5ece4fff2f4bc6490359cadafd13df"
 
 [[projects]]
   branch = "master"
