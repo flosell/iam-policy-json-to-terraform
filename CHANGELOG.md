@@ -4,7 +4,7 @@ This changelog contains a loose collection of changes in every release. I will a
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
-## Unreleased
+## 1.2.0 - 2019-03-02
 
 ### Added
 
