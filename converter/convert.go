@@ -25,51 +25,45 @@ func convertConditions(conditions map[string]map[string]stringOrStringArray) []h
 }
 
 func convertPrincipals(v stringOrMapWithStringOrStringArray) []hclPrincipal {
-	if v == nil {
-		return nil
-	}
-
-	stringPrincipal, stringOk := v.(string)
-	if stringOk {
+	switch v.(type) {
+	case string:
 		return []hclPrincipal{
 			{
 				Type:        "*",
-				Identifiers: []string{stringPrincipal},
+				Identifiers: []string{v.(string)},
 			},
 		}
+	case map[string]interface{}:
+		result := make([]hclPrincipal, 0)
+		for k, v := range v.(map[string]interface{}) {
+			result = append(result, hclPrincipal{
+				Type:        k,
+				Identifiers: convertStringOrStringArray(v),
+			})
+		}
+		return result
+	default:
+		return nil
 	}
-	return convertMapPrincipals(v.(map[string]interface{}))
-}
-
-func convertMapPrincipals(principals map[string]interface{}) []hclPrincipal {
-	result := make([]hclPrincipal, 0)
-	for k, v := range principals {
-		result = append(result, hclPrincipal{
-			Type:        k,
-			Identifiers: convertStringOrStringArray(v),
-		})
-	}
-	return result
 }
 
 func convertStringOrStringArray(v stringOrStringArray) []string {
-	var resources []string
-
 	switch v.(type) {
 	case []interface{}:
+		var resources []string
 		resourceArray, _ := v.([]interface{})
 		resources = make([]string, len(resourceArray))
 		for i, r := range resourceArray {
 			resources[i] = escapeString(r.(string))
 		}
+		return resources
 	case string:
-		resourceString, _ := v.(string)
-		resources = []string{resourceString}
+		return []string{v.(string)}
 	case bool:
-		resources = []string{strconv.FormatBool(v.(bool))}
+		return []string{strconv.FormatBool(v.(bool))}
+	default:
+		return nil
 	}
-
-	return resources
 }
 
 func convertStatements(json jsonStatement) hclStatement {
