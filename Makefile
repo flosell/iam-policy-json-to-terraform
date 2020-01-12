@@ -1,4 +1,4 @@
-.PHONY: build test clean fmt fmtcheck tools
+.PHONY: build test clean fmt fmtcheck tools test-readme
 .DEFAULT_GOAL := help
 
 build: test iam-policy-json-to-terraform_amd64 iam-policy-json-to-terraform_alpine iam-policy-json-to-terraform_darwin iam-policy-json-to-terraform.exe ## Test and build the whole application
@@ -43,6 +43,9 @@ fmtcheck: vendor **/*.go ## Run linter
         exit 1; \
     fi; \
     exit 0
+
+test-readme: README.md ## Run the commands mentioned in the README for sanity-checking
+	docker run golang:1-buster bash -e -x -c "$$(cat README.md | sed -e 's_git@github.com:_https://github.com/_g' | sed -n '/```bash/,/```/p' | sed -e 's/^[[:space:]]*//' | grep '^\$$' | sed -e 's/^\$$ //g')"
 
 help:
 	@grep -h -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
