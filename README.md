@@ -26,14 +26,15 @@ $ iam-policy-json-to-terraform < some-policy.json
   
 * Clone the repository to the right location in the`$GOPATH`: 
   ```bash
-  mkdir -p $GOPATH/src/github.com/flosell/
-  cd $GOPATH/src/github.com/flosell/
-  git clone  git@github.com:flosell/iam-policy-json-to-terraform.git
+  $ mkdir -p $GOPATH/src/github.com/flosell/
+  $ cd $GOPATH/src/github.com/flosell/
+  $ git clone  git@github.com:flosell/iam-policy-json-to-terraform.git
   ```
 
 * Install dependencies and tools: 
   ```bash
-  make vendor tools
+  $ cd $GOPATH/src/github.com/flosell/iam-policy-json-to-terraform
+  $ make vendor tools
   ```
   
 ### Development
@@ -41,7 +42,7 @@ $ iam-policy-json-to-terraform < some-policy.json
 `make` is your primary point of entry for any development activity. Call it without arguments to learn more: 
 
 ```bash
-$  make
+$ make
 build                          Test and build the whole application
 clean                          Remove build artifacts and vendored dependencies
 fmt                            Format code
