@@ -1,24 +1,25 @@
 .PHONY: build test clean fmt fmtcheck tools
+.DEFAULT_GOAL := help
 
-build: test iam-policy-json-to-terraform_amd64 iam-policy-json-to-terraform_alpine iam-policy-json-to-terraform_darwin iam-policy-json-to-terraform.exe
+build: test iam-policy-json-to-terraform_amd64 iam-policy-json-to-terraform_alpine iam-policy-json-to-terraform_darwin iam-policy-json-to-terraform.exe ## Test and build the whole application
 
-vendor: **/*.go Gopkg.*
+vendor: **/*.go Gopkg.* ## Install dependencies into ./vendor
 	dep ensure
 
-clean:
+clean: ## Remove build artifacts and vendored dependencies
 	rm -f *_amd64 *_darwin *.exe
 	rm -rf vendor
 
-test: fmtcheck vendor **/*.go
+test: fmtcheck vendor **/*.go ## Run all tests
 	go test -v ./...
 	golint -set_exit_status ./converter
 	golint -set_exit_status .
 	go vet ./...
 
-fmt: **/*.go
+fmt: **/*.go ## Format code
 	go fmt ./...
 
-tools:
+tools: ## Install additional required tooling
 	go get -u golang.org/x/lint/golint
 
 iam-policy-json-to-terraform_amd64: vendor **/*.go
@@ -33,7 +34,7 @@ iam-policy-json-to-terraform_darwin: vendor **/*.go
 iam-policy-json-to-terraform.exe: vendor **/*.go
 	GOOS=windows GOARCH=amd64 go build -o $@ *.go
 
-fmtcheck: vendor **/*.go
+fmtcheck: vendor **/*.go ## Run linter
 	@gofmt_files=$$(gofmt -l `find . -name '*.go' | grep -v vendor`); \
     if [ -n "$${gofmt_files}" ]; then \
         echo 'gofmt needs running on the following files:'; \
@@ -42,3 +43,6 @@ fmtcheck: vendor **/*.go
         exit 1; \
     fi; \
     exit 0
+
+help:
+	@grep -h -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
