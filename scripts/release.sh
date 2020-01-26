@@ -20,6 +20,11 @@ fi
 
 cd ${SCRIPT_DIR}/..
 
+sed -i "" -e "s/const AppVersion = .*/const AppVersion = \"${VERSION}\"/g" iam-policy-json-to-terraform.go
+git commit -m "Release ${VERSION}: Update AppVersion constant" iam-policy-json-to-terraform.go
+
+make clean build
+
 chag update $VERSION
 git commit -m "Release ${VERSION}: Update CHANGELOG.md" CHANGELOG.md
 chag tag --sign
