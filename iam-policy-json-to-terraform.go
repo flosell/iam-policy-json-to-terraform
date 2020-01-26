@@ -1,18 +1,30 @@
 package main
 
-import "fmt"
 import (
 	"bufio"
 	"flag"
-	"github.com/flosell/iam-policy-json-to-terraform/converter"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
+
+	"github.com/flosell/iam-policy-json-to-terraform/converter"
 )
+
+// AppVersion : current version
+const AppVersion = "1.2.0"
 
 func main() {
 	policyName := flag.String("name", "policy", "name of the policy in generated hcl")
+	version := flag.Bool("version", false, "prints the version")
 	flag.Parse()
+
+	versionValue := *version
+	if versionValue {
+		fmt.Println(AppVersion)
+		os.Exit(0)
+	}
+
 	reader := bufio.NewReader(os.Stdin)
 	b, err := ioutil.ReadAll(reader)
 
