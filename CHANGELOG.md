@@ -4,6 +4,12 @@ This changelog contains a loose collection of changes in every release. I will a
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## Unreleased
+
+### Added
+
+* Add `-version` flag that returns the current version. Thanks @nitrocode for the contribution!
+
 ## 1.2.0 - 2019-03-02
 
 ### Added
