@@ -6,9 +6,15 @@ Small tool to convert an IAM Policy in JSON format into a Terraform [`aws_iam_po
 
 ## Installation
 
-Download the latest binary from the [releases page](https://github.com/flosell/iam-policy-json-to-terraform/releases) and put it into your `PATH` under the name `iam-policy-json-to-terraform`
+### OSX
 
     brew install iam-policy-json-to-terraform
+    
+### Other
+
+Download the latest binary from the [releases page](https://github.com/flosell/iam-policy-json-to-terraform/releases) and put it into your `PATH` under the name `iam-policy-json-to-terraform`
+
+### Developer
 
 If you're a go developer and have your `GOPATH` defined and have added your `$GOPATH/bin` directory to your path, you can simply run this command.
 
