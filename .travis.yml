@@ -9,4 +9,3 @@ install:
   - make tools vendor
 script:
   - make test build
-  - make test-readme
