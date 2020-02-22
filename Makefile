@@ -44,8 +44,8 @@ fmtcheck: vendor **/*.go ## Run linter
     fi; \
     exit 0
 
-test-readme: README.md ## Run the commands mentioned in the README for sanity-checking
-	docker run golang:1-buster bash -e -x -c "$$(cat README.md | sed -e 's_git@github.com:_https://github.com/_g' | sed -n '/```bash/,/```/p' | sed -e 's/^[[:space:]]*//' | grep '^\$$' | sed -e 's/^\$$ //g')"
+test-readme: README.md scripts/test-readme.sh ## Run the commands mentioned in the README for sanity-checking
+	scripts/test-readme.sh
 
 help:
 	@grep -h -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'

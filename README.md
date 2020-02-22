@@ -47,19 +47,19 @@ $ iam-policy-json-to-terraform < some-policy.json
 ### Prerequisites
 
 * Install [`dep`](https://golang.github.io/dep/): 
-  ```bash 
+  ```bash testcase=building
   $ curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
   ```
   
 * Clone the repository to the right location in the`$GOPATH`: 
-  ```bash
+  ```bash testcase=building
   $ mkdir -p $GOPATH/src/github.com/flosell/
   $ cd $GOPATH/src/github.com/flosell/
   $ git clone  git@github.com:flosell/iam-policy-json-to-terraform.git
   ```
 
 * Install dependencies and tools: 
-  ```bash
+  ```bash testcase=building
   $ cd $GOPATH/src/github.com/flosell/iam-policy-json-to-terraform
   $ make vendor tools
   ```
@@ -68,7 +68,7 @@ $ iam-policy-json-to-terraform < some-policy.json
 
 `make` is your primary point of entry for any development activity. Call it without arguments to learn more: 
 
-```bash
+```bash testcase=building
 $ make
 build                          Test and build the whole application
 clean                          Remove build artifacts and vendored dependencies
