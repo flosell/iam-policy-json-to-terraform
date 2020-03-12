@@ -49,11 +49,6 @@ $ iam-policy-json-to-terraform < some-policy.json
 
 ### Prerequisites
 
-* Install [`dep`](https://golang.github.io/dep/): 
-  ```bash testcase=building
-  $ curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-  ```
-  
 * Clone the repository to the right location in the`$GOPATH`: 
   ```bash testcase=building
   $ mkdir -p $GOPATH/src/github.com/flosell/
