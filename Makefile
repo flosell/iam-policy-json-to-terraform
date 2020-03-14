@@ -21,7 +21,7 @@ fmt: **/*.go ## Format code
 	go fmt ./...
 
 tools: ## Install additional required tooling
-	GOFLAGS= go install golang.org/x/lint/golint
+	go install golang.org/x/lint/golint
 
 iam-policy-json-to-terraform_amd64: vendor **/*.go
 	 GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -o $@ *.go
