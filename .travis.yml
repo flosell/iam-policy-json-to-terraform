@@ -7,8 +7,7 @@ before_install:
   - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 install:
   - make tools vendor
-script:
-  - make test build
+script: make test build
 jobs:
   include:
     - stage: check if commands in readme still work
