@@ -9,4 +9,8 @@ install:
   - make tools vendor
 script:
   - make test build
-  - make test-readme
+jobs:
+  include:
+    - stage: check if commands in readme still work
+      script: make test-readme
+      if: type != pull_request # test-readme currently always clones master so it might fail on pull-requests that change the README
