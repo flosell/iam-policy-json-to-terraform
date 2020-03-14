@@ -1,5 +1,6 @@
 #!/bin/bash
 SCRIPT_DIR=$(cd $(dirname $0) ; pwd -P)
+set -e
 
 testcases=$(cat README.md | sed -n -e 's/.*```bash testcase=\(.*\)/\1/p' | sort | uniq)
 
