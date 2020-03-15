@@ -3,8 +3,6 @@ services:
   - docker
 go:
   - '1.13'
-before_install:
-  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 install:
   - make tools vendor
 jobs:

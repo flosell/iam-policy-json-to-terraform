@@ -1,10 +1,11 @@
 .PHONY: build test clean fmt fmtcheck tools test-readme
 .DEFAULT_GOAL := help
+export GOFLAGS = -mod=readonly
 
 build: test iam-policy-json-to-terraform_amd64 iam-policy-json-to-terraform_alpine iam-policy-json-to-terraform_darwin iam-policy-json-to-terraform.exe ## Test and build the whole application
 
-vendor: **/*.go Gopkg.* ## Install dependencies into ./vendor
-	dep ensure
+vendor: **/*.go go.* ## Install dependencies into ./vendor
+	go mod vendor
 
 clean: ## Remove build artifacts and vendored dependencies
 	rm -f *_amd64 *_darwin *.exe
@@ -20,7 +21,7 @@ fmt: **/*.go ## Format code
 	go fmt ./...
 
 tools: ## Install additional required tooling
-	go get -u golang.org/x/lint/golint
+	go install golang.org/x/lint/golint
 
 iam-policy-json-to-terraform_amd64: vendor **/*.go
 	 GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -o $@ *.go
