@@ -49,16 +49,14 @@ $ iam-policy-json-to-terraform < some-policy.json
 
 ### Prerequisites
 
-* Clone the repository to the right location in the`$GOPATH`: 
+* Clone the repository to a location of your choosing: 
   ```bash testcase=building
-  $ mkdir -p $GOPATH/src/github.com/flosell/
-  $ cd $GOPATH/src/github.com/flosell/
-  $ git clone  git@github.com:flosell/iam-policy-json-to-terraform.git
+  $ git clone git@github.com:flosell/iam-policy-json-to-terraform.git
   ```
 
 * Install dependencies and tools: 
   ```bash testcase=building
-  $ cd $GOPATH/src/github.com/flosell/iam-policy-json-to-terraform
+  $ cd iam-policy-json-to-terraform
   $ make vendor tools
   ```
   
