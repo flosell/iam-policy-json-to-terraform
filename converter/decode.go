@@ -1,10 +1,13 @@
 package converter
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
+type jsonStatements []jsonStatement
 type jsonPolicyDocument struct {
 	Version   string
-	Statement []jsonStatement
+	Statement jsonStatements
 }
 
 type stringOrStringArray interface{}
@@ -20,6 +23,28 @@ type jsonStatement struct {
 	Condition    map[string]map[string]stringOrStringArray
 	Principal    stringOrMapWithStringOrStringArray
 	NotPrincipal stringOrMapWithStringOrStringArray
+}
+
+func (stmts *jsonStatements) UnmarshalJSON(b []byte) error {
+	var jsonStatements []jsonStatement
+	errSliceUnmarshal := json.Unmarshal(b, &jsonStatements)
+	if errSliceUnmarshal == nil {
+		*stmts = jsonStatements
+		return nil
+	}
+
+	if e, ok := errSliceUnmarshal.(*json.UnmarshalTypeError); ok {
+		if e.Value == "object" {
+			var s jsonStatement
+			errStringUnmarshal := json.Unmarshal(b, &s)
+			if errStringUnmarshal != nil {
+				return errStringUnmarshal
+			}
+			*stmts = []jsonStatement{s}
+			return nil
+		}
+	}
+	return errSliceUnmarshal
 }
 
 func decode(b []byte) ([]jsonStatement, error) {

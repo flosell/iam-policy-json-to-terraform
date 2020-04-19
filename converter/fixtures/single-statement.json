@@ -1,0 +1,19 @@
+{
+  "Version": "2012-10-17",
+  "Statement": {
+    "Effect": "Deny",
+    "Action": "*",
+    "Resource": "*",
+    "Condition": {
+      "NotIpAddress": {
+        "aws:SourceIp": [
+          "xxx.xxx.xxx.xxx/xx",
+          "yyy.yyy.yyy.yyy"
+        ]
+      },
+      "StringNotLike": {
+        "aws:invokedBy": "*.amazonaws.com"
+      }
+    }
+  }
+}
