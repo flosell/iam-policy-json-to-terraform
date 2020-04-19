@@ -12,6 +12,7 @@ func TestConvertFromJsonToTerraformHcl(t *testing.T) {
 		out string
 	}{
 		{"fixtures/simple.json", "fixtures/simple.tf"},
+		{"fixtures/empty-policy.json", "fixtures/empty-policy.tf"},
 	}
 
 	for _, fixture := range fixtures {
