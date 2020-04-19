@@ -7,23 +7,35 @@ import (
 )
 
 func TestConvertFromJsonToTerraformHcl(t *testing.T) {
-	input, ferr := ioutil.ReadFile("fixtures/simple.json")
-	if ferr != nil {
-		t.Fatal(ferr)
-	}
-	expectedOutput, ferr := ioutil.ReadFile("fixtures/simple.tf")
-	if ferr != nil {
-		t.Fatal(ferr)
+	var fixtures = []struct {
+		in  string
+		out string
+	}{
+		{"fixtures/simple.json", "fixtures/simple.tf"},
 	}
 
-	actualOutput, err := Convert("policy", input)
+	for _, fixture := range fixtures {
+		t.Run(fixture.in, func(t *testing.T) {
+			input, ferr := ioutil.ReadFile(fixture.in)
+			if ferr != nil {
+				t.Fatal(ferr)
+			}
+			expectedOutput, ferr := ioutil.ReadFile(fixture.out)
+			if ferr != nil {
+				t.Fatal(ferr)
+			}
 
-	if err != nil {
-		t.Fatal(err)
+			actualOutput, err := Convert("policy", input)
+
+			if err != nil {
+				t.Fatal(err)
+			}
+
+			assert.EqualValues(t,
+				string(expectedOutput),
+				actualOutput,
+			)
+		})
 	}
 
-	assert.EqualValues(t,
-		string(expectedOutput),
-		actualOutput,
-	)
 }
