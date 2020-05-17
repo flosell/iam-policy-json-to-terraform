@@ -1,13 +1,14 @@
 package converter
 
 import (
+	"regexp"
 	"strconv"
-	"strings"
 )
 
-func escapeString(s string) string {
+func escapePolicyVariables(s string) string {
 	// Escape TF special characters
-	return strings.Replace(s, "$", "$$", -1)
+	re := regexp.MustCompile(`\$\{((.*:.*)|([\*\?\$]))}`)
+	return re.ReplaceAllString(s, "$$$${$1}")
 }
 
 func convertConditions(conditions map[string]map[string]stringOrStringArray) []hclCondition {
@@ -54,7 +55,7 @@ func convertStringOrStringArray(v stringOrStringArray) []string {
 		resourceArray, _ := v.([]interface{})
 		resources = make([]string, len(resourceArray))
 		for i, r := range resourceArray {
-			resources[i] = escapeString(r.(string))
+			resources[i] = escapePolicyVariables(r.(string))
 		}
 		return resources
 	case string:
