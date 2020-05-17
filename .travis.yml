@@ -4,7 +4,7 @@ services:
 go:
   - '1.13'
 install:
-  - make tools vendor
+  - make tools
 jobs:
   include:
     - stage: run tests and build
