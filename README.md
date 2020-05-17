@@ -57,7 +57,7 @@ $ iam-policy-json-to-terraform < some-policy.json
 * Install dependencies and tools: 
   ```bash testcase=building
   $ cd iam-policy-json-to-terraform
-  $ make vendor tools
+  $ make tools
   ```
   
 ### Development
@@ -67,10 +67,10 @@ $ iam-policy-json-to-terraform < some-policy.json
 ```bash testcase=building
 $ make
 build                          Test and build the whole application
-clean                          Remove build artifacts and vendored dependencies
+clean                          Remove build artifacts
 fmt                            Format code
 fmtcheck                       Run linter
+test-readme                    Run the commands mentioned in the README for sanity-checking
 test                           Run all tests
 tools                          Install additional required tooling
-vendor                         Install dependencies into ./vendor 
 ```

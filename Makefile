@@ -4,14 +4,11 @@ export GOFLAGS = -mod=readonly
 
 build: test iam-policy-json-to-terraform_amd64 iam-policy-json-to-terraform_alpine iam-policy-json-to-terraform_darwin iam-policy-json-to-terraform.exe ## Test and build the whole application
 
-vendor: **/*.go go.* ## Install dependencies into ./vendor
-	go mod vendor
-
-clean: ## Remove build artifacts and vendored dependencies
+clean: ## Remove build artifacts
 	rm -f *_amd64 *_darwin *.exe
 	rm -rf vendor
 
-test: fmtcheck vendor **/*.go ## Run all tests
+test: fmtcheck **/*.go ## Run all tests
 	go test -v ./...
 	golint -set_exit_status ./converter
 	golint -set_exit_status .
@@ -23,19 +20,19 @@ fmt: **/*.go ## Format code
 tools: ## Install additional required tooling
 	go install golang.org/x/lint/golint
 
-iam-policy-json-to-terraform_amd64: vendor **/*.go
+iam-policy-json-to-terraform_amd64: **/*.go
 	 GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -o $@ *.go
 
-iam-policy-json-to-terraform_alpine: vendor **/*.go
+iam-policy-json-to-terraform_alpine: **/*.go
 	 GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o $@ *.go
 
-iam-policy-json-to-terraform_darwin: vendor **/*.go
+iam-policy-json-to-terraform_darwin: **/*.go
 	GOOS=darwin go build -o $@ *.go
 
-iam-policy-json-to-terraform.exe: vendor **/*.go
+iam-policy-json-to-terraform.exe: **/*.go
 	GOOS=windows GOARCH=amd64 go build -o $@ *.go
 
-fmtcheck: vendor **/*.go ## Run linter
+fmtcheck: **/*.go ## Run linter
 	@gofmt_files=$$(gofmt -l `find . -name '*.go' | grep -v vendor`); \
     if [ -n "$${gofmt_files}" ]; then \
         echo 'gofmt needs running on the following files:'; \
