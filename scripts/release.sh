@@ -50,6 +50,8 @@ for i in "${REPO}.exe" "${REPO}_alpine" "${REPO}_amd64" "${REPO}_darwin"; do
       --file ${i}
 done
 
+export HOMEBREW_GITHUB_API_TOKEN="${GITHUB_TOKEN}" # homebrew often uses a readonly token, set the one already used for release instead
+
 archive_url="https://github.com/flosell/iam-policy-json-to-terraform/archive/${VERSION}.tar.gz"
 sha=$(curl -sSLf "${archive_url}" | openssl sha256)
 brew bump-formula-pr --strict "iam-policy-json-to-terraform" \
