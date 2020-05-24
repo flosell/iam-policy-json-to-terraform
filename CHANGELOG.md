@@ -4,7 +4,7 @@ This changelog contains a loose collection of changes in every release. I will a
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
-## Unreleased
+## 1.5.0 - 2020-05-24
 
 ### Fixed
 
