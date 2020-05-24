@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -eu -o pipefail
 
 # TODO: make sure the following is installed:
 # https://github.com/aktau/github-release
