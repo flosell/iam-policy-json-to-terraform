@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Fixed
 
-* Limit escaping of dollar signs to IAM policy variables, don't escape terraform interpolations
+* Limit escaping of dollar signs to IAM policy variables, don't escape terraform interpolations (#13)
 
 ## 1.4.0 - 2020-04-19
 
