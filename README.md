@@ -23,6 +23,8 @@ If you're a go developer and have your `GOPATH` defined and have added your `$GO
 $ go get github.com/flosell/iam-policy-json-to-terraform
 ```
 
+**Note: there's an [open bug](https://github.com/flosell/iam-policy-json-to-terraform/issues/9) that might cause the output to be incorrect terraform syntax if installed this way. If you are affected by this use one of the other installation methods.**
+
 ## Usage
 
 From raw JSON
