@@ -1,5 +1,5 @@
 fileignoreconfig:
 - filename: go.sum
-  checksum: e5a611b466e39040ecc177a2f38ae34d261194610db152eb530113f5bc7e130e
+  checksum: 34e2be836b87b1da629655c4ab47eb5c420711a63450c902b65ac7d93275c3b6
   ignore_detectors: []
 scopeconfig: []
