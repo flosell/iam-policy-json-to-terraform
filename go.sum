@@ -3,6 +3,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/flosell/hclencoder v0.0.0-20190302100708-b2820d827e5e h1:by8SzuzCuA9E9tVRyVa9tx5T9D6BuqMeGRQdGXV5WaM=
 github.com/flosell/hclencoder v0.0.0-20190302100708-b2820d827e5e/go.mod h1:Wb68kkGesw8VVW6Jo+WSmKV24iYvlrY+wRlIVoA+3yA=
+github.com/flosell/hclencoder v0.0.0-20200802035130-9d8abae53260 h1:pRkZlDN36HBKGhlbjT+wLt7Xropk+RGJyDhKmYGCFD8=
+github.com/flosell/hclencoder v0.0.0-20200802035130-9d8abae53260/go.mod h1:P5gEpOHEo+IoWcqpT+YcVkJvtsE3cM3JxB5l/t4QgA4=
 github.com/hashicorp/hcl v1.0.0 h1:0Anlzjpi4vEasTeNFn2mLJgTSwt0+6sfsiTG8qcWGx4=
 github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T20WEQ=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
