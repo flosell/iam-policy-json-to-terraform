@@ -4,6 +4,12 @@ This changelog contains a loose collection of changes in every release. I will a
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## 1.6.0 - unreleased
+
+### Added
+
+* Support for input that contains HCL expressions that break JSON syntax (#16) - this should make it easier to convert from heredoc to terraform
+
 ## 1.5.0 - 2020-05-24
 
 ### Fixed

@@ -1,6 +1,7 @@
 package converter
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -49,7 +50,7 @@ func (stmts *jsonStatements) UnmarshalJSON(b []byte) error {
 
 func decode(b []byte) ([]jsonStatement, error) {
 	document := &jsonPolicyDocument{}
-	err := json.Unmarshal(b, document)
+	err := json.Unmarshal(escapeHclSnippetsInJSON(b), document)
 
 	if err != nil {
 		return nil, err
@@ -57,4 +58,48 @@ func decode(b []byte) ([]jsonStatement, error) {
 
 	return document.Statement, nil
 
+}
+
+func escapeHclSnippetsInJSON(b []byte) []byte {
+	unescapedBuffer := bytes.Buffer{}
+	escapeBuffer := bytes.Buffer{}
+
+	currentBuffer := &unescapedBuffer
+
+	expressionDepth := 0
+
+	for i := 0; i < len(b); i++ {
+		if expressionDepth == 0 {
+			unescapedBuffer.WriteByte(b[i])
+		} else {
+			if b[i] == '}' {
+				expressionDepth--
+				if expressionDepth == 0 {
+					currentBuffer = &unescapedBuffer
+					currentBuffer.Write(escapeJSON(escapeBuffer.Bytes()))
+					escapeBuffer.Reset()
+					currentBuffer.WriteByte(b[i])
+				} else {
+					currentBuffer.WriteByte(b[i])
+				}
+			} else {
+				currentBuffer.WriteByte(b[i])
+			}
+		}
+
+		if b[i] == '$' && len(b) > i+1 && b[i+1] == '{' {
+			currentBuffer.WriteByte(b[i+1])
+			expressionDepth++
+			i++
+			currentBuffer = &escapeBuffer
+		}
+	}
+	unescapedBuffer.Write(escapeBuffer.Bytes())
+	return unescapedBuffer.Bytes()
+}
+
+func escapeJSON(b []byte) []byte {
+	marshalled, _ := json.Marshal(string(b))
+	withoutQuotes := marshalled[1 : len(marshalled)-1]
+	return withoutQuotes
 }

@@ -28,6 +28,8 @@ data "aws_iam_policy_document" "policy" {
       "arn:aws:s3:::${aws_s3_bucket.upload.id}/*",
       "arn:aws:s3:::${aws_s3_bucket.upload.id}",
       "arn:aws:s3:::foo/${join(var.separator,local.path_elements)}",
+      "arn:aws:s3:::foo/${join("/",local.path_elements)}",
+      "arn:aws:s3:::foo/${join("/",["foo${lower("BAR")}"])}",
     ]
 
     actions = [
