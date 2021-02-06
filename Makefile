@@ -18,19 +18,19 @@ fmt: **/*.go ## Format code
 	go fmt ./...
 
 tools: ## Install additional required tooling
-	go list -f '{{range .Imports}}{{.}} {{end}}' tools/tools.go | xargs go install
+	go list -f '{{range .Imports}}{{.}} {{end}}' tools.go | xargs go install
 
 iam-policy-json-to-terraform_amd64: **/*.go
-	 GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -o $@ *.go
+	 GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -o $@
 
 iam-policy-json-to-terraform_alpine: **/*.go
-	 GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o $@ *.go
+	 GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o $@
 
 iam-policy-json-to-terraform_darwin: **/*.go
-	GOOS=darwin go build -o $@ *.go
+	GOOS=darwin go build -o $@
 
 iam-policy-json-to-terraform.exe: **/*.go
-	GOOS=windows GOARCH=amd64 go build -o $@ *.go
+	GOOS=windows GOARCH=amd64 go build -o $@
 
 fmtcheck: **/*.go ## Run linter
 	@gofmt_files=$$(gofmt -l `find . -name '*.go' | grep -v vendor`); \
