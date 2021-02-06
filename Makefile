@@ -5,7 +5,7 @@ export GOFLAGS = -mod=readonly
 build: test iam-policy-json-to-terraform_amd64 iam-policy-json-to-terraform_alpine iam-policy-json-to-terraform_darwin iam-policy-json-to-terraform.exe ## Test and build the whole application
 
 clean: ## Remove build artifacts
-	rm -f *_amd64 *_darwin *.exe
+	rm -f *_amd64 *_darwin *_alpine *.exe
 	rm -rf vendor
 
 test: fmtcheck **/*.go ## Run all tests
