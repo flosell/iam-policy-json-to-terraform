@@ -9,7 +9,7 @@ Small tool to convert an IAM Policy in JSON format into a Terraform [`aws_iam_po
 ### OSX
 
 ```bash
-$ brew install iam-policy-json-to-terraform
+brew install iam-policy-json-to-terraform
 ```
     
 ### Other
