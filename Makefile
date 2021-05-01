@@ -2,7 +2,7 @@
 .DEFAULT_GOAL := help
 export GOFLAGS = -mod=readonly
 
-build: test iam-policy-json-to-terraform_amd64 iam-policy-json-to-terraform_alpine iam-policy-json-to-terraform_darwin iam-policy-json-to-terraform.exe ## Test and build the whole application
+build: test iam-policy-json-to-terraform_amd64 iam-policy-json-to-terraform_alpine iam-policy-json-to-terraform_darwin iam-policy-json-to-terraform_darwin_arm iam-policy-json-to-terraform.exe ## Test and build the whole application
 
 clean: ## Remove build artifacts
 	rm -f *_amd64 *_darwin *_alpine *.exe
@@ -27,7 +27,10 @@ iam-policy-json-to-terraform_alpine: **/*.go
 	 GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o $@
 
 iam-policy-json-to-terraform_darwin: **/*.go
-	GOOS=darwin go build -o $@
+	GOOS=darwin GOARCH=amd64 go build -o $@
+
+iam-policy-json-to-terraform_darwin_arm: **/*.go
+	GOOS=darwin GOARCH=arm64 go build -o $@
 
 iam-policy-json-to-terraform.exe: **/*.go
 	GOOS=windows GOARCH=amd64 go build -o $@
