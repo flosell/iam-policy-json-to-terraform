@@ -2,7 +2,7 @@ language: go
 services:
   - docker
 go:
-  - '1.14'
+  - '1.16'
 install:
   - make tools
 jobs:
