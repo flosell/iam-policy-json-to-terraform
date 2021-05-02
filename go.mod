@@ -1,6 +1,6 @@
 module github.com/flosell/iam-policy-json-to-terraform
 
-go 1.14
+go 1.16
 
 require (
 	github.com/flosell/hclencoder v0.0.0-20200802035130-9d8abae53260
