@@ -40,7 +40,7 @@ github-release release \
     --name ${VERSION} \
     --description "$(chag contents)"
 
-for i in "${REPO}.exe" "${REPO}_alpine" "${REPO}_amd64" "${REPO}_darwin"; do
+for i in "${REPO}.exe" "${REPO}_alpine" "${REPO}_amd64" "${REPO}_darwin" "${REPO}_darwin_arm"; do
   echo "Uploading ${i}..."
   github-release upload \
       --user ${USER} \
