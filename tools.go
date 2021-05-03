@@ -6,6 +6,6 @@
 package tools
 
 import (
-	_ "golang.org/x/lint/golint"
 	_ "github.com/github-release/github-release"
+	_ "golang.org/x/lint/golint"
 )
