@@ -4,11 +4,11 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"github.com/flosell/iam-policy-json-to-terraform/converter"
+	"github.com/mattn/go-isatty"
 	"io/ioutil"
 	"log"
 	"os"
-
-	"github.com/flosell/iam-policy-json-to-terraform/converter"
 )
 
 // AppVersion : current version
@@ -23,6 +23,12 @@ func main() {
 	if versionValue {
 		fmt.Println(AppVersion)
 		os.Exit(0)
+	}
+
+	if isatty.IsTerminal(os.Stdin.Fd()) {
+		os.Stderr.WriteString("Paste a valid IAM policy and press the EOF afterwards.\n")
+		os.Stderr.WriteString("Alternatively, you can pipe input directly into the command.\n")
+		os.Stderr.WriteString("> ")
 	}
 
 	reader := bufio.NewReader(os.Stdin)

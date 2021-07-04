@@ -4,6 +4,12 @@ This changelog contains a loose collection of changes in every release. I will a
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## Unreleased
+
+### Added
+
+* Usage message if STDIN is a terminal (#18)
+
 ## 1.7.0 - 2021-05-03
 
 ### Added
