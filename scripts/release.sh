@@ -53,7 +53,7 @@ done
 export HOMEBREW_GITHUB_API_TOKEN="${GITHUB_TOKEN}" # homebrew often uses a readonly token, set the one already used for release instead
 
 archive_url="https://github.com/flosell/iam-policy-json-to-terraform/archive/${VERSION}.tar.gz"
-sha=$(curl -sSLf "${archive_url}" | openssl sha256)
+sha=$(curl -sSLf "${archive_url}" | sha256sum | awk '{print $1}')
 brew bump-formula-pr --strict "iam-policy-json-to-terraform" \
                      --url "${archive_url}" \
                      --sha256 "${sha}"
