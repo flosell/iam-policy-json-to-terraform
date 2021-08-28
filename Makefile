@@ -8,7 +8,7 @@ clean: ## Remove build artifacts
 	rm -f *_amd64 *_darwin *_alpine *.exe
 	rm -rf vendor
 
-test: fmtcheck **/*.go ## Run all tests
+test: fmtcheck seccheck **/*.go ## Run all tests
 	go test -v ./...
 	golint -set_exit_status ./converter
 	golint -set_exit_status .
@@ -44,6 +44,9 @@ fmtcheck: **/*.go ## Run linter
         exit 1; \
     fi; \
     exit 0
+
+seccheck: **/*.go ## Run security checks
+	gosec -exclude G104 ./...
 
 test-readme: README.md scripts/test-readme.sh ## Run the commands mentioned in the README for sanity-checking
 	scripts/test-readme.sh
