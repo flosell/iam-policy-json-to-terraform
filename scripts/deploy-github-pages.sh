@@ -12,7 +12,7 @@ pushd ${SCRIPT_DIR}/../docs
 
 git init .
 
-if [ -z "${GITHUB_TOKEN_FOR_DEPLOY}" ]; then
+if [ -n "${GITHUB_TOKEN_FOR_DEPLOY-}" ]; then
   /usr/bin/git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${GITHUB_TOKEN_FOR_DEPLOY}"
 fi
 
