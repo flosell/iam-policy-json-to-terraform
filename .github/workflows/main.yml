@@ -51,5 +51,9 @@ jobs:
           path: web
       - name: show files after download-artifact
         run: ls -alh web/
+      - name: Set GitHub Actions Bot as GitHub user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Deploy to GitHub Pages
         run: make web-deploy
