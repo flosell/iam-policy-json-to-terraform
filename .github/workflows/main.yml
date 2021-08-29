@@ -36,3 +36,17 @@ jobs:
           path: |
             web/index.html
             web/web.js
+  deploy-web:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+      - name: Store website build
+        uses: actions/download-artifact@v2
+        with:
+          name: website
+          path: web
+      - name: show files
+        run: ls -alh web/
+      - name: Deploy to GitHub Pages
+        run: make web-deploy
