@@ -1,0 +1,38 @@
+name: main pipeline
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: "1.16"
+      - name: Install tools
+        run: make tools-main
+      - name: Build and Test
+        run: make test build
+  test-web:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: "1.16"
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '15'
+      - name: Install tools
+        run: make tools-main tools-web
+      - name: Build web version and run E2E tests
+        run: make web-build web-e2e
+      - name: Store website build
+        uses: actions/upload-artifact@v2
+        with:
+          name: website
+          path: |
+            web/index.html
+            web/web.js
