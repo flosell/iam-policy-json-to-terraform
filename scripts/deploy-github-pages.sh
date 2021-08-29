@@ -2,7 +2,7 @@
 
 set -eu -o pipefail
 
-SCRIPT_DIR=$(dirname "$0")
+SCRIPT_DIR=$(cd $(dirname $0) ; pwd -P)
 REPO_ORIGIN=$(git remote get-url origin)
 
 mkdir ${SCRIPT_DIR}/../docs
@@ -12,9 +12,7 @@ pushd ${SCRIPT_DIR}/../docs
 
 git init .
 
-if [ -n "${GITHUB_TOKEN_FOR_DEPLOY-}" ]; then
-  /usr/bin/git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${GITHUB_TOKEN_FOR_DEPLOY}"
-fi
+cp ${SCRIPT_DIR}/../.git/config .git/config
 
 git add .
 git commit -m "Updating website"
