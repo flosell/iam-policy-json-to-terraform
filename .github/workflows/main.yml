@@ -44,7 +44,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: show files before download-artifact
         run: ls -alh web/
-      - name: Store website build
+      - name: Retrieve website build from previous step
         uses: actions/download-artifact@v2
         with:
           name: website
