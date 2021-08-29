@@ -23,7 +23,7 @@ fmt: **/*.go ## Format code
 tools: tools-main tools-web ## Install additional required tooling
 
 tools-web: ## Install additional required tooling for the web version
-	cd web && npm install
+	test -z "${NO_TOOLS_WEB}" && (cd web && npm install) || echo "skipping tools web because of environment variable (only for testing readme)"
 
 tools-main:  ## Install additional required tooling for the main version
 	go list -f '{{range .Imports}}{{.}} {{end}}' tools.go | xargs go install

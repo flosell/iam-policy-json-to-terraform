@@ -70,7 +70,10 @@ build                          Test and build the whole application
 clean                          Remove build artifacts
 fmt                            Format code
 fmtcheck                       Run linter
-test-readme                    Run the commands mentioned in the README for sanity-checking
+seccheck                       Run security checks
 test                           Run all tests
+test-readme                    Run the commands mentioned in the README for sanity-checking
 tools                          Install additional required tooling
+tools-main                     Install additional required tooling for the main version
+tools-web                      Install additional required tooling for the web version
 ```
