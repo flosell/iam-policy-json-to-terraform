@@ -42,23 +42,15 @@ jobs:
     if: ${{ github.ref == 'refs/heads/master' }}
     steps:
       - uses: actions/checkout@v2
-      - name: show files before download-artifact
-        run: ls -alh web/
       - name: Retrieve website build from previous step
         uses: actions/download-artifact@v2
         with:
           name: website
           path: web
-      - name: show files after download-artifact
-        run: ls -alh web/
       - name: Set GitHub Actions Bot as GitHub user
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      - name: Debug GitHub cloned repo
-        run: |
-          git remote -v
-          git config -l
       - name: Deploy to GitHub Pages
         run: make web-deploy
         env:
