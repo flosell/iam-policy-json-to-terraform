@@ -1,6 +1,4 @@
 language: go
-services:
-  - docker
 go:
   - '1.16'
 install:
@@ -16,4 +14,6 @@ jobs:
         chrome: stable
     - stage: check if commands in readme still work
       script: make test-readme
+      services:
+        - docker
       if: type != pull_request # test-readme currently always clones master so it might fail on pull-requests that change the README
