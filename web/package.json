@@ -1,0 +1,22 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "web.js",
+  "scripts": {
+    "test": "testcafe chrome:headless web_test.js -s takeOnFails=true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/flosell/iam-policy-json-to-terraform.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/flosell/iam-policy-json-to-terraform/issues"
+  },
+  "homepage": "https://github.com/flosell/iam-policy-json-to-terraform#readme",
+  "devDependencies": {
+    "testcafe": "^1.15.3"
+  }
+}

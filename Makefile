@@ -7,7 +7,9 @@ build: test iam-policy-json-to-terraform_amd64 iam-policy-json-to-terraform_alpi
 clean: ## Remove build artifacts
 	rm -f *_amd64 *_darwin *_alpine *.exe
 	rm -rf vendor
-	rm web/web.js*
+	rm -f web/web.js*
+	rm -rf web/node_modules
+	rm -rf web/screenshots
 
 test: fmtcheck seccheck **/*.go ## Run all tests
 	go test -v ./...
@@ -18,7 +20,12 @@ test: fmtcheck seccheck **/*.go ## Run all tests
 fmt: **/*.go ## Format code
 	go fmt ./...
 
-tools: ## Install additional required tooling
+tools: tools-main tools-web ## Install additional required tooling
+
+tools-web: ## Install additional required tooling for the web version
+	cd web && npm install
+
+tools-main:  ## Install additional required tooling for the main version
 	go list -f '{{range .Imports}}{{.}} {{end}}' tools.go | xargs go install
 
 iam-policy-json-to-terraform_amd64: **/*.go
@@ -56,7 +63,10 @@ web-serve: web/*
 	cd web && gopherjs serve github.com/flosell/iam-policy-json-to-terraform/web/
 
 web-build: web/*.go
-	cd web ** && gopherjs build --minify
+	cd web && gopherjs build --minify
+
+web-e2e: web/*.go web/*.js
+	cd web && npm test
 
 help:
 	@grep -h -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
