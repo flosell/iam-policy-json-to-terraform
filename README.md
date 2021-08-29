@@ -3,6 +3,12 @@
 
 Small tool to convert an IAM Policy in JSON format into a Terraform [`aws_iam_policy_document`](https://www.terraform.io/docs/providers/aws/d/iam_policy_document.html)
 
+## Web Version
+
+Check out a web version of the tool [here](https://flosell.github.io/iam-policy-json-to-terraform/).
+
+For command line usage and automation, check out the instructions below. 
+
 ## Installation
 
 ### OSX
