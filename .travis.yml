@@ -9,6 +9,10 @@ jobs:
   include:
     - stage: run tests and build
       script: make test build
+    - stage: run web build and e2e test
+      script: make web-build web-e2e
+      addons:
+        chrome: stable
     - stage: check if commands in readme still work
       script: make test-readme
       if: type != pull_request # test-readme currently always clones master so it might fail on pull-requests that change the README
