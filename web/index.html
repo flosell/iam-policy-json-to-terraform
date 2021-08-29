@@ -1,22 +1,48 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
+
+        .textContainer {
+            flex-basis: 45%;
+            flex-flow: column nowrap;
+            display: flex;
+        }
+
+        .textContainer textarea {
+            flex-basis: 100%;
+        }
+
+        .buttonContainer {
+            flex-basis: 10%;
+            flex-flow: row nowrap;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .buttonContainer button {
+            width: 80%;
+            height: 10em;
+        }
+    </style>
 </head>
 <body>
-<div>
-    <label>
-        Input: IAM Policy Document (in JSON format)
-        <textarea id="input" autofocus>{}</textarea>
-    </label>
+<div class="textContainer">
+    <label for="input">Input: IAM Policy Document (in JSON format)</label>
+    <textarea id="input" autofocus>{}</textarea>
 </div>
-<div>
+<div class="buttonContainer">
     <button id="doConvert">&gt;</button>
 </div>
-<div>
-    <label>
-        Output: Terraform
-        <textarea id="output" readonly></textarea>
-    </label>
+<div class="textContainer">
+    <label for="output">Output: Terraform</label>
+    <textarea id="output" readonly></textarea>
 </div>
 <script src="web.js"></script>
 <script type="application/javascript">
@@ -27,7 +53,7 @@
         try {
             output = convert("hello", inputTextBox.value)
         } catch (e) {
-            output = "Could not convert:\n"+e.message
+            output = "Could not convert:\n" + e.message
         }
         outputTextBox.value = output
     })
