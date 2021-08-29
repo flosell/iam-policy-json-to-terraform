@@ -8,3 +8,4 @@ iam-policy-json-to-terraform_darwin_arm
 web.js*
 node_modules
 web/screenshots
+docs

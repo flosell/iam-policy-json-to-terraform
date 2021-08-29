@@ -68,5 +68,8 @@ web-build: web/*.go
 web-e2e: web/*.go web/*.js
 	cd web && npm test
 
+web-deploy: web-build ## Deploy the web version to GitHub pages
+	scripts/deploy-github-pages.sh
+
 help:
 	@grep -h -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' | sort
