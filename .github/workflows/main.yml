@@ -53,5 +53,3 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Deploy to GitHub Pages
         run: make web-deploy
-        env:
-          GITHUB_TOKEN_FOR_DEPLOY: ${{ secrets.GITHUB_TOKEN }}
