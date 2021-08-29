@@ -42,12 +42,14 @@ jobs:
     if: ${{ github.ref == 'refs/heads/master' }}
     steps:
       - uses: actions/checkout@v2
+      - name: show files before download-artifact
+        run: ls -alh web/
       - name: Store website build
         uses: actions/download-artifact@v2
         with:
           name: website
           path: web
-      - name: show files
+      - name: show files after download-artifact
         run: ls -alh web/
       - name: Deploy to GitHub Pages
         run: make web-deploy
