@@ -61,3 +61,5 @@ jobs:
           git config -l
       - name: Deploy to GitHub Pages
         run: make web-deploy
+        env:
+          GITHUB_TOKEN_FOR_DEPLOY: ${{ secrets.GITHUB_TOKEN }}

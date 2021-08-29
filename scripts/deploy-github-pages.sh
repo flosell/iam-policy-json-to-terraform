@@ -11,6 +11,11 @@ cp ${SCRIPT_DIR}/../web/{index.html,web.js} ${SCRIPT_DIR}/../docs
 pushd ${SCRIPT_DIR}/../docs
 
 git init .
+
+if [ -z "${GITHUB_TOKEN_FOR_DEPLOY}" ]; then
+  /usr/bin/git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${GITHUB_TOKEN_FOR_DEPLOY}"
+fi
+
 git add .
 git commit -m "Updating website"
 git push "${REPO_ORIGIN}" master:gh-pages --force
