@@ -1,0 +1,36 @@
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<div>
+    <label>
+        Input: IAM Policy Document (in JSON format)
+        <textarea id="input" autofocus>{}</textarea>
+    </label>
+</div>
+<div>
+    <button id="doConvert">&gt;</button>
+</div>
+<div>
+    <label>
+        Output: Terraform
+        <textarea id="output" readonly></textarea>
+    </label>
+</div>
+<script src="web.js"></script>
+<script type="application/javascript">
+    let inputTextBox = document.getElementById("input")
+    let outputTextBox = document.getElementById("output")
+    document.getElementById("doConvert").addEventListener("click", function () {
+        let output
+        try {
+            output = convert("hello", inputTextBox.value)
+        } catch (e) {
+            output = "Could not convert:\n"+e.message
+        }
+        outputTextBox.value = output
+    })
+</script>
+</body>
+</html>

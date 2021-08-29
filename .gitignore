@@ -5,3 +5,4 @@ iam-policy-json-to-terraform_alpine
 iam-policy-json-to-terraform_amd64
 iam-policy-json-to-terraform_darwin
 iam-policy-json-to-terraform_darwin_arm
+web.js*

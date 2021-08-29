@@ -7,7 +7,7 @@ package tools
 
 import (
 	_ "github.com/github-release/github-release"
+	_ "github.com/gopherjs/gopherjs"
 	_ "github.com/securego/gosec/v2/cmd/gosec"
 	_ "golang.org/x/lint/golint"
-	_ "github.com/gopherjs/gopherjs"
 )
