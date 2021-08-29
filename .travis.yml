@@ -11,6 +11,8 @@ jobs:
       script: make test build
     - stage: run web build and e2e test
       script: make web-build web-e2e
+      node_js:
+        - 15
       addons:
         chrome: stable
     - stage: check if commands in readme still work
