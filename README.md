@@ -76,5 +76,8 @@ test-readme                    Run the commands mentioned in the README for sani
 tools                          Install additional required tooling
 tools-main                     Install additional required tooling for the main version
 tools-web                      Install additional required tooling for the web version
+web-build                      Build the web version
 web-deploy                     Deploy the web version to GitHub pages
+web-e2e                        Run end to end tests for web version (requires web-build)
+web-serve                      Serve the web version on a local development server
 ```

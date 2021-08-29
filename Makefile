@@ -59,13 +59,13 @@ seccheck: **/*.go ## Run security checks
 test-readme: README.md scripts/test-readme.sh ## Run the commands mentioned in the README for sanity-checking
 	scripts/test-readme.sh
 
-web-serve: web/*
+web-serve: web/* ## Serve the web version on a local development server
 	cd web && gopherjs serve github.com/flosell/iam-policy-json-to-terraform/web/
 
-web-build: web/*.go
+web-build: web/*.go ## Build the web version
 	cd web && gopherjs build --minify
 
-web-e2e: web/*.go web/*.js
+web-e2e: web/*.go web/*.js ## Run end to end tests for web version (requires web-build)
 	cd web && npm test
 
 web-deploy: web-build ## Deploy the web version to GitHub pages
