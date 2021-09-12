@@ -98,4 +98,4 @@ Include it and it'll expose a `convert(policyName,jsonString)` function in the g
 Currently, the complete web-frontend is plain HTML, JS and CSS, all within `web/index.html`. 
 Edit or refine as needed.
 
-End-To-End Tests for the web frontend exist as [`TestCafe`](https://testcafe.io/) tests in `web_test.js` and can be run using `make web-e2e`.
+End-To-End Tests for the web frontend exist as [TestCafe](https://testcafe.io/) tests in `web_test.js` and can be run using `make web-e2e`.
