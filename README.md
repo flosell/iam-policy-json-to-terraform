@@ -67,6 +67,8 @@ $ iam-policy-json-to-terraform < some-policy.json
   
 ### Development
 
+#### Entry point 
+
 `make` is your primary point of entry for any development activity. Call it without arguments to learn more: 
 
 ```bash testcase=building
@@ -86,3 +88,14 @@ web-deploy                     Deploy the web version to GitHub pages
 web-e2e                        Run end to end tests for web version (requires web-build)
 web-serve                      Serve the web version on a local development server
 ```
+
+#### Web Development
+
+To develop the web-frontend, you'll need to first compile the JavaScript version of `iam-policy-json-to-terraform`.
+`make web-build` will do that, generating a `web.js` file. 
+Include it and it'll expose a `convert(policyName,jsonString)` function in the global namespace. 
+
+Currently, the complete web-frontend is plain HTML, JS and CSS, all within `web/index.html`. 
+Edit or refine as needed.
+
+End-To-End Tests for the web frontend exist as [`TestCafe`](https://testcafe.io/) tests in `web_test.js` and can be run using `make web-e2e`.
