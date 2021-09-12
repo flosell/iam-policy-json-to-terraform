@@ -1,4 +1,6 @@
 fileignoreconfig:
+- filename: web/index.html
+  checksum: bbfdd0d28d913d9c712e1419388c76d3dbabc12b5229b213ae02bb595cb940d1
 - filename: go.sum
   checksum: b6119cf32c0ae74cfd65541469dc26a866ddc406a1b6506a5f5ee8312d081938
   ignore_detectors: []
