@@ -8,7 +8,7 @@ require (
 	github.com/github-release/github-release v0.10.0
 	github.com/gopherjs/gopherjs v0.0.0-20210825203111-a709d8e111b3
 	github.com/kevinburke/rest v0.0.0-20210425173428-1fcb8c8e9022 // indirect
-	github.com/mattn/go-isatty v0.0.13
+	github.com/mattn/go-isatty v0.0.14
 	github.com/securego/gosec/v2 v2.8.1
 	github.com/spf13/cobra v1.2.1 // indirect
 	github.com/stretchr/testify v1.7.0
