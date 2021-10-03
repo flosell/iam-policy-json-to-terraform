@@ -1,4 +1,4 @@
-import { Selector } from 'testcafe'; // first import testcafe selectors
+import { Selector, t } from 'testcafe';
 
 fixture `iam-policy-json-to-terraform web version`.page `./index.html`;  // specify the start page
 
@@ -24,28 +24,43 @@ let someIamTerraform = `data "aws_iam_policy_document" "hello" {
 }
 `
 
-//then create a test and place your code there
+class Page {
+    constructor() {
+        this.output = Selector('#output')
+        this.input = Selector('#input')
+        this.convertButton = Selector('#doConvert')
+    }
+
+    async replaceInputText(newText) {
+        await t
+            .selectText(this.input)
+            .pressKey('delete')
+            .typeText(this.input, newText)
+    }
+}
+
+let p = new Page()
+
 test('happy path', async t => {
-    await t
-        // .click('#doConvert')
-        .expect(Selector('#output').value).eql('data "aws_iam_policy_document" "hello" {}\n')
-        .selectText('#input')
-        .pressKey('delete')
-        .typeText('#input', someIamJson)
-        .click('#doConvert')
-        .expect(Selector('#output').value).eql(someIamTerraform);
+    await t.expect(p.output.value)
+        .eql('data "aws_iam_policy_document" "hello" {}\n')
+
+    await p.replaceInputText(someIamJson)
+    await t.click(p.convertButton)
+
+    await t.expect(p.output.value)
+        .eql(someIamTerraform)
 });
 
 test('error case', async t => {
-    await t
-        .selectText('#input')
-        .pressKey('delete')
-        .typeText('#input', '{')
-        .click('#doConvert')
-        .expect(Selector('#output').value).contains('unexpected end of JSON input');
+    await p.replaceInputText('{')
+    await t.click(p.convertButton)
+
+    await t.expect(p.output.value)
+        .contains('unexpected end of JSON input')
 });
 
 test.page`./index.html#content=${encodeURIComponent(someIamJson)}`('bookmarklets', async t => {
     await t
-        .expect(Selector('#output').value).eql(someIamTerraform);
+        .expect(p.output.value).eql(someIamTerraform);
 });
