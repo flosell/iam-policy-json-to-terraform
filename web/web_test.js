@@ -27,8 +27,13 @@ let someIamTerraform = `data "aws_iam_policy_document" "hello" {
 //then create a test and place your code there
 test('happy path', async t => {
     await t
+        // .click('#doConvert')
+        .expect(Selector('#output').value).eql('data "aws_iam_policy_document" "hello" {}\n')
+        .selectText('#input')
+        .pressKey('delete')
+        .typeText('#input', someIamJson)
         .click('#doConvert')
-        .expect(Selector('#output').value).eql('data "aws_iam_policy_document" "hello" {}\n');
+        .expect(Selector('#output').value).eql(someIamTerraform);
 });
 
 test('error case', async t => {
