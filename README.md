@@ -50,7 +50,7 @@ From a JSON policy file
 $ iam-policy-json-to-terraform < some-policy.json
 ```
 
-If a video demo is more your thing, checkout [this nice 2min introduction](https://www.youtube.com/watch?v=AhtpJII6eaw) by the folks at env0.
+If a video demo is more your thing, checkout [this nice 2min introduction](https://www.youtube.com/watch?v=AhtpJII6eaw) by the folks at env0. 
 
 ## Local development
 

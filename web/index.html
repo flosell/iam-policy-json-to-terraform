@@ -4,10 +4,11 @@
     <title>iam-policy-json-to-terraform - Easily convert AWS IAM policies to Terraform HCL</title>
     <meta name="description" content="This tool converts standard IAM policies in JSON format (like what you'd find in the AWS docs) into more terraform native aws_iam_policy_document data source code">
     <style>
-        body {
+        .mainContainer {
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
+            height: 95%;
         }
 
         .textContainer {
@@ -35,24 +36,30 @@
     </style>
 </head>
 <body>
-<div class="textContainer">
-    <label for="input">Input: IAM Policy Document (in JSON format)</label>
-    <textarea id="input" autofocus>{}</textarea>
+<div class="mainContainer">
+    <div class="textContainer">
+        <label for="input">Input: IAM Policy Document (in JSON format)</label>
+        <textarea id="input" autofocus>{}</textarea>
+    </div>
+    <div class="buttonContainer">
+        <button id="doConvert"
+                data-goatcounter-click="convert-button-clicked"
+                data-goatcounter-title="Convert-button was clicked">&gt;
+        </button>
+    </div>
+    <div class="textContainer">
+        <label for="output">Output: Terraform</label>
+        <textarea id="output" readonly></textarea>
+    </div>
 </div>
-<div class="buttonContainer">
-    <button id="doConvert"
-            data-goatcounter-click="convert-button-clicked"
-            data-goatcounter-title="Convert-button was clicked">&gt;</button>
-</div>
-<div class="textContainer">
-    <label for="output">Output: Terraform</label>
-    <textarea id="output" readonly></textarea>
+<div>
+    <a href="javascript:if(document.getSelection){s=document.getSelection();}else{s= '{}';};document.location='https://flosell.github.io/iam-policy-json-to-terraform/#content='+encodeURIComponent(s)">Bookmarklet</a> drag this into your bookmarks; select a valid IAM policy on any page and click the bookmark to convert in one click
 </div>
 <script src="web.js"></script>
 <script type="application/javascript">
     let inputTextBox = document.getElementById("input")
     let outputTextBox = document.getElementById("output")
-    document.getElementById("doConvert").addEventListener("click", function () {
+    function convertToHcl() {
         let output
         try {
             output = convert("hello", inputTextBox.value)
@@ -60,7 +67,17 @@
             output = "Could not convert:\n" + e.message
         }
         outputTextBox.value = output
-    })
+    }
+    document.getElementById("doConvert").addEventListener("click", convertToHcl)
+
+    let h = document.location.hash
+    let r = /content=(.+)/
+    let m = r.exec(h)
+    if (m) {
+        inputTextBox.value = decodeURIComponent(m[1])
+        convertToHcl()
+    }
+
 </script>
 <script data-goatcounter="https://flosell.goatcounter.com/count"
         src="https://gc.zgo.at/count.v2.js"
