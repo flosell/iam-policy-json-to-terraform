@@ -68,6 +68,9 @@ web-build: web/*.go ## Build the web version
 web-e2e: web/*.go web/*.js ## Run end to end tests for web version (requires web-build)
 	cd web && npm test
 
+web-e2e-live: web/*.go web/*.js ## Run end to end tests for web version in live mode for development (requires web-build)
+	cd web && npm run test-live
+
 web-deploy: ## Deploy the web version to GitHub pages
 	scripts/deploy-github-pages.sh
 

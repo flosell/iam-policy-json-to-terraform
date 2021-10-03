@@ -88,6 +88,7 @@ tools-web                      Install additional required tooling for the web v
 web-build                      Build the web version
 web-deploy                     Deploy the web version to GitHub pages
 web-e2e                        Run end to end tests for web version (requires web-build)
+web-e2e-live                   Run end to end tests for web version in live mode for development (requires web-build)
 web-serve                      Serve the web version on a local development server
 ```
 
