@@ -26,6 +26,14 @@
             flex-basis: 100%;
         }
 
+        .textContainer pre {
+            border-width: 1px;
+            border-style: solid;
+            border-color: rgb(118, 118, 118);
+            flex-basis: 100%;
+            white-space: pre-wrap;
+        }
+
         .buttonContainer {
             flex-basis: 10%;
             flex-flow: row nowrap;
@@ -39,6 +47,10 @@
             height: 10em;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+        referrerpolicy="no-referrer"
+        crossorigin="anonymous"
+        integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" />
 </head>
 <body>
 <div class="mainContainer">
@@ -54,12 +66,24 @@
     </div>
     <div class="textContainer">
         <label for="output">Output: Terraform</label>
-        <textarea id="output" readonly></textarea>
+        <pre id="output" class="language-hcl"></pre>
     </div>
 </div>
 <div>
     <a href="javascript:if(document.getSelection){s=document.getSelection();}else{s= '{}';};document.location='https://flosell.github.io/iam-policy-json-to-terraform/#content='+encodeURIComponent(s)">Bookmarklet</a> drag this into your bookmarks; select a valid IAM policy on any page and click the bookmark to convert in one click
 </div>
+<script type="application/javascript">
+    window.Prism = window.Prism || {};
+    Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-core.min.js"
+        referrerpolicy="no-referrer"
+        crossorigin="anonymous"
+        integrity="sha512-TbHaMJHEmRBDf9W3P7VcRGwEmVEJu7MO6roAE0C4yqoNHeIVo3otIX3zj1DOLtn7YCD+U8Oy1T9eMtG/M9lxRw=="></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-hcl.min.js"
+        referrerpolicy="no-referrer"
+        crossorigin="anonymous"
+        integrity="sha512-swbu7APQjzOJzQrot5PC5xlX+6Q45sZZpjbnUeabv/mjhF35bcYOWnaIHN6N7cxZjSVM/8kH2Vg+4vBsOnNxKw=="></script>
 <script src="web.js"></script>
 <script type="application/javascript">
     let inputTextBox = document.getElementById("input")
@@ -71,7 +95,9 @@
         } catch (e) {
             output = "Could not convert:\n" + e.message
         }
-        outputTextBox.value = output
+
+        outputTextBox.textContent = output
+        Prism.highlightElement(outputTextBox)
     }
     document.getElementById("doConvert").addEventListener("click", convertToHcl)
 
