@@ -42,13 +42,13 @@ class Page {
 let p = new Page()
 
 test('happy path', async t => {
-    await t.expect(p.output.value)
+    await t.expect(p.output.textContent)
         .eql('data "aws_iam_policy_document" "hello" {}\n')
 
     await p.replaceInputText(someIamJson)
     await t.click(p.convertButton)
 
-    await t.expect(p.output.value)
+    await t.expect(p.output.textContent)
         .eql(someIamTerraform)
 });
 
@@ -56,11 +56,11 @@ test('error case', async t => {
     await p.replaceInputText('{')
     await t.click(p.convertButton)
 
-    await t.expect(p.output.value)
+    await t.expect(p.output.textContent)
         .contains('unexpected end of JSON input')
 });
 
 test.page`./index.html#content=${encodeURIComponent(someIamJson)}`('bookmarklets', async t => {
     await t
-        .expect(p.output.value).eql(someIamTerraform);
+        .expect(p.output.textContent).eql(someIamTerraform);
 });
