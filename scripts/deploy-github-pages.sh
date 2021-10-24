@@ -7,6 +7,7 @@ REPO_ORIGIN=$(git remote get-url origin)
 
 mkdir ${SCRIPT_DIR}/../docs
 cp ${SCRIPT_DIR}/../web/{index.html,web.js} ${SCRIPT_DIR}/../docs
+cp -r ${SCRIPT_DIR}/../web/img ${SCRIPT_DIR}/../docs
 
 pushd ${SCRIPT_DIR}/../docs
 
