@@ -28,7 +28,7 @@ class Page {
     constructor() {
         this.output = Selector('#output')
         this.input = Selector('#input')
-        this.convertButton = Selector('#doConvert')
+        this.error = Selector('#error')
     }
 
     async replaceInputText(newText) {
@@ -46,7 +46,6 @@ test('happy path', async t => {
         .eql('data "aws_iam_policy_document" "hello" {}\n')
 
     await p.replaceInputText(someIamJson)
-    await t.click(p.convertButton)
 
     await t.expect(p.output.textContent)
         .eql(someIamTerraform)
@@ -54,9 +53,23 @@ test('happy path', async t => {
 
 test('error case', async t => {
     await p.replaceInputText('{')
-    await t.click(p.convertButton)
+
+    await t.expect(p.error.value)
+        .contains('unexpected end of JSON input')
+});
+
+test('update to error case', async t => {
+    await p.replaceInputText(someIamJson)
 
     await t.expect(p.output.textContent)
+        .eql(someIamTerraform)
+
+    await p.replaceInputText('{')
+
+    await t.expect(p.output.textContent)
+        .eql(someIamTerraform)
+
+    await t.expect(p.error.value)
         .contains('unexpected end of JSON input')
 });
 

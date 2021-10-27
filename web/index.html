@@ -34,7 +34,7 @@
             white-space: pre-wrap;
         }
 
-        .buttonContainer {
+        .middleContainer {
             flex-basis: 10%;
             flex-flow: row nowrap;
             display: flex;
@@ -42,9 +42,12 @@
             align-items: center;
         }
 
-        .buttonContainer button {
-            width: 80%;
-            height: 10em;
+        .middleContainer textarea {
+            resize: none;
+            border: none;
+            outline: none;
+            height: 200px;
+            color: crimson;
         }
 
         .bottomContainer {
@@ -66,11 +69,13 @@
         <label for="input">Input: IAM Policy Document (in JSON format)</label>
         <textarea id="input" autofocus>{}</textarea>
     </div>
-    <div class="buttonContainer">
-        <button id="doConvert"
-                data-goatcounter-click="convert-button-clicked"
-                data-goatcounter-title="Convert-button was clicked">&gt;
-        </button>
+    <div>
+        <div class="middleContainer">
+            <img alt="IAM -> Terraform" src="./img/arrow.png" width="75px">
+        </div>
+        <div class="middleContainer">
+            <textarea id="error" readonly></textarea>
+        </div>
     </div>
     <div class="textContainer">
         <label for="output">Output: Terraform</label>
@@ -85,7 +90,7 @@
             <a href="javascript:if(document.getSelection){s=document.getSelection();}else{s= '{}';};document.location='https://flosell.github.io/iam-policy-json-to-terraform/#content='+encodeURIComponent(s)">
                 <img alt="IAM -> Terraform" src="./img/bookmark.png" width="75px">
             </a>
-    </div> 
+    </div>
     <div >
         The command line version of this tool can be found here:
         <br>
@@ -100,6 +105,10 @@
     window.Prism = window.Prism || {};
     Prism.manual = true;
 </script>
+<script data-goatcounter="https://flosell.goatcounter.com/count"
+        src="https://gc.zgo.at/count.v2.js"
+        crossorigin="anonymous"
+        integrity="sha384-PeYXrhTyEaBBz91ANMgpSbfN1kjioQNPHNDbMvevUVLJoWrVEjDCpKb71TehNAlj"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-core.min.js"
         referrerpolicy="no-referrer"
         crossorigin="anonymous"
@@ -112,18 +121,31 @@
 <script type="application/javascript">
     let inputTextBox = document.getElementById("input")
     let outputTextBox = document.getElementById("output")
+    let errorTextBox = document.getElementById("error")
+
     function convertToHcl() {
         let output
         try {
             output = convert("hello", inputTextBox.value)
         } catch (e) {
             output = "Could not convert:\n" + e.message
+            errorTextBox.value = output
+
+            return
         }
 
+        errorTextBox.value = ""
         outputTextBox.textContent = output
         Prism.highlightElement(outputTextBox)
+
+        window.goatcounter.count({
+            path:  'convert-button-clicked',
+            title: 'Convert-button was clicked',
+            event: true,
+        })
     }
-    document.getElementById("doConvert").addEventListener("click", convertToHcl)
+
+    inputTextBox.addEventListener("input", convertToHcl)
 
     let h = document.location.hash
     let r = /content=(.+)/
@@ -133,11 +155,5 @@
     }
     convertToHcl()
 </script>
-<script data-goatcounter="https://flosell.goatcounter.com/count"
-        src="https://gc.zgo.at/count.v2.js"
-        crossorigin="anonymous"
-        integrity="sha384-PeYXrhTyEaBBz91ANMgpSbfN1kjioQNPHNDbMvevUVLJoWrVEjDCpKb71TehNAlj"></script>
-
-
 </body>
 </html>
