@@ -127,6 +127,9 @@
         integrity="sha512-fQZjy9w4ohD5RHN8ks4tKhZTpUina+TCJppWgFOZB2aOHofdXxECa3rbDO7bQVi8FzjNJxwgZQcwHag5CC/m7g=="></script>
 <script src="web.js"></script>
 <script type="application/javascript">
+    // disable bracket autocomplete in input
+    Prism.Live.pairs = {};
+
     let inputTextBox = document.getElementById("input")
     let outputTextBox = document.getElementById("output")
     function convertToHcl() {
