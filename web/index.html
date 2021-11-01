@@ -5,6 +5,14 @@
     <title>iam-policy-json-to-terraform - Easily convert AWS IAM policies to Terraform HCL</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="This tool converts standard IAM policies in JSON format (like what you'd find in the AWS docs) into more terraform native aws_iam_policy_document data source code">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+        referrerpolicy="no-referrer"
+        crossorigin="anonymous"
+        integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PrismJS/live@d3c54ad946afff49446b316cef7e9a739b0cf569/prism-live.css"
+        referrerpolicy="no-referrer"
+        crossorigin="anonymous"
+        integrity="sha512-QsaAQihPMX2k19aAYNcmCbcidTLWvb5aIYg0WblRZKPSg0Zio/6X/dKG43bscRxM97ldbJ06T1Di/xUj+l/Imw==" />
     <style>
         html, body {
             height: 100%
@@ -24,6 +32,7 @@
 
         .textContainer textarea {
             flex-basis: 100%;
+            height: 85%;
         }
 
         .textContainer pre {
@@ -55,16 +64,12 @@
         }
 
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
-        referrerpolicy="no-referrer"
-        crossorigin="anonymous"
-        integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" />
 </head>
 <body>
 <div class="mainContainer">
     <div class="textContainer">
         <label for="input">Input: IAM Policy Document (in JSON format)</label>
-        <textarea id="input" autofocus>{}</textarea>
+        <textarea id="input" autofocus class="prism-live language-javascript">{}</textarea>
     </div>
     <div class="buttonContainer">
         <button id="doConvert"
@@ -85,14 +90,14 @@
             <a href="javascript:if(document.getSelection){s=document.getSelection();}else{s= '{}';};document.location='https://flosell.github.io/iam-policy-json-to-terraform/#content='+encodeURIComponent(s)">
                 <img alt="IAM -> Terraform" src="./img/bookmark.png" width="75px">
             </a>
-    </div> 
+    </div>
     <div >
         The command line version of this tool can be found here:
         <br>
             <a href="https://github.com/flosell/iam-policy-json-to-terraform">
                 <img alt="Github" src="./img/GitHub-Mark-120px-plus.png" width="45px" />
             </a>
-        </br>
+        <br>
     </div>
 </div>
 
@@ -100,14 +105,26 @@
     window.Prism = window.Prism || {};
     Prism.manual = true;
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-core.min.js"
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blissfuljs/1.0.6/bliss.shy.min.js"
         referrerpolicy="no-referrer"
         crossorigin="anonymous"
-        integrity="sha512-TbHaMJHEmRBDf9W3P7VcRGwEmVEJu7MO6roAE0C4yqoNHeIVo3otIX3zj1DOLtn7YCD+U8Oy1T9eMtG/M9lxRw=="></script>
+        integrity="sha512-MxBdQXQ8H/eviAINQi9I3C5hl/mG7hbiB5KEAUdKcr0CVJpjmyXNyRSh4wIzX3/5oHK8L1B8svUuKXWu70RAVA=="></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"
+        referrerpolicy="no-referrer"
+        crossorigin="anonymous"
+        integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ=="></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-hcl.min.js"
         referrerpolicy="no-referrer"
         crossorigin="anonymous"
         integrity="sha512-swbu7APQjzOJzQrot5PC5xlX+6Q45sZZpjbnUeabv/mjhF35bcYOWnaIHN6N7cxZjSVM/8kH2Vg+4vBsOnNxKw=="></script>
+<script src="https://cdn.jsdelivr.net/gh/PrismJS/live@d3c54ad946afff49446b316cef7e9a739b0cf569/src/prism-live.js"
+        referrerpolicy="no-referrer"
+        crossorigin="anonymous"
+        integrity="sha512-MLp0dbVf1XzybvjP03yaSHGjdOP9zM5fApzmA7w8SNqJjFT6RRJLbsQheWwHoh5YOGX3FzsDMwdY3XVZRIyULA=="></script>
+<script src="https://cdn.jsdelivr.net/gh/PrismJS/live@d3c54ad946afff49446b316cef7e9a739b0cf569/src/prism-live-javascript.js"
+        referrerpolicy="no-referrer"
+        crossorigin="anonymous"
+        integrity="sha512-fQZjy9w4ohD5RHN8ks4tKhZTpUina+TCJppWgFOZB2aOHofdXxECa3rbDO7bQVi8FzjNJxwgZQcwHag5CC/m7g=="></script>
 <script src="web.js"></script>
 <script type="application/javascript">
     let inputTextBox = document.getElementById("input")
@@ -137,7 +154,5 @@
         src="https://gc.zgo.at/count.v2.js"
         crossorigin="anonymous"
         integrity="sha384-PeYXrhTyEaBBz91ANMgpSbfN1kjioQNPHNDbMvevUVLJoWrVEjDCpKb71TehNAlj"></script>
-
-
 </body>
 </html>
