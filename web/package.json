@@ -5,7 +5,8 @@
   "main": "web.js",
   "scripts": {
     "test-live": "testcafe chrome web_test.js --live",
-    "test": "testcafe chrome:headless web_test.js -s takeOnFails=true"
+    "test": "testcafe chrome:headless web_test.js -s takeOnFails=true",
+    "backstop": "backstop"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/flosell/iam-policy-json-to-terraform#readme",
   "devDependencies": {
+    "backstopjs": "^6.0.4",
     "testcafe": "^1.15.3"
   }
 }

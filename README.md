@@ -90,6 +90,8 @@ web-deploy                     Deploy the web version to GitHub pages
 web-e2e                        Run end to end tests for web version (requires web-build)
 web-e2e-live                   Run end to end tests for web version in live mode for development (requires web-build)
 web-serve                      Serve the web version on a local development server
+web-visual-regression-approve  Accept changes in Web UI visuals
+web-visual-regression-test     Test for changes in Web UI visuals
 ```
 
 #### Web Development

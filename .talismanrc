@@ -1,7 +1,10 @@
 fileignoreconfig:
-- filename: web/index.html
-  checksum: bbfdd0d28d913d9c712e1419388c76d3dbabc12b5229b213ae02bb595cb940d1
-- filename: go.sum
-  checksum: b6119cf32c0ae74cfd65541469dc26a866ddc406a1b6506a5f5ee8312d081938
-  ignore_detectors: []
-scopeconfig: []
+- filename: web/package-lock.json
+  checksum: 7db423ddcaac0600d30a5fbe04e2c4becc5e7bd97ebb6f1fa04e273867c4c011
+- filename: web/backstop_data/engine_scripts/puppet/clickAndHoverHelper.js
+  checksum: 1e2b3b5bad27ef20f58ce5d5b35cf3bf172ba64c14df79d4298afafe097bb733
+- filename: web/backstop_data/engine_scripts/puppet/ignoreCSP.js
+  checksum: c3353b98a8b735c2bbcc7abebde4a14f7682ab59f30cb25ae45731c2a3677c9b
+- filename: web/backstop_data/engine_scripts/playwright/clickAndHoverHelper.js
+  checksum: bfe83dc9cae532a0af9b6e3d6488cf296d74ce6b97dd99478935f198c3acd74d
+version: ""
