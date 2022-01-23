@@ -32,7 +32,7 @@ jobs:
       - name: Install tools
         run: make tools-main tools-web
       - name: Build web version and run E2E tests
-        run: make web-build web-e2e web-visual-regression-test
+        run: make web-build web-e2e
       - name: Store website build
         uses: actions/upload-artifact@v2
         with:
@@ -40,13 +40,6 @@ jobs:
           path: |
             web/index.html
             web/web.js
-      - name: Store Visual Regression test report
-        if: ${{failure()}}
-        uses: actions/upload-artifact@v2
-        with:
-          name: visual regression test report
-          path: |
-            web/backstop_data/*
   deploy-web:
     runs-on: ubuntu-latest
     needs: test-web
