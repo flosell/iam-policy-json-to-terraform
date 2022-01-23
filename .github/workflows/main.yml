@@ -46,7 +46,7 @@ jobs:
         with:
           name: visual regression test report
           path: |
-            web/backstop_data/html_report/*
+            web/backstop_data/*
   deploy-web:
     runs-on: ubuntu-latest
     needs: test-web
