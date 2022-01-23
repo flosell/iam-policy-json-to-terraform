@@ -16,7 +16,12 @@ For command line usage and automation, check out the instructions below.
 ```bash
 $ brew install iam-policy-json-to-terraform
 ```
-    
+
+### [asdf](https://github.com/asdf-vm/asdf)
+```bash
+$ asdf plugin add iam-policy-json-to-terraform https://github.com/carlduevel/asdf-iam-policy-json-to-terraform.git
+```    
+
 ### Other
 
 Download the latest binary from the [releases page](https://github.com/flosell/iam-policy-json-to-terraform/releases) and put it into your `PATH` under the name `iam-policy-json-to-terraform`
