@@ -32,7 +32,7 @@ jobs:
       - name: Install tools
         run: make tools-main tools-web
       - name: Build web version and run E2E tests
-        run: make web-build web-e2e
+        run: make web-build web-e2e web-visual-regression-test
       - name: Store website build
         uses: actions/upload-artifact@v2
         with:
