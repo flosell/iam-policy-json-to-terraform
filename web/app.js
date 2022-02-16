@@ -37,9 +37,19 @@ let r = /content=(.+)/
 let m = r.exec(h)
 if (m) {
     inputTextBox.value = decodeURIComponent(m[1])
+    window.goatcounter.count({
+        path: 'bookmarklet-used',
+        title: 'Page was loaded using the bookmarklet',
+        event: true,
+    })
 
 }
 convertToHcl()
 infoToggleButton.addEventListener("click",() => {
     infoExpander.toggleAttribute("open")
+    window.goatcounter.count({
+        path: 'info-toggle-clicked',
+        title: 'Info-Toggle-button was clicked',
+        event: true,
+    })
 })
