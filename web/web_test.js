@@ -28,7 +28,9 @@ class Page {
     constructor() {
         this.output = Selector('#output')
         this.input = Selector('#input')
-        this.error = Selector('#error')
+        this.error = Selector('#json-error')
+        this.infoToggle = Selector('#info-toggle')
+        this.infoExpander = Selector('#info-expander')
     }
 
     async replaceInputText(newText) {
@@ -54,7 +56,7 @@ test('happy path', async t => {
 test('error case', async t => {
     await p.replaceInputText('{')
 
-    await t.expect(p.error.value)
+    await t.expect(p.error.innerText)
         .contains('unexpected end of JSON input')
 });
 
@@ -69,9 +71,18 @@ test('update to error case', async t => {
     await t.expect(p.output.textContent)
         .eql(someIamTerraform)
 
-    await t.expect(p.error.value)
+    await t.expect(p.error.innerText)
         .contains('unexpected end of JSON input')
 });
+
+test('expand infos', async t => {
+    await t.expect(p.infoExpander.visible).notOk()
+
+    await t
+        .click(p.infoToggle)
+
+    await t.expect(p.infoExpander.visible).ok()
+})
 
 test.page`./index.html#content=${encodeURIComponent(someIamJson)}`('bookmarklets', async t => {
     await t

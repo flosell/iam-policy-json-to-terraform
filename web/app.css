@@ -1,51 +1,149 @@
-html, body {
-    height: 100%
+:root {
+    --main-bg-color: #000000;
+    --title-text-color: #FFFFFF;
+    --info-bg-color: #844FBA;
+    --error-bg-color: #FF8484;
+    --display-font-family: 'Open Sans', sans-serif;
+    --code-font-family: 'Source Code Pro', monospace;
 }
 
-.mainContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    height: 85%;
+h1 {
+    font-family: var(--display-font-family);
+    font-weight: 700;
+}
+.wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: auto 1fr 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+            "title . infos"
+            "details details details"
+            "main main main"
+            "footer footer footer";;
+    width: 100vw;
+    height: 100vh;
 }
 
-.textContainer {
-    flex-basis: 45%;
-    flex-flow: column nowrap;
-    display: flex;
+.title {
+    background: var(--main-bg-color);
+    color: var(--title-text-color);
+    grid-area: title;
 }
 
-.textContainer textarea {
-    flex-basis: 100%;
+.footer {
+    background: var(--main-bg-color);
+    grid-area: footer;
 }
-
-.textContainer pre {
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(118, 118, 118);
-    flex-basis: 100%;
-    white-space: pre-wrap;
-}
-
-.middleContainer {
-    flex-basis: 10%;
-    flex-flow: row nowrap;
+.footer a {
+    font-family: var(--display-font-family);
+    font-weight: 300;
+    color: var(--title-text-color);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.middleContainer textarea {
-    resize: none;
-    border: none;
-    outline: none;
-    height: 200px;
-    color: crimson;
+.footer img {
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
-.bottomContainer {
+.infos {
+    background: var(--info-bg-color);
+    color: var(--title-text-color);
+    grid-area: infos;
+    justify-self: end;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.details {
+    background: var(--main-bg-color);
+    grid-area: details;
+    font-family: var(--display-font-family);
+    font-weight: 300;
+    color: var(--title-text-color);
+}
+
+.details summary {
+    display: none;
+}
+
+.details dd {
+    margin-bottom: 1em;
+}
+
+.details dt {
+    font-weight: 500;
+}
+
+.details a {
+    color: white;
+}
+
+.main {
+    background: var(--main-bg-color);
+    grid-area: main;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
+    grid-gap: 0;
+    grid-template-columns: 1fr 0.2fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+            "json-editor arrow hcl-editor"
+            "json-error arrow hcl-error"
+;
+
+    padding: 40px;
+    min-height: 0;
+}
+
+.main > * {
+    background-color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.editor {
+    height: auto;
+    font-family: var(--code-font-family);
+    font-weight: 400;
+    font-size: 14px;
+}
+.json-editor {
+    grid-area: json-editor;
+
+}
+.json-error {
+    grid-area: json-error;
+}
+
+.hcl-editor {
+    grid-area: hcl-editor;
+}
+.hcl-error {
+    grid-area: hcl-error;
+}
+.error {
+    background-color: var(--error-bg-color);
     text-align: center;
+    display: none;
+}
+
+.arrow {
+    grid-area: arrow;
+
+    background-color: var(--main-bg-color);
+    color: var(--info-bg-color);
+
+    justify-self: center;
+    align-self: center;
+
+    font-size: 10vw;
+    font-family: var(--display-font-family);
+    font-weight: 900;
+}
+
+.title,.infos {
+    margin: 0;
 }
