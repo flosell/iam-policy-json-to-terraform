@@ -147,3 +147,9 @@ h1 {
 .title,.infos {
     margin: 0;
 }
+
+/* Align PrismJS theme to our styling */
+pre[class*=language-] {
+    background-color: white;
+    margin: 0;
+}

@@ -7,4 +7,6 @@ fileignoreconfig:
   checksum: c3353b98a8b735c2bbcc7abebde4a14f7682ab59f30cb25ae45731c2a3677c9b
 - filename: web/backstop_data/engine_scripts/playwright/clickAndHoverHelper.js
   checksum: bfe83dc9cae532a0af9b6e3d6488cf296d74ce6b97dd99478935f198c3acd74d
+- filename: web/index.html
+  checksum: a257d633ffdcb86bf067bcd4ea0b58825785c606c0a8d8f624c7adc6fc4304eb
 version: ""
