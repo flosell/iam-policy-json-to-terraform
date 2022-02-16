@@ -1,0 +1,51 @@
+html, body {
+    height: 100%
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 85%;
+}
+
+.textContainer {
+    flex-basis: 45%;
+    flex-flow: column nowrap;
+    display: flex;
+}
+
+.textContainer textarea {
+    flex-basis: 100%;
+}
+
+.textContainer pre {
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(118, 118, 118);
+    flex-basis: 100%;
+    white-space: pre-wrap;
+}
+
+.middleContainer {
+    flex-basis: 10%;
+    flex-flow: row nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.middleContainer textarea {
+    resize: none;
+    border: none;
+    outline: none;
+    height: 200px;
+    color: crimson;
+}
+
+.bottomContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    text-align: center;
+}

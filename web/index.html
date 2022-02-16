@@ -5,59 +5,7 @@
     <title>iam-policy-json-to-terraform - Easily convert AWS IAM policies to Terraform HCL</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="This tool converts standard IAM policies in JSON format (like what you'd find in the AWS docs) into more terraform native aws_iam_policy_document data source code">
-    <style>
-        html, body {
-            height: 100%
-        }
-        .mainContainer {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            height: 85%;
-        }
-
-        .textContainer {
-            flex-basis: 45%;
-            flex-flow: column nowrap;
-            display: flex;
-        }
-
-        .textContainer textarea {
-            flex-basis: 100%;
-        }
-
-        .textContainer pre {
-            border-width: 1px;
-            border-style: solid;
-            border-color: rgb(118, 118, 118);
-            flex-basis: 100%;
-            white-space: pre-wrap;
-        }
-
-        .middleContainer {
-            flex-basis: 10%;
-            flex-flow: row nowrap;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .middleContainer textarea {
-            resize: none;
-            border: none;
-            outline: none;
-            height: 200px;
-            color: crimson;
-        }
-
-        .bottomContainer {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-gap: 20px;
-            text-align: center;
-        }
-
-    </style>
+    <link href="app.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
         referrerpolicy="no-referrer"
         crossorigin="anonymous"
@@ -118,42 +66,6 @@
         crossorigin="anonymous"
         integrity="sha512-swbu7APQjzOJzQrot5PC5xlX+6Q45sZZpjbnUeabv/mjhF35bcYOWnaIHN6N7cxZjSVM/8kH2Vg+4vBsOnNxKw=="></script>
 <script src="web.js"></script>
-<script type="application/javascript">
-    let inputTextBox = document.getElementById("input")
-    let outputTextBox = document.getElementById("output")
-    let errorTextBox = document.getElementById("error")
-
-    function convertToHcl() {
-        let output
-        try {
-            output = convert("hello", inputTextBox.value)
-        } catch (e) {
-            output = "Could not convert:\n" + e.message
-            errorTextBox.value = output
-
-            return
-        }
-
-        errorTextBox.value = ""
-        outputTextBox.textContent = output
-        Prism.highlightElement(outputTextBox)
-
-        window.goatcounter.count({
-            path:  'convert-button-clicked',
-            title: 'Convert-button was clicked',
-            event: true,
-        })
-    }
-
-    inputTextBox.addEventListener("input", convertToHcl)
-
-    let h = document.location.hash
-    let r = /content=(.+)/
-    let m = r.exec(h)
-    if (m) {
-        inputTextBox.value = decodeURIComponent(m[1])
-    }
-    convertToHcl()
-</script>
+<script type="application/javascript" src="app.js"></script>
 </body>
 </html>

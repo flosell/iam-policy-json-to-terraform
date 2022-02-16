@@ -74,10 +74,10 @@ web-e2e-live: web/*.go web/*.js ## Run end to end tests for web version in live 
 web-deploy: ## Deploy the web version to GitHub pages
 	scripts/deploy-github-pages.sh
 
-web-visual-regression-test:  web/*.go web/*.js web/*.html ## Test for changes in Web UI visuals
+web-visual-regression-test:  web/*.go web/*.js web/*.css web/*.html ## Test for changes in Web UI visuals
 	cd web && npm run backstop test
 
-web-visual-regression-approve:  web/*.go web/*.js web/*.html ## Accept changes in Web UI visuals
+web-visual-regression-approve:  web/*.go web/*.js web/*.css web/*.html ## Accept changes in Web UI visuals
 	cd web && npm run backstop approve
 
 help:
