@@ -75,7 +75,7 @@ web-deploy: ## Deploy the web version to GitHub pages
 	scripts/deploy-github-pages.sh
 
 web-visual-regression-test:  web/*.go web/*.js web/*.css web/*.html ## Test for changes in Web UI visuals
-	cd web && npx backstop test
+	cd web && npx backstop test --docker
 
 web-visual-regression-approve:  web/*.go web/*.js web/*.css web/*.html ## Accept changes in Web UI visuals
 	cd web && npx backstop approve
