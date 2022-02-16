@@ -16,7 +16,7 @@
   "onReadyScript": "puppet/onReady.js",
   "scenarios": [
     {
-      "label": "BackstopJS Homepage",
+      "label": "Normal",
       "cookiePath": "backstop_data/engine_scripts/cookies.json",
       "url": "./index.html",
       "referenceUrl": "",
