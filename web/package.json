@@ -20,6 +20,6 @@
   "homepage": "https://github.com/flosell/iam-policy-json-to-terraform#readme",
   "devDependencies": {
     "backstopjs": "^6.0.4",
-    "testcafe": "^1.15.3"
+    "testcafe": "^1.18.3"
   }
 }
