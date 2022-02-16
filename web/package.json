@@ -5,8 +5,7 @@
   "main": "web.js",
   "scripts": {
     "test-live": "testcafe chrome web_test.js --live",
-    "test": "testcafe chrome:headless web_test.js -s takeOnFails=true",
-    "backstop": "backstop"
+    "test": "testcafe chrome:headless web_test.js -s takeOnFails=true"
   },
   "repository": {
     "type": "git",

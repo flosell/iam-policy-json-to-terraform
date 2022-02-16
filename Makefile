@@ -75,10 +75,10 @@ web-deploy: ## Deploy the web version to GitHub pages
 	scripts/deploy-github-pages.sh
 
 web-visual-regression-test:  web/*.go web/*.js web/*.css web/*.html ## Test for changes in Web UI visuals
-	cd web && npm run backstop test
+	cd web && npx backstop test
 
 web-visual-regression-approve:  web/*.go web/*.js web/*.css web/*.html ## Accept changes in Web UI visuals
-	cd web && npm run backstop approve
+	cd web && npx backstop approve
 
 help:
 	@grep -h -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' | sort
