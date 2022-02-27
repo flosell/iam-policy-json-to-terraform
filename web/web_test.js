@@ -75,13 +75,13 @@ test('update to error case', async t => {
         .contains('unexpected end of JSON input')
 });
 
-test('expand infos', async t => {
-    await t.expect(p.infoExpander.visible).notOk()
+test('collapse infos', async t => {
+    await t.expect(p.infoExpander.visible).ok()
 
     await t
         .click(p.infoToggle)
 
-    await t.expect(p.infoExpander.visible).ok()
+    await t.expect(p.infoExpander.visible).notOk()
 })
 
 test.page`./index.html#content=${encodeURIComponent(someIamJson)}`('bookmarklets', async t => {
