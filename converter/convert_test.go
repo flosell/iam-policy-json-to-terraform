@@ -44,7 +44,7 @@ func TestConvertFromJsonToTerraformHcl(t *testing.T) {
 }
 
 func TestErrorOnUnsupportedCloudformationSnippet(t *testing.T) {
-	input, ferr := ioutil.ReadFile("fixtures/cloudformation-snippet.json")
+	input, ferr := ioutil.ReadFile("fixtures/error-cloudformation-snippet.json")
 	if ferr != nil {
 		t.Fatal(ferr)
 	}
@@ -56,7 +56,7 @@ func TestErrorOnUnsupportedCloudformationSnippet(t *testing.T) {
 }
 
 func TestErrorOnUnparseableJson(t *testing.T) {
-	input, ferr := ioutil.ReadFile("fixtures/broken.json")
+	input, ferr := ioutil.ReadFile("fixtures/error-broken.json")
 	if ferr != nil {
 		t.Fatal(ferr)
 	}
