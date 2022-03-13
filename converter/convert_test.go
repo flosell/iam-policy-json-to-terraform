@@ -43,6 +43,30 @@ func TestConvertFromJsonToTerraformHcl(t *testing.T) {
 
 }
 
+func TestErrorOnUnsupportedCloudformationSnippet(t *testing.T) {
+	input, ferr := ioutil.ReadFile("fixtures/cloudformation-snippet.json")
+	if ferr != nil {
+		t.Fatal(ferr)
+	}
+
+	_, err := Convert("policy", input)
+
+	assert.NotNil(t, err)
+	assert.ErrorIs(t, err, ErrorLackOfStatements)
+}
+
+func TestErrorOnUnparseableJson(t *testing.T) {
+	input, ferr := ioutil.ReadFile("fixtures/broken.json")
+	if ferr != nil {
+		t.Fatal(ferr)
+	}
+
+	_, err := Convert("policy", input)
+
+	assert.NotNil(t, err)
+	assert.NotErrorIs(t, err, ErrorLackOfStatements)
+}
+
 func TestEscapeDollarSigns(t *testing.T) {
 	var testcases = []struct {
 		in  string

@@ -8,7 +8,7 @@ import (
 type jsonStatements []jsonStatement
 type jsonPolicyDocument struct {
 	Version   string
-	Statement jsonStatements
+	Statement *jsonStatements
 }
 
 type stringOrStringArray interface{}
@@ -56,7 +56,11 @@ func decode(b []byte) ([]jsonStatement, error) {
 		return nil, err
 	}
 
-	return document.Statement, nil
+	if document.Statement == nil {
+		return nil, nil
+	}
+
+	return *document.Statement, nil
 
 }
 

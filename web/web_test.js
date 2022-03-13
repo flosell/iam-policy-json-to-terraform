@@ -73,6 +73,11 @@ test('update to error case', async t => {
 
     await t.expect(p.error.innerText)
         .contains('unexpected end of JSON input')
+
+    await p.replaceInputText('{}')
+
+    await t.expect(p.error.innerText)
+        .contains('input did not contain any statements')
 });
 
 test('collapse infos', async t => {

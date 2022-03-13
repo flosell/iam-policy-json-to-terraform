@@ -1,0 +1,33 @@
+{
+  "PolicyName": "DeployLambdaFunctions",
+  "PolicyDocument": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "lambda:Get*",
+          "lambda:List*",
+          "lambda:CreateFunction",
+          "lambda:DeleteFunction",
+          "lambda:CreateFunction",
+          "lambda:DeleteFunction",
+          "lambda:UpdateFunctionConfiguration",
+          "lambda:UpdateFunctionCode",
+          "lambda:PublishVersion",
+          "lambda:CreateAlias",
+          "lambda:DeleteAlias",
+          "lambda:UpdateAlias",
+          "lambda:AddPermission",
+          "lambda:RemovePermission",
+          "lambda:InvokeFunction"
+        ],
+        "Resource": [
+          {
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${AppId}-*"
+          }
+        ]
+      }
+    ]
+  }
+}

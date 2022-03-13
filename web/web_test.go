@@ -6,7 +6,10 @@ import (
 )
 
 func TestWebWrapperConvertsString(t *testing.T) {
-	result := ConvertString("someName", "{}")
+	result := ConvertString("someName", `
+{
+	"Statement": []
+}`)
 	assert.Equal(t, "data \"aws_iam_policy_document\" \"someName\" {}\n", result)
 }
 
