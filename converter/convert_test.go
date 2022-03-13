@@ -39,9 +39,9 @@ func TestConvertFromJsonToTerraformHcl(t *testing.T) {
 
 func TestConversionErrors(t *testing.T) {
 	var testcases = []struct {
-		fixtureFile  string
+		fixtureFile         string
 		partialErrorMessage string
-		expectedError error
+		expectedError       error
 	}{
 		{"fixtures/error-broken.json", "unexpected end of JSON input", nil},
 		{"fixtures/error-cloudformation-snippet.json", "", ErrorLackOfStatements},
