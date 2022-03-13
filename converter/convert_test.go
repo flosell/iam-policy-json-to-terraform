@@ -19,14 +19,8 @@ func TestConvertFromJsonToTerraformHcl(t *testing.T) {
 
 	for _, fixture := range fixtures {
 		t.Run(fixture.in, func(t *testing.T) {
-			input, ferr := ioutil.ReadFile(fixture.in)
-			if ferr != nil {
-				t.Fatal(ferr)
-			}
-			expectedOutput, ferr := ioutil.ReadFile(fixture.out)
-			if ferr != nil {
-				t.Fatal(ferr)
-			}
+			input := readFixtureFile(t, fixture.in)
+			expectedOutput := readFixtureFile(t, fixture.out)
 
 			actualOutput, err := Convert("policy", input)
 
@@ -43,28 +37,30 @@ func TestConvertFromJsonToTerraformHcl(t *testing.T) {
 
 }
 
-func TestErrorOnUnsupportedCloudformationSnippet(t *testing.T) {
-	input, ferr := ioutil.ReadFile("fixtures/error-cloudformation-snippet.json")
-	if ferr != nil {
-		t.Fatal(ferr)
+func TestConversionErrors(t *testing.T) {
+	var testcases = []struct {
+		fixtureFile  string
+		partialErrorMessage string
+		expectedError error
+	}{
+		{"fixtures/error-broken.json", "unexpected end of JSON input", nil},
+		{"fixtures/error-cloudformation-snippet.json", "", ErrorLackOfStatements},
 	}
 
-	_, err := Convert("policy", input)
+	for _, testcase := range testcases {
+		t.Run(testcase.fixtureFile, func(t *testing.T) {
+			input := readFixtureFile(t, testcase.fixtureFile)
 
-	assert.NotNil(t, err)
-	assert.ErrorIs(t, err, ErrorLackOfStatements)
-}
+			_, err := Convert("policy", input)
 
-func TestErrorOnUnparseableJson(t *testing.T) {
-	input, ferr := ioutil.ReadFile("fixtures/error-broken.json")
-	if ferr != nil {
-		t.Fatal(ferr)
+			assert.NotNil(t, err)
+			assert.Contains(t, err.Error(), testcase.partialErrorMessage)
+
+			if testcase.expectedError != nil {
+				assert.ErrorIs(t, err, testcase.expectedError)
+			}
+		})
 	}
-
-	_, err := Convert("policy", input)
-
-	assert.NotNil(t, err)
-	assert.Contains(t, err.Error(), "unexpected end of JSON input")
 }
 
 func TestEscapeDollarSigns(t *testing.T) {
@@ -101,4 +97,12 @@ func TestEscapeDollarSigns(t *testing.T) {
 		})
 
 	}
+}
+
+func readFixtureFile(t *testing.T, file string) []byte {
+	input, ferr := ioutil.ReadFile(file)
+	if ferr != nil {
+		t.Fatal(ferr)
+	}
+	return input
 }
