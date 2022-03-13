@@ -17,6 +17,15 @@ function convertToHcl() {
         output = "Error: " + e.message
         errorTextBox.textContent = output
         errorTextBox.style.display = "block"
+
+        if (e.message && e.message.includes("looks like CloudFormation code")) {
+            window.goatcounter.count({
+                path: 'error-trying-to-convert-cloudformation',
+                title: 'User is trying to convert CloudFormation code and its not supported',
+                event: true,
+            })
+        }
+
         return
     }
     errorTextBox.value = ""
