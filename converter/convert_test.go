@@ -64,7 +64,7 @@ func TestErrorOnUnparseableJson(t *testing.T) {
 	_, err := Convert("policy", input)
 
 	assert.NotNil(t, err)
-	assert.NotErrorIs(t, err, ErrorLackOfStatements)
+	assert.Contains(t, err.Error(), "unexpected end of JSON input")
 }
 
 func TestEscapeDollarSigns(t *testing.T) {
