@@ -1,8 +1,6 @@
 package converter
 
 import (
-	"errors"
-	"fmt"
 	"regexp"
 	"strconv"
 )
@@ -83,19 +81,12 @@ func convertStatements(json jsonStatement) hclStatement {
 	}
 }
 
-// ErrorLackOfStatements indicates that the input JSON did not contain any statements, so likely isn't a useful input
-var ErrorLackOfStatements = errors.New("input did not contain any statements")
-
 // Convert reads a JSON policy document and return a string with a terraform policy document definition
 func Convert(policyName string, b []byte) (string, error) {
 	statementsFromJSON, err := decode(b)
 
 	if err != nil {
 		return "", err
-	}
-
-	if statementsFromJSON == nil {
-		return "", fmt.Errorf("invalid policy input: %w", ErrorLackOfStatements)
 	}
 
 	hclStatements := make([]hclStatement, len(statementsFromJSON))

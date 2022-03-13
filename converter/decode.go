@@ -3,12 +3,16 @@ package converter
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
+	"fmt"
 )
 
 type jsonStatements []jsonStatement
 type jsonPolicyDocument struct {
-	Version   string
-	Statement *jsonStatements
+	Version        string
+	Statement      *jsonStatements
+	PolicyName     *interface{}
+	PolicyDocument *interface{}
 }
 
 type stringOrStringArray interface{}
@@ -48,6 +52,13 @@ func (stmts *jsonStatements) UnmarshalJSON(b []byte) error {
 	return errSliceUnmarshal
 }
 
+// ErrorLackOfStatements indicates that the input JSON did not contain any statements, so likely isn't a useful input
+var ErrorLackOfStatements = errors.New("input did not contain any statements")
+
+// ErrorLooksLikeCloudformation indicates that the input JSON did not contain any statements but looks like CloudFormation
+var ErrorLooksLikeCloudformation = errors.New("input did not contain any statements " +
+	"but looks like CloudFormation code - this is currently not supported. Look at GitHub Issue #50 for details")
+
 func decode(b []byte) ([]jsonStatement, error) {
 	document := &jsonPolicyDocument{}
 	err := json.Unmarshal(escapeHclSnippetsInJSON(b), document)
@@ -57,7 +68,10 @@ func decode(b []byte) ([]jsonStatement, error) {
 	}
 
 	if document.Statement == nil {
-		return nil, nil
+		if document.PolicyName != nil || document.PolicyDocument != nil {
+			return nil, fmt.Errorf("invalid policy input: %w", ErrorLooksLikeCloudformation)
+		}
+		return nil, fmt.Errorf("invalid policy input: %w", ErrorLackOfStatements)
 	}
 
 	return *document.Statement, nil

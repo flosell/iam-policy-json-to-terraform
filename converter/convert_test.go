@@ -44,7 +44,8 @@ func TestConversionErrors(t *testing.T) {
 		expectedError       error
 	}{
 		{"fixtures/error-broken.json", "unexpected end of JSON input", nil},
-		{"fixtures/error-cloudformation-snippet.json", "", ErrorLackOfStatements},
+		{"fixtures/error-no-statements.json", "", ErrorLackOfStatements},
+		{"fixtures/error-cloudformation-snippet.json", "", ErrorLooksLikeCloudformation},
 	}
 
 	for _, testcase := range testcases {
