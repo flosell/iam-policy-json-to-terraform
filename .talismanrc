@@ -1,6 +1,6 @@
 fileignoreconfig:
 - filename: web/package-lock.json
-  checksum: 79e0a359b5032ea2096548da0319397c5fa66949055caf9f50e07aaa082f4b7d
+  checksum: 0a62ebd791f4f99571926ad7f2adf2ce837d33f19b47f667ed3d3854d1284006
 - filename: web/backstop_data/engine_scripts/puppet/clickAndHoverHelper.js
   checksum: 1e2b3b5bad27ef20f58ce5d5b35cf3bf172ba64c14df79d4298afafe097bb733
 - filename: web/backstop_data/engine_scripts/puppet/ignoreCSP.js
