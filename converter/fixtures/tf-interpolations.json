@@ -15,7 +15,7 @@
         "s3:DeleteObjectVersion"
       ],
       "Resource": [
-        "arn:aws:s3:::${aws_s3_bucket.output.id}/*",
+        "arn:aws:s3:::${aws_s3_bucket.output.id}/${var.foldername}/*",
         "arn:aws:s3:::${aws_s3_bucket.output.id}"
       ]
     },
@@ -50,6 +50,16 @@
       ],
       "Resource": [
         "${aws_kms_key.key.arn}"
+      ]
+    },
+    {
+      "Sid": "AWSCloudTrailCreateLogStream2014110",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogStream"
+      ],
+      "Resource": [
+        "arn:aws:logs:${data.aws_region.reg_current.name}:${data.aws_caller_identity.acc_current.account_id}:log-group:${aws_cloudwatch_log_group.trail-log-group.name}:*"
       ]
     }
   ]

@@ -7,7 +7,7 @@ import (
 
 func escapePolicyVariables(s string) string {
 	// Escape TF special characters
-	re := regexp.MustCompile(`\${((.*:.*)|([*?$]))}`)
+	re := regexp.MustCompile(`\${(([^}]*:[^}]*)|([*?$]))}`)
 	return re.ReplaceAllString(s, "$$$${$1}")
 }
 

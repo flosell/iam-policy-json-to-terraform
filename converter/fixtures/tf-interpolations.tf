@@ -4,7 +4,7 @@ data "aws_iam_policy_document" "policy" {
     effect = "Allow"
 
     resources = [
-      "arn:aws:s3:::${aws_s3_bucket.output.id}/*",
+      "arn:aws:s3:::${aws_s3_bucket.output.id}/${var.foldername}/*",
       "arn:aws:s3:::${aws_s3_bucket.output.id}",
     ]
 
@@ -55,5 +55,12 @@ data "aws_iam_policy_document" "policy" {
       "kms:GenerateDataKey*",
       "kms:DescribeKey",
     ]
+  }
+
+  statement {
+    sid       = "AWSCloudTrailCreateLogStream2014110"
+    effect    = "Allow"
+    resources = ["arn:aws:logs:${data.aws_region.reg_current.name}:${data.aws_caller_identity.acc_current.account_id}:log-group:${aws_cloudwatch_log_group.trail-log-group.name}:*"]
+    actions   = ["logs:CreateLogStream"]
   }
 }
