@@ -15,4 +15,5 @@ require (
 	github.com/tomnomnom/linkheader v0.0.0-20180905144013-02ca5825eb80 // indirect
 	github.com/voxelbrain/goptions v0.0.0-20180630082107-58cddc247ea2 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616
+	golang.org/x/sys v0.0.0-20220808155132-1c4a2a72c664 // indirect
 )
