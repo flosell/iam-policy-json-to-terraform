@@ -10,6 +10,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 * Minor dependency updates
 
+### Fixed
+
+* Allow multiple Terraform variables in the same line (#59)
+* Include more helpful error messages on parsing errors (#49)
+
 ## 1.8.0 - 2021-07-07
 
 ### Added
