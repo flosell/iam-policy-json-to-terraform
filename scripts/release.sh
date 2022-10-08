@@ -3,11 +3,9 @@
 set -eu -o pipefail
 
 # TODO: make sure the following is installed:
-# https://github.com/aktau/github-release
 # https://github.com/mtdowling/chag
-# $GITHUB_TOKEN is set
+# $GITHUB_TOKEN is set # TODO: use gh for that? 
 
-USER="flosell"
 REPO="iam-policy-json-to-terraform"
 
 SCRIPT_DIR=$(dirname "$0")
@@ -32,25 +30,17 @@ chag tag --sign
 git push
 git push --tags
 
-
-github-release release \
-    --user ${USER} \
-    --repo ${REPO} \
-    --tag ${VERSION} \
-    --name ${VERSION} \
-    --description "$(chag contents)"
+gh release create ${VERSION} \
+    --title ${VERSION} \
+    --notes "$(chag contents)"
 
 for i in "${REPO}.exe" "${REPO}_alpine" "${REPO}_amd64" "${REPO}_darwin" "${REPO}_darwin_arm"; do
   echo "Uploading ${i}..."
-  github-release upload \
-      --user ${USER} \
-      --repo ${REPO} \
-      --tag ${VERSION} \
-      --name ${i} \
-      --file ${i}
+  gh release upload ${VERSION} ${i}
 done
 
-export HOMEBREW_GITHUB_API_TOKEN="${GITHUB_TOKEN}" # homebrew often uses a readonly token, set the one already used for release instead
+HOMEBREW_GITHUB_API_TOKEN="$(gh auth token)" # homebrew often uses a readonly token, set the one already used for release instead
+export HOMEBREW_GITHUB_API_TOKEN
 
 archive_url="https://github.com/flosell/iam-policy-json-to-terraform/archive/${VERSION}.tar.gz"
 sha=$(curl -sSLf "${archive_url}" | sha256sum | awk '{print $1}')
