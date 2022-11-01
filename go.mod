@@ -9,7 +9,7 @@ require (
 	github.com/gopherjs/gopherjs v0.0.0-20210825203111-a709d8e111b3
 	github.com/kevinburke/rest v0.0.0-20210425173428-1fcb8c8e9022 // indirect
 	github.com/mattn/go-isatty v0.0.16
-	github.com/securego/gosec/v2 v2.13.1
+	github.com/securego/gosec/v2 v2.14.0
 	github.com/spf13/cobra v1.2.1 // indirect
 	github.com/stretchr/testify v1.8.1
 	github.com/tomnomnom/linkheader v0.0.0-20180905144013-02ca5825eb80 // indirect
