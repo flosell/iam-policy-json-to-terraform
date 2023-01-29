@@ -4,6 +4,12 @@ This changelog contains a loose collection of changes in every release. I will a
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## Unreleased
+
+### Changed
+
+* Minor dependency updates
+
 ## 1.8.1 - 2022-10-08
 
 ### Changed
