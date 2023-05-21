@@ -1,3 +1,4 @@
+//go:build tools
 // +build tools
 
 // Managing build tooling here. Inspired by this:

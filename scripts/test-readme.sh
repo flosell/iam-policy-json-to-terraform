@@ -10,7 +10,7 @@ for x in ${testcases}; do
 
   commands=$(cat ${SCRIPT_DIR}/../README.md | sed -e 's_git@github.com:_https://github.com/_g' | sed -n "/\`\`\`bash testcase=${x}/,/\`\`\`/p" | sed -e 's/^[[:space:]]*//' | grep '^\$' | sed -e 's/^\$ //g')
 
-  docker run -e NO_TOOLS_WEB=true --rm golang:1.16-buster bash -e -x -c "${commands}"
+  docker run -e NO_TOOLS_WEB=true --rm golang:1.17-buster bash -e -x -c "${commands}"
 
   echo
   echo
