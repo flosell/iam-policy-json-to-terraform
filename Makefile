@@ -26,7 +26,7 @@ tools-web: ## Install additional required tooling for the web version
 	test -z "${NO_TOOLS_WEB}" && (cd web && npm install) || echo "skipping tools web because of environment variable (only for testing readme)"
 
 tools-main:  ## Install additional required tooling for the main version
-	go list -f '{{range .Imports}}{{.}} {{end}}' tools.go | xargs go install
+	cat tools.go | grep _ | cut -f2 -d '_' | xargs -n1 go install
 
 iam-policy-json-to-terraform_amd64: **/*.go
 	 GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -o $@
