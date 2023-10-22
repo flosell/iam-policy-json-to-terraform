@@ -1,4 +1,4 @@
-import { Selector, t } from 'testcafe';
+import { Selector, t, ClientFunction } from 'testcafe';
 
 fixture `iam-policy-json-to-terraform web version`.page `./index.html`;  // specify the start page
 
@@ -91,6 +91,9 @@ test('collapse infos', async t => {
 
 test('bookmarklets', async t => {
     await t.navigateTo(`./index.html#content=${encodeURIComponent(someIamJson)}`)
+    await ClientFunction(() => {
+        document.location.reload();
+    })();
     await t
         .expect(p.output.textContent).eql(someIamTerraform);
 });
