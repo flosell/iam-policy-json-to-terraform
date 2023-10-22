@@ -89,7 +89,8 @@ test('collapse infos', async t => {
     await t.expect(p.infoExpander.visible).notOk()
 })
 
-test.page`./index.html#content=${encodeURIComponent(someIamJson)}`('bookmarklets', async t => {
+test('bookmarklets', async t => {
+    await t.navigateTo(`./index.html#content=${encodeURIComponent(someIamJson)}`)
     await t
         .expect(p.output.textContent).eql(someIamTerraform);
 });
