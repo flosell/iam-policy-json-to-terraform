@@ -28,7 +28,7 @@ jobs:
           go-version: "1.17"
       - uses: actions/setup-node@v2
         with:
-          node-version: '15'
+          node-version: '20'
       - name: Install tools
         run: make tools-main tools-web
       - name: Build web version and run E2E tests
