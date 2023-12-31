@@ -30,7 +30,7 @@ Download the latest binary from the [releases page](https://github.com/flosell/i
 
 If you're a go developer and have your `GOPATH` defined and have added your `$GOPATH/bin` directory to your path, you can simply run this command.
 ```bash testcase=usage
-$ go get github.com/flosell/iam-policy-json-to-terraform
+$ go install github.com/flosell/iam-policy-json-to-terraform@latest
 ```
 
 ## Usage
