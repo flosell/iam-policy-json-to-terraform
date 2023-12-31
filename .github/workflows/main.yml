@@ -26,7 +26,7 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: "1.18"
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
       - name: Install tools
@@ -34,7 +34,7 @@ jobs:
       - name: Build web version and run E2E tests
         run: make web-build web-e2e web-visual-regression-test
       - name: Store website build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: website
           path: |
@@ -42,7 +42,7 @@ jobs:
             web/web.js
       - name: Store Visual Regression test report
         if: ${{failure()}}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: visual regression test report
           path: |
@@ -54,7 +54,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Retrieve website build from previous step
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: website
           path: web
