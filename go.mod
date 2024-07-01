@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	github.com/flosell/hclencoder v0.0.0-20200802035130-9d8abae53260
-	github.com/github-release/github-release v0.10.0
+	github.com/github-release/github-release v0.10.1
 	github.com/gopherjs/gopherjs v1.17.2
 	github.com/kevinburke/rest v0.0.0-20210425173428-1fcb8c8e9022 // indirect
 	github.com/mattn/go-isatty v0.0.20
