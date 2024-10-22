@@ -4,8 +4,8 @@
   "description": "",
   "main": "web.js",
   "scripts": {
-    "test-live": "testcafe chrome web_test.js --live",
-    "test": "testcafe chrome:headless web_test.js -s takeOnFails=true"
+    "test-live": "testcafe chrome web_test.js --live --disable-native-automation",
+    "test": "testcafe chrome:headless web_test.js -s takeOnFails=true --disable-native-automation"
   },
   "repository": {
     "type": "git",
