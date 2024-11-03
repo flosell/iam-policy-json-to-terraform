@@ -24,6 +24,30 @@ function convertToHcl() {
                 title: 'User is trying to convert CloudFormation code and its not supported',
                 event: true,
             })
+        } else if (e.message && e.message.includes("did not contain any statements")) {
+            window.goatcounter.count({
+                path: 'error-lack-of-statements',
+                title: 'User input didnt contain any statements',
+                event: true,
+            })
+        } else if (e.message && e.message.includes("did not contain any statements")) {
+            window.goatcounter.count({
+                path: 'error-lack-of-statements',
+                title: 'User input didnt contain any statements',
+                event: true,
+            })
+        } else if (e.message && e.message.includes("could not parse input")) {
+            window.goatcounter.count({
+                path: 'error-could-not-parse',
+                title: 'User input couldnt be parsed as JSON',
+                event: true,
+            })
+        } else {
+            window.goatcounter.count({
+                path: 'error-unknown',
+                title: 'An error that we didnt expect happened',
+                event: true,
+            })
         }
 
         return

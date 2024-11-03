@@ -64,7 +64,7 @@ func decode(b []byte) ([]jsonStatement, error) {
 	err := json.Unmarshal(escapeHclSnippetsInJSON(b), document)
 
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("could not parse input: %w", err)
 	}
 
 	if document.Statement == nil {
