@@ -24,6 +24,7 @@ tools: tools-main tools-web ## Install additional required tooling
 
 tools-web: ## Install additional required tooling for the web version
 	test -z "${NO_TOOLS_WEB}" && (cd web && npm install) || echo "skipping tools web because of environment variable (only for testing readme)"
+	test -z "${NO_TOOLS_WEB}" && cp $$(tinygo env TINYGOROOT)/targets/wasm_exec.js ./web
 
 tools-main:  ## Install additional required tooling for the main version
 	cat tools.go | grep _ | cut -f2 -d '_' | xargs -n1 go install
@@ -60,10 +61,12 @@ test-readme: README.md scripts/test-readme.sh ## Run the commands mentioned in t
 	scripts/test-readme.sh
 
 web-serve: web/* ## Serve the web version on a local development server
-	cd web && gopherjs serve github.com/flosell/iam-policy-json-to-terraform/web/
+	cd web && python -m http.server 8080 && cd ..
+	# TODO: rebuild tinygo on changes
 
-web-build: web/*.go ## Build the web version
-	cd web && gopherjs build --minify
+web-build: web/*.go ## Build the web version using tinygo
+	# TODO: ensure tinygo is installed or defer to docker?
+	cd web && GOOS=js GOARCH=wasm tinygo build -o wasm.wasm ./web.go
 
 web-e2e: web/*.go web/*.js ## Run end to end tests for web version (requires web-build)
 	cd web && npm test
