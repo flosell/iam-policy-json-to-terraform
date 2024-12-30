@@ -8,7 +8,7 @@ on:
     branches: [master]
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -19,7 +19,7 @@ jobs:
       - name: Build and Test
         run: make test build
   test-web:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: test
     steps:
       - uses: actions/checkout@v4
@@ -48,7 +48,7 @@ jobs:
           path: |
             web/backstop_data/*
   deploy-web:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: test-web
     if: ${{ github.ref == 'refs/heads/master' }}
     steps:
@@ -65,7 +65,7 @@ jobs:
       - name: Deploy to GitHub Pages
         run: make web-deploy
   test-readme:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: test
     steps:
       - uses: actions/checkout@v4
