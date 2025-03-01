@@ -19,9 +19,9 @@ fi
 cd ${SCRIPT_DIR}/..
 
 echo "Checking GitHub Login..."
-gh auth status
+gh auth status | grep -E 'Token scopes.*workflow'
 if [ $? -ne 0 ]; then
-  echo "Please login to GitHub using 'gh auth login'"
+  echo "Please login to GitHub using 'gh auth login' and afterwards, ensure the token has the 'workflow' scope using 'gh auth refresh -s workflow'"
   exit 1
 fi
 
