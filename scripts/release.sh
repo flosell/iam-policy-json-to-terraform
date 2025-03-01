@@ -58,7 +58,7 @@ done
 HOMEBREW_GITHUB_API_TOKEN="$(gh auth token)" # homebrew often uses a readonly token, set the one already used for release instead
 export HOMEBREW_GITHUB_API_TOKEN
 
-archive_url="https://github.com/flosell/iam-policy-json-to-terraform/archive/${VERSION}.tar.gz"
+archive_url="https://github.com/flosell/iam-policy-json-to-terraform/archive/refs/tags/${VERSION}.tar.gz"
 sha=$(curl -sSLf "${archive_url}" | sha256sum | awk '{print $1}')
 brew bump-formula-pr --strict "iam-policy-json-to-terraform" \
                      --url "${archive_url}" \
