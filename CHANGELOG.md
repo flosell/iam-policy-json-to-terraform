@@ -4,7 +4,7 @@ This changelog contains a loose collection of changes in every release. I will a
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
-## Unreleased
+## 1.9.0 - 2025-03-01
 ### Changed
 
 * No longer generating empty `sid` entries when it's missing in the input JSON (#125) - thank you @esprimo for the contribution
