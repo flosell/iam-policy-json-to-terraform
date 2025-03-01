@@ -54,7 +54,6 @@ data "aws_iam_policy_document" "policy" {
   }
 
   statement {
-    sid    = ""
     effect = "Deny"
 
     not_resources = [
@@ -77,7 +76,6 @@ data "aws_iam_policy_document" "policy" {
   }
 
   statement {
-    sid     = ""
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
 
@@ -92,7 +90,6 @@ data "aws_iam_policy_document" "policy" {
   }
 
   statement {
-    sid     = ""
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
 
