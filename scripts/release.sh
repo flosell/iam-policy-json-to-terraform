@@ -18,6 +18,14 @@ fi
 
 cd ${SCRIPT_DIR}/..
 
+echo "Checking GitHub Login..."
+gh auth status
+if [ $? -ne 0 ]; then
+  echo "Please login to GitHub using 'gh auth login'"
+  exit 1
+fi
+
+
 sed -i "" -e "s/const AppVersion = .*/const AppVersion = \"${VERSION}\"/g" iam-policy-json-to-terraform.go
 git commit -m "Release ${VERSION}: Update AppVersion constant" iam-policy-json-to-terraform.go
 
