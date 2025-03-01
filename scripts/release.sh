@@ -25,6 +25,14 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+echo "Checking GPG signing capabilities..."
+echo "test" | gpg --sign > /dev/null
+
+if [ $? -ne 0 ]; then
+  echo "Please configure GPG signing or ensure the key is not expired"
+  exit 1
+fi
+
 
 sed -i "" -e "s/const AppVersion = .*/const AppVersion = \"${VERSION}\"/g" iam-policy-json-to-terraform.go
 git commit -m "Release ${VERSION}: Update AppVersion constant" iam-policy-json-to-terraform.go
