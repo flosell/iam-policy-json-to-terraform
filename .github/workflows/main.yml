@@ -58,6 +58,7 @@ jobs:
           # TODO: this is not a full list of files required, still need the rest of the repo
           path: |
             web/index.html
+            web/web.js
   web-test:
     runs-on: ubuntu-24.04
     needs: web-build
