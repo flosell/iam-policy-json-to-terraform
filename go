@@ -12,7 +12,6 @@ die() {
 }
 
 goal_build() { ## build all variants
-  goal_test # TODO: shouldn't this be a separate command?
   goal_iam_policy_json_to_terraform_amd64
   goal_iam_policy_json_to_terraform_alpine
   goal_iam_policy_json_to_terraform_darwin

@@ -17,9 +17,11 @@ jobs:
         with:
           go-version: "1.18"
       - name: Install tools
-        run: make tools-main
-      - name: Build and Test
-        run: make test build
+        run: ./go tools_main
+      - name: Build
+        run: ./go build
+      - name: Run tests
+        run: ./go test
   test-web:
     runs-on: ubuntu-24.04
     needs: test
@@ -32,9 +34,15 @@ jobs:
         with:
           node-version: '20'
       - name: Install tools
-        run: make tools-main tools-web
-      - name: Build web version and run E2E tests
-        run: make web-build web-e2e web-visual-regression-test
+        run: |
+          ./go tools_main 
+          ./go tools_web
+      - name: Build web version
+        run: ./go web_build
+      - name: Run E2E tests
+        run: ./go web_e2e
+      - name: Run visual regression tests
+        run: ./go web_visual_regression_test
       - name: Store website build
         uses: actions/upload-artifact@v4
         with:
@@ -65,11 +73,11 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Deploy to GitHub Pages
-        run: make web-deploy
+        run: ./go web_deploy
   test-readme:
     runs-on: ubuntu-24.04
     needs: test
     steps:
       - uses: actions/checkout@v4
       - name: Test if readme is written well
-        run: make test-readme
+        run: ./go test_readme
