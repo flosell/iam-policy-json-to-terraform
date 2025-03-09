@@ -11,11 +11,6 @@ die() {
   exit 1
 }
 
-goal_build() { ## build all
-  goal_cli_build
-  goal_web_build
-}
-
 goal_cli_build() { ## build all CLI variants
   goal_iam_policy_json_to_terraform_amd64
   goal_iam_policy_json_to_terraform_alpine
