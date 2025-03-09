@@ -6,7 +6,7 @@ SCRIPT_DIR=$(cd $(dirname $0) ; pwd -P)
 REPO_ORIGIN=$(git remote get-url origin)
 
 mkdir ${SCRIPT_DIR}/../docs
-cp ${SCRIPT_DIR}/../web/{index.html,web.js,app.css,app.js} ${SCRIPT_DIR}/../docs
+cp ${SCRIPT_DIR}/../web/{index.html,app.css,app.js} ${SCRIPT_DIR}/../docs
 cp -r ${SCRIPT_DIR}/../web/img ${SCRIPT_DIR}/../docs
 
 pushd ${SCRIPT_DIR}/../docs
