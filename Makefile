@@ -17,9 +17,9 @@ fmt: **/*.go ## Format code
 tools: tools-main tools-web ## Install additional required tooling
 
 tools-web: ## Install additional required tooling for the web version
-	./go tools-web
+	./go tools_web
 tools-main:  ## Install additional required tooling for the main version
-	./go tools-main
+	./go tools_main
 
 iam-policy-json-to-terraform_amd64: **/*.go
 	 ./go iam_policy_json_to_terraform_amd64
