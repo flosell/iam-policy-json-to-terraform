@@ -6,63 +6,70 @@ let errorTextBox = document.getElementById("json-error")
 let infoToggleButton = document.getElementById("info-toggle");
 let infoExpander = document.getElementById("info-expander");
 
-function convertToHcl() {
+function displayErrorMessage(errorMessage) {
+    errorTextBox.textContent = "Error: " + errorMessage
+    errorTextBox.style.display = "block"
+}
 
-    let output
-    try {
-        output = convert("hello", inputTextBox.value)
-        errorTextBox.textContent = ""
-        errorTextBox.style.display = null
-    } catch (e) {
-        output = "Error: " + e.message
-        errorTextBox.textContent = output
-        errorTextBox.style.display = "block"
-
-        if (e.message && e.message.includes("looks like CloudFormation code")) {
-            window.goatcounter.count({
-                path: 'error-trying-to-convert-cloudformation',
-                title: 'User is trying to convert CloudFormation code and its not supported',
-                event: true,
-            })
-        } else if (e.message && e.message.includes("did not contain any statements")) {
-            window.goatcounter.count({
-                path: 'error-lack-of-statements',
-                title: 'User input didnt contain any statements',
-                event: true,
-            })
-        } else if (e.message && e.message.includes("did not contain any statements")) {
-            window.goatcounter.count({
-                path: 'error-lack-of-statements',
-                title: 'User input didnt contain any statements',
-                event: true,
-            })
-        } else if (e.message && e.message.includes("could not parse input")) {
-            window.goatcounter.count({
-                path: 'error-could-not-parse',
-                title: 'User input couldnt be parsed as JSON',
-                event: true,
-            })
-        } else {
-            window.goatcounter.count({
-                path: 'error-unknown',
-                title: 'An error that we didnt expect happened',
-                event: true,
-            })
-        }
-
-        return
+function countError(errorMessage) {
+    if (errorMessage && errorMessage.includes("looks like CloudFormation code")) {
+        window.goatcounter.count({
+            path: 'error-trying-to-convert-cloudformation',
+            title: 'User is trying to convert CloudFormation code and its not supported',
+            event: true,
+        })
+    } else if (errorMessage && errorMessage.includes("did not contain any statements")) {
+        window.goatcounter.count({
+            path: 'error-lack-of-statements',
+            title: 'User input didnt contain any statements',
+            event: true,
+        })
+    } else if (errorMessage && errorMessage.includes("did not contain any statements")) {
+        window.goatcounter.count({
+            path: 'error-lack-of-statements',
+            title: 'User input didnt contain any statements',
+            event: true,
+        })
+    } else if (errorMessage && errorMessage.includes("could not parse input")) {
+        window.goatcounter.count({
+            path: 'error-could-not-parse',
+            title: 'User input couldnt be parsed as JSON',
+            event: true,
+        })
+    } else {
+        window.goatcounter.count({
+            path: 'error-unknown',
+            title: 'An error that we didnt expect happened',
+            event: true,
+        })
     }
-    errorTextBox.value = ""
+}
 
+function displayConversionResult(output) {
     outputTextBox.textContent = output
     Prism.highlightElement(outputTextBox)
 
-    window.goatcounter.count({
-        path: 'convert-button-clicked',
-        title: 'Convert-button was clicked',
-        event: true,
-    })
+    errorTextBox.textContent = ""
+    errorTextBox.style.display = null
+    errorTextBox.value = ""
+}
 
+function convertToHcl() {
+    try {
+        let output = convert("hello", inputTextBox.value)
+
+        displayConversionResult(output);
+
+        window.goatcounter.count({
+            path: 'convert-button-clicked',
+            title: 'Convert-button was clicked',
+            event: true,
+        })
+    } catch (e) {
+        let errorMessage = e.message;
+        displayErrorMessage(errorMessage);
+        countError(errorMessage);
+    }
 }
 inputTextBox.addEventListener("input", convertToHcl)
 let h = document.location.hash
