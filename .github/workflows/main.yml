@@ -55,6 +55,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: website
+          # TODO: this is not a full list of files required, still need the rest of the repo
           path: |
             web/index.html
             web/web.js
