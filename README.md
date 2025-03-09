@@ -69,17 +69,17 @@ If a video demo is more your thing, checkout [this nice 2min introduction](https
 * Install dependencies and tools: 
   ```bash testcase=building
   $ cd iam-policy-json-to-terraform
-  $ make tools
+  $ ./go tools
   ```
   
 ### Development
 
 #### Entry point 
 
-`make` is your primary point of entry for any development activity. Call it without arguments to learn more: 
+`./go` is your primary point of entry for any development activity. Call it without arguments to learn more: 
 
 ```bash testcase=building
-$ make
+$ ./go
 build                          Test and build the whole application
 clean                          Remove build artifacts
 fmt                            Format code
@@ -102,10 +102,10 @@ web-visual-regression-test     Test for changes in Web UI visuals
 #### Web Development
 
 To develop the web-frontend, you'll need to first compile the JavaScript version of `iam-policy-json-to-terraform`.
-`make web-build` will do that, generating a `web.js` file. 
+`./go web-build` will do that, generating a `web.js` file. 
 Include it and it'll expose a `convert(policyName,jsonString)` function in the global namespace. 
 
 Currently, the complete web-frontend is plain HTML, JS and CSS, all within `web/index.html`. 
 Edit or refine as needed.
 
-End-To-End Tests for the web frontend exist as [TestCafe](https://testcafe.io/) tests in `web_test.js` and can be run using `make web-e2e`.
+End-To-End Tests for the web frontend exist as [TestCafe](https://testcafe.io/) tests in `web_test.js` and can be run using `./go web-e2e`.
