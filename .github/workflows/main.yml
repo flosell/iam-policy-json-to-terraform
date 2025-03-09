@@ -47,6 +47,7 @@ jobs:
           go-version: "1.18"
       - name: Install tools
         run: |
+          ./go tools_main # for gopherjs
           ./go tools_web
       - name: Build web version
         run: ./go web_build
