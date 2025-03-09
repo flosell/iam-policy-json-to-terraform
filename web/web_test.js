@@ -1,6 +1,6 @@
 import { Selector, t, ClientFunction } from 'testcafe';
 
-fixture `iam-policy-json-to-terraform web version`.page `./index.html`;  // specify the start page
+fixture `iam-policy-json-to-terraform web version`.page `${process.env['TARGET_DOMAIN'] || './'}index.html`;  // specify the start page
 
 let someIamJson = `{
   "Version": "2012-10-17",

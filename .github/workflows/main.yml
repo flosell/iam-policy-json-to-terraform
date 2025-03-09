@@ -106,6 +106,22 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Deploy to GitHub Pages
         run: ./go web_deploy
+  web-test-after-deployment:
+    runs-on: ubuntu-24.04
+    needs: web-deploy
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.18"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install tools
+        run: |
+          ./go tools_web
+      - name: Run E2E tests
+        run: TARGET_DOMAIN="https://flosell.github.io/iam-policy-json-to-terraform/" ./go web_e2e
   test-readme:
     runs-on: ubuntu-24.04
     needs: cli-build
