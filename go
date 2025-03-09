@@ -29,12 +29,13 @@ goal_clean() { ## Remove build and test artifacts as well as dependencies
 }
 
 goal_test() { ## Run all tests
-  goal_fmtcheck # TODO: shouldn't this be a separate command?
-  goal_seccheck # TODO: shouldn't this be a separate command?
   go test -v ./...
-  golint -set_exit_status ./converter
-  golint -set_exit_status .
-  go vet ./...
+}
+
+goal_check() { ## Check code style and common bug patterns
+  goal_check_format
+  goal_check_style
+  goal_check_security
 }
 
 goal_fmt() { ## Format code
@@ -74,7 +75,7 @@ goal_iam_policy_json_to_terraform_exe() {
   GOOS=windows GOARCH=amd64 go build -o iam-policy-json-to-terraform.exe
 }
 
-goal_fmtcheck() { ## Run linter
+goal_check_format() { ## Run linter
   gofmt_files=$(gofmt -l $(find . -name '*.go' | grep -v vendor))
   if [ -n "${gofmt_files}" ]; then
     echo 'gofmt needs running on the following files:'
@@ -84,7 +85,13 @@ goal_fmtcheck() { ## Run linter
   fi
 }
 
-goal_seccheck() { ## Run security checks
+goal_check_style() { ## Check code style
+  golint -set_exit_status ./converter
+  golint -set_exit_status .
+  go vet ./...
+}
+
+goal_check_security() { ## Run security checks
   gosec -exclude G104 ./...
 }
 

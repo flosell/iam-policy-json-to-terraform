@@ -9,6 +9,15 @@ on:
 env:
   TERM: xterm
 jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.18"
+      - run: ./go tools_main
+      - run: ./go check
   test:
     runs-on: ubuntu-24.04
     steps:
@@ -16,8 +25,6 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: "1.18"
-      - name: Install tools
-        run: ./go tools_main
       - name: Build
         run: ./go build
       - name: Run tests
