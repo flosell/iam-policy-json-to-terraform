@@ -126,11 +126,11 @@ goal_help() { ## this help message
   echo "usage: ${bold}$0 <goal>${normal}
 goals:"
   cat "$0" | sed -nr -e "s/goal_([a-zA-Z0-9_-]+).*#(.*)# *(.*)/    ${bold}\1${normal} \2 |--- \3/p" | column -ts '|' | sort
-  exit 1
 }
 
 if type -t "goal_$1" &>/dev/null; then
   goal_$1 "${@:2}"
 else
   goal_help
+  exit 1
 fi

@@ -79,7 +79,7 @@ If a video demo is more your thing, checkout [this nice 2min introduction](https
 `./go` is your primary point of entry for any development activity. Call it without arguments to learn more: 
 
 ```bash testcase=building
-$ ./go
+$ ./go help
 build                          Test and build the whole application
 clean                          Remove build artifacts
 fmt                            Format code
