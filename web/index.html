@@ -54,6 +54,8 @@
 <script type="application/javascript">
     window.Prism = window.Prism || {};
     Prism.manual = true;
+    // allow local if we are running inside a test (to be able to mock out and assert on requests)
+    window.goatcounter = {allow_local: window.navigator && window.navigator.webdriver === true};
 </script>
 <script data-goatcounter="https://flosell.goatcounter.com/count"
         src="https://gc.zgo.at/count.v2.js"

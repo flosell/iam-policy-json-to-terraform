@@ -1,6 +1,15 @@
-import { Selector, t, ClientFunction } from 'testcafe';
+import {ClientFunction, RequestLogger, RequestMock, Selector, t} from 'testcafe';
 
-fixture `iam-policy-json-to-terraform web version`.page `${process.env['TARGET_DOMAIN'] || './'}index.html`;  // specify the start page
+const goatCounter = new RegExp('https://.*\.goatcounter\.com/count');
+const logger = RequestLogger(goatCounter)
+const mock = RequestMock()
+    .onRequestTo(goatCounter)
+    .respond("{}", 202);
+
+
+fixture `iam-policy-json-to-terraform web version`
+    .page `${process.env['TARGET_DOMAIN'] || './'}index.html`
+    .requestHooks(logger,mock)
 
 let someIamJson = `{
   "Version": "2012-10-17",
@@ -43,6 +52,10 @@ class Page {
 
 let p = new Page()
 
+function trackingEvent(eventName) {
+    return record => record.request.url.includes(eventName);
+}
+
 test('happy path', async t => {
     await t.expect(p.output.textContent)
         .eql('data "aws_iam_policy_document" "hello" {}\n')
@@ -51,6 +64,9 @@ test('happy path', async t => {
 
     await t.expect(p.output.textContent)
         .eql(someIamTerraform)
+
+    await t.expect(logger.contains(trackingEvent("convert-button-clicked"))).ok()
+    await logger.clear()
 });
 
 test('error case', async t => {
@@ -58,6 +74,9 @@ test('error case', async t => {
 
     await t.expect(p.error.innerText)
         .contains('unexpected end of JSON input')
+
+    await t.expect(logger.contains(trackingEvent("error-could-not-parse"))).ok()
+    await logger.clear()
 });
 
 test('update to error case', async t => {
@@ -96,4 +115,7 @@ test('bookmarklets', async t => {
     })();
     await t
         .expect(p.output.textContent).eql(someIamTerraform);
+
+    await t.expect(logger.contains(trackingEvent("bookmarklet-used"))).ok()
+    await logger.clear()
 });
