@@ -87,7 +87,7 @@ jobs:
           name: visual regression test report
           path: |
             web/backstop_data/*
-  deploy-web:
+  web-deploy:
     runs-on: ubuntu-24.04
     needs: web-test
     if: ${{ github.ref == 'refs/heads/master' }}
