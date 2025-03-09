@@ -9,6 +9,12 @@ on:
 env:
   TERM: xterm
 jobs:
+  show_help:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Show help
+        run: ./go help
   test:
     runs-on: ubuntu-24.04
     steps:
