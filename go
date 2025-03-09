@@ -11,13 +11,17 @@ die() {
   exit 1
 }
 
-goal_build() { ## build all variants
+goal_build() { ## build all
+  goal_cli_build
+  goal_web_build
+}
+
+goal_cli_build() { ## build all CLI variants
   goal_iam_policy_json_to_terraform_amd64
   goal_iam_policy_json_to_terraform_alpine
   goal_iam_policy_json_to_terraform_darwin
   goal_iam_policy_json_to_terraform_darwin_arm
   goal_iam_policy_json_to_terraform_exe
-  # TODO: should this also build wasm?
 }
 
 goal_clean() { ## Remove build and test artifacts as well as dependencies

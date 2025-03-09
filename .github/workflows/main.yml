@@ -29,11 +29,46 @@ jobs:
         run: ./go build
       - name: Run tests
         run: ./go test
-  test-web:
+  cli-build:
     runs-on: ubuntu-24.04
     needs: test
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.18"
+      - name: Build CLI
+        run: ./go build
+  web-build:
+    runs-on: ubuntu-24.04
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.18"
+      - name: Install tools
+        run: |
+          ./go tools_web
+      - name: Build web version
+        run: ./go web_build
+      - name: Store website build
+        uses: actions/upload-artifact@v4
+        with:
+          name: website
+          path: |
+            web/index.html
+            web/web.js
+  web-test:
+    runs-on: ubuntu-24.04
+    needs: web-build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Retrieve website build from previous step
+        uses: actions/download-artifact@v4
+        with:
+          name: website
+          path: web
       - uses: actions/setup-go@v5
         with:
           go-version: "1.18"
@@ -42,21 +77,11 @@ jobs:
           node-version: '20'
       - name: Install tools
         run: |
-          ./go tools_main 
           ./go tools_web
-      - name: Build web version
-        run: ./go web_build
       - name: Run E2E tests
         run: ./go web_e2e
       - name: Run visual regression tests
         run: ./go web_visual_regression_test
-      - name: Store website build
-        uses: actions/upload-artifact@v4
-        with:
-          name: website
-          path: |
-            web/index.html
-            web/web.js
       - name: Store Visual Regression test report
         if: ${{failure()}}
         uses: actions/upload-artifact@v4
@@ -66,7 +91,7 @@ jobs:
             web/backstop_data/*
   deploy-web:
     runs-on: ubuntu-24.04
-    needs: test-web
+    needs: web-test
     if: ${{ github.ref == 'refs/heads/master' }}
     steps:
       - uses: actions/checkout@v4
@@ -83,7 +108,7 @@ jobs:
         run: ./go web_deploy
   test-readme:
     runs-on: ubuntu-24.04
-    needs: test
+    needs: cli-build
     steps:
       - uses: actions/checkout@v4
       - name: Test if readme is written well
