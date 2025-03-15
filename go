@@ -59,12 +59,17 @@ goal_tools() { ## Install additional required tooling
 
 goal_tools_tinygo() {
   TINYGO_VERSION="0.36.0" # cross-reference this with the referenced version in the duckdb-wasm release used by evidence (see its package-lock.json)
-  ARCH="$(uname -m)"
 
   if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     OS="linux"
   else
     OS="darwin"
+  fi
+
+  if [[ "$(uname -m)" == "x86_64" ]]; then
+    ARCH="amd64"
+  else
+    ARCH="arm64"
   fi
 
   mkdir -p "${SCRIPT_DIR}/.bin"
