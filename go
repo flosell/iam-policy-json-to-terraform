@@ -35,6 +35,7 @@ goal_clean() { ## Remove build and test artifacts as well as dependencies
   rm -f web/web.js*
   rm -rf web/node_modules
   rm -rf web/screenshots
+  rm -rf .bin
 }
 
 goal_test() { ## Run all tests
@@ -56,10 +57,30 @@ goal_tools() { ## Install additional required tooling
   goal_tools_web
 }
 
+goal_tools_tinygo() {
+  TINYGO_VERSION="0.36.0" # cross-reference this with the referenced version in the duckdb-wasm release used by evidence (see its package-lock.json)
+  ARCH="$(uname -m)"
+
+  if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    OS="linux"
+  else
+    OS="darwin"
+  fi
+
+  mkdir -p "${SCRIPT_DIR}/.bin"
+
+  curl --output "${SCRIPT_DIR}/.bin/tinygo.tar.gz" -L "https://github.com/tinygo-org/tinygo/releases/download/v${TINYGO_VERSION}/tinygo${TINYGO_VERSION}.${OS}-${ARCH}.tar.gz"
+
+  cd ${SCRIPT_DIR}/.bin
+  tar xzf tinygo.tar.gz
+  cd ..
+}
+
 goal_tools_web() { ## Install additional required tooling for the web version
   if [ -z "${NO_TOOLS_WEB}" ]; then
     cd web && npm install; cd ..
-    tinygo_docker bash -c 'cat $(tinygo env TINYGOROOT)/targets/wasm_exec.js' > web/wasm_exec.js
+    goal_tools_tinygo
+    cat $(.bin/tinygo/bin/tinygo env TINYGOROOT)/targets/wasm_exec.js > web/wasm_exec.js
   else
     echo "skipping tools web because of environment variable (only for testing readme)"
   fi
@@ -126,12 +147,8 @@ goal_web_serve() { ## Serve the web version on a local development server
   wait
 }
 
-tinygo_docker() {
-  docker run --rm -v $(go env GOPATH):/go -e "GOPATH=/go" -v $(pwd):/src -w /src/web tinygo/tinygo:0.36.0 "$@"
-}
-
 goal_web_build() { ## Build the web version
-  tinygo_docker tinygo build -o wasm.wasm -target=wasm ./web.go
+  ${SCRIPT_DIR}/.bin/tinygo/bin/tinygo build -o web/wasm.wasm -target=wasm web/web.go
 }
 
 goal_web_build_watch() {
