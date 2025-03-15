@@ -3,6 +3,16 @@ set -e
 
 SCRIPT_DIR=$(cd $(dirname $0) ; pwd -P)
 
+background_pids=()
+cleanup() {
+  for pid in "${background_pids[@]}"; do
+    if ps "${pid}" &>/dev/null; then
+      kill -- "${pid}"
+    fi
+  done
+}
+trap cleanup EXIT
+
 die() {
   red=$(tput setaf 1)
   normal=$(tput sgr0)
@@ -101,14 +111,13 @@ goal_test_readme() { ## Run the commands mentioned in the README for sanity-chec
 web_serve_background() {
   cd web
   gopherjs serve github.com/flosell/iam-policy-json-to-terraform/web/ &
-  gopher_pid=$!
+  background_pids+=("$!")
   cd ..
-  trap 'kill -9 $gopher_pid' EXIT
 }
 
 goal_web_serve() { ## Serve the web version on a local development server
   web_serve_background
-  wait $gopher_pid
+  wait
 }
 
 goal_web_build() { ## Build the web version
