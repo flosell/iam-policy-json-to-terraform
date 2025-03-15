@@ -57,8 +57,12 @@ goal_tools() { ## Install additional required tooling
 }
 
 goal_tools_web() { ## Install additional required tooling for the web version
-  test -z "${NO_TOOLS_WEB}" && (cd web && npm install) || echo "skipping tools web because of environment variable (only for testing readme)"
-  tinygo_docker bash -c 'cat $(tinygo env TINYGOROOT)/targets/wasm_exec.js' > web/wasm_exec.js
+  if [ -z "${NO_TOOLS_WEB}" ]; then
+    cd web && npm install; cd ..
+    tinygo_docker bash -c 'cat $(tinygo env TINYGOROOT)/targets/wasm_exec.js' > web/wasm_exec.js
+  else
+    echo "skipping tools web because of environment variable (only for testing readme)"
+  fi
 }
 
 goal_tools_main() { ## Install additional required tooling for the main version
