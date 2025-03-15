@@ -85,8 +85,8 @@ goal_check_format() { ## Run linter
 }
 
 goal_check_style() { ## Check code style
-  revive -set_exit_status ./converter
-  revive -set_exit_status .
+  revive -config revive.toml -set_exit_status ./converter
+  revive -config revive.toml -set_exit_status .
   go vet ./...
 }
 
