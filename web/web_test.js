@@ -7,8 +7,9 @@ const mock = RequestMock()
     .respond("{}", 202);
 
 
-fixture `iam-policy-json-to-terraform web version`
-    .page `${process.env['TARGET_URL']}`
+let target = `${process.env['TARGET_URL']}`;
+fixture `iam-policy-json-to-terraform web version ${target}`
+    .page(target)
     .requestHooks(logger,mock)
 
 let someIamJson = `{
