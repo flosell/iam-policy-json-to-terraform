@@ -11,3 +11,5 @@ web/screenshots
 docs
 web/backstop_data/html_report
 web/backstop_data/bitmaps_test
+web/wasm.wasm
+web/wasm_exec.js

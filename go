@@ -38,7 +38,7 @@ goal_clean() { ## Remove build and test artifacts as well as dependencies
 }
 
 goal_test() { ## Run all tests
-  go test -v ./...
+  go test -v ./converter/
 }
 
 goal_check() { ## Check code style and common bug patterns
@@ -58,6 +58,7 @@ goal_tools() { ## Install additional required tooling
 
 goal_tools_web() { ## Install additional required tooling for the web version
   test -z "${NO_TOOLS_WEB}" && (cd web && npm install) || echo "skipping tools web because of environment variable (only for testing readme)"
+  tinygo_docker bash -c 'cat $(tinygo env TINYGOROOT)/targets/wasm_exec.js' > web/wasm_exec.js
 }
 
 goal_tools_main() { ## Install additional required tooling for the main version
@@ -97,11 +98,12 @@ goal_check_format() { ## Run linter
 goal_check_style() { ## Check code style
   revive -config revive.toml -set_exit_status ./converter
   revive -config revive.toml -set_exit_status .
-  go vet ./...
+  go vet ./converter
+  go vet .
 }
 
 goal_check_security() { ## Run security checks
-  gosec -exclude G104 ./...
+  gosec -exclude-dir=web -exclude G104 ./...
 }
 
 goal_test_readme() { ## Run the commands mentioned in the README for sanity-checking
@@ -110,7 +112,7 @@ goal_test_readme() { ## Run the commands mentioned in the README for sanity-chec
 
 web_serve_background() {
   cd web
-  gopherjs serve github.com/flosell/iam-policy-json-to-terraform/web/ &
+  python -m http.server 8080 &
   background_pids+=("$!")
   cd ..
 }
@@ -120,8 +122,16 @@ goal_web_serve() { ## Serve the web version on a local development server
   wait
 }
 
+tinygo_docker() {
+  docker run --rm -v $(go env GOPATH):/go -e "GOPATH=/go" -v $(pwd):/src -w /src/web tinygo/tinygo:0.36.0 "$@"
+}
+
 goal_web_build() { ## Build the web version
-  cd web && gopherjs build --minify
+  tinygo_docker tinygo build -o wasm.wasm -target=wasm ./web.go
+}
+
+goal_web_build_watch() {
+  fswatch -o web/web.go | xargs -n1 -I{} bash -c 'echo "rebuilding" && ./go web_build'
 }
 
 goal_web_e2e() { ## Run end to end tests for web version (requires web-build)
