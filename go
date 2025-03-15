@@ -142,7 +142,7 @@ goal_test_readme() { ## Run the commands mentioned in the README for sanity-chec
 
 web_serve_background() {
   cd web
-  python -m http.server 8080 &
+  python -m http.server  --bind 0.0.0.0 8080 &
   background_pids+=("$!")
   cd ..
 }
@@ -185,10 +185,12 @@ goal_web_deploy() { ## Deploy the web version to GitHub pages
 }
 
 goal_web_visual_regression_test() { ## Test for changes in Web UI visuals
+  web_serve_background
   cd web && npx backstop test --docker
 }
 
 goal_web_visual_regression_approve() { ## Accept changes in Web UI visuals
+  web_serve_background
   cd web && npx backstop approve
 }
 

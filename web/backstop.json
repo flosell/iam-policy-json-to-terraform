@@ -19,7 +19,7 @@
     {
       "label": "Normal",
       "cookiePath": "backstop_data/engine_scripts/cookies.json",
-      "url": "./index.html",
+      "url": "http://host.docker.internal:8080/",
       "referenceUrl": "",
       "readyEvent": "",
       "readySelector": "",
@@ -38,7 +38,7 @@
     {
       "label": "With Infos Expanded",
       "cookiePath": "backstop_data/engine_scripts/cookies.json",
-      "url": "./index.html",
+      "url": "http://host.docker.internal:8080/",
       "referenceUrl": "",
       "readyEvent": "",
       "readySelector": "",
