@@ -47,7 +47,7 @@ jobs:
           go-version: "1.23"
       - name: Install tools
         run: |
-          ./go tools_web
+          bash -x ./go tools_web
       - name: Build web version
         run: bash -x ./go web_build
       - name: Store website build
