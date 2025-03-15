@@ -77,6 +77,7 @@ jobs:
           node-version: '20'
       - name: Install tools
         run: |
+          ./go tools_main # for gopherjs
           ./go tools_web
       - name: Run E2E tests
         run: ./go web_e2e
