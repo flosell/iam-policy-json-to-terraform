@@ -41,6 +41,7 @@ func convertPrincipals(v stringOrMapWithStringOrStringArray) []hclPrincipal {
 		}
 	case map[string]interface{}:
 		result := make([]hclPrincipal, 0)
+		// revive:disable:unchecked-type-assertion
 		for k, v := range v.(map[string]interface{}) {
 			result = append(result, hclPrincipal{
 				Type:        k,
@@ -57,7 +58,7 @@ func convertStringOrStringArray(v stringOrStringArray) []string {
 	switch v.(type) {
 	case []interface{}:
 		var resources []string
-		resourceArray, _ := v.([]interface{})
+		resourceArray, _ := v.([]interface{}) // revive:disable:unchecked-type-assertion
 		resources = make([]string, len(resourceArray))
 		for i, r := range resourceArray {
 			resources[i] = escapePolicyVariables(r.(string))
@@ -113,5 +114,4 @@ func Convert(policyName string, b []byte) (string, error) {
 	}
 
 	return tfFromStatements, err
-
 }

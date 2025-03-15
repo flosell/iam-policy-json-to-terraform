@@ -1,0 +1,16 @@
+enableAllRules = true
+
+[rule.add-constant]
+    arguments = [{ allowInts = "0,1"}]
+
+[rule.unhandled-error]
+    arguments = ["bytes.Buffer.Write", "bytes.Buffer.WriteByte", "fmt.Print.*", "os.File.WriteString"]
+
+[rule.package-comments]
+    Disabled = true
+
+[rule.line-length-limit]
+    Disabled = true
+
+[rule.use-any] # TODO: this makes sense, fix separately
+    Disabled = true

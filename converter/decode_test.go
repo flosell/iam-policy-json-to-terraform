@@ -6,6 +6,7 @@ import (
 	"testing"
 )
 
+//revive:disable:cognitive-complexity
 func TestUnmarshalJsonStringAndArrayToArray(t *testing.T) {
 	var testcases = []struct {
 		in        string
@@ -40,7 +41,6 @@ func TestUnmarshalJsonStringAndArrayToArray(t *testing.T) {
 			}
 		})
 	}
-
 }
 func TestEscapeHclSnippetsInThem(t *testing.T) {
 	var testcases = []struct {
@@ -74,5 +74,4 @@ func TestEscapeHclSnippetsInThem(t *testing.T) {
 			assert.Equal(t, testcase.out, string(out))
 		})
 	}
-
 }

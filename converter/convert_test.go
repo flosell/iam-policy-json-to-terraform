@@ -34,7 +34,6 @@ func TestConvertFromJsonToTerraformHcl(t *testing.T) {
 			)
 		})
 	}
-
 }
 
 func TestConversionErrors(t *testing.T) {
@@ -96,7 +95,6 @@ func TestEscapeDollarSigns(t *testing.T) {
 				escapePolicyVariables(testcase.in),
 			)
 		})
-
 	}
 }
 

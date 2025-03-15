@@ -75,9 +75,9 @@ func decode(b []byte) ([]jsonStatement, error) {
 	}
 
 	return *document.Statement, nil
-
 }
 
+//revive:disable:cognitive-complexity TODO
 func escapeHclSnippetsInJSON(b []byte) []byte {
 	unescapedBuffer := bytes.Buffer{}
 	escapeBuffer := bytes.Buffer{}

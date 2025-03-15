@@ -45,5 +45,4 @@ func main() {
 	}
 
 	fmt.Print(converted)
-
 }
