@@ -98,8 +98,17 @@ goal_test_readme() { ## Run the commands mentioned in the README for sanity-chec
   scripts/test-readme.sh
 }
 
+web_serve_background() {
+  cd web
+  gopherjs serve github.com/flosell/iam-policy-json-to-terraform/web/ &
+  gopher_pid=$!
+  cd ..
+  trap 'kill -9 $gopher_pid' EXIT
+}
+
 goal_web_serve() { ## Serve the web version on a local development server
-  cd web && gopherjs serve github.com/flosell/iam-policy-json-to-terraform/web/
+  web_serve_background
+  wait $gopher_pid
 }
 
 goal_web_build() { ## Build the web version
@@ -107,11 +116,17 @@ goal_web_build() { ## Build the web version
 }
 
 goal_web_e2e() { ## Run end to end tests for web version (requires web-build)
-  cd web && npm test
+  web_serve_background
+  cd web
+  TARGET_URL="${TARGET_URL:-localhost:8080/}" npm test
+  cd ..
 }
 
 goal_web_e2e_live() { ## Run end to end tests for web version in live mode for development (requires web-build)
-  cd web && npm run test-live
+  web_serve_background
+  cd web
+  TARGET_URL="${TARGET_URL:-localhost:8080/}" npm run test-live
+  cd ..
 }
 
 goal_web_deploy() { ## Deploy the web version to GitHub pages
