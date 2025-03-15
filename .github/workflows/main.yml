@@ -122,7 +122,7 @@ jobs:
         run: |
           ./go tools_web
       - name: Run E2E tests
-        run: TARGET_URL="https://flosell.github.io/iam-policy-json-to-terraform/" ./go web_e2e
+        run: ./go web_e2e_deployed
   test-readme:
     runs-on: ubuntu-24.04
     needs: cli-build

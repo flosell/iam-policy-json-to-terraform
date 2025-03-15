@@ -122,6 +122,12 @@ goal_web_e2e() { ## Run end to end tests for web version (requires web-build)
   cd ..
 }
 
+goal_web_e2e_deployed() { ## Run end to end tests against the deployed web version
+  cd web
+  TARGET_URL="${TARGET_URL:-https://flosell.github.io/iam-policy-json-to-terraform/}" npm test
+  cd ..
+}
+
 goal_web_e2e_live() { ## Run end to end tests for web version in live mode for development (requires web-build)
   web_serve_background
   cd web
