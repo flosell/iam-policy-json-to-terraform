@@ -107,6 +107,12 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Deploy to GitHub Pages
         run: ./go web_deploy
+      - name: Store website build
+        uses: actions/upload-artifact@v4
+        with:
+          name: version
+          path: |
+            docs/version.txt
   web-test-after-deployment:
     runs-on: ubuntu-24.04
     needs: web-deploy
@@ -118,6 +124,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Retrieve website build from previous step
+        uses: actions/download-artifact@v4
+        with:
+          name: version
+          path: docs
+      - name: Wait for version deployed
+        run: ./go wait_for_deployed
       - name: Install tools
         run: |
           ./go tools_web

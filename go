@@ -160,6 +160,24 @@ goal_web_e2e() { ## Run end to end tests for web version (requires web-build)
   cd ..
 }
 
+goal_wait_for_deployed() {
+  TARGET_URL="https://flosell.github.io/iam-policy-json-to-terraform/version.txt"
+
+  expected_version="$(cat docs/version.txt)" # this should come from artifact
+  while true; do
+    current_version=$(curl -s "${TARGET_URL}")
+    echo "Current version: '${current_version}', expected version: '${expected_version}'"
+
+    if [ "${current_version}" != "${expected_version}" ]; then
+      echo "sleeping"
+      sleep 1
+    else
+      echo "found"
+      return
+    fi
+  done
+}
+
 goal_web_e2e_deployed() { ## Run end to end tests against the deployed web version
   cd web
   TARGET_URL="${TARGET_URL:-https://flosell.github.io/iam-policy-json-to-terraform/}" npm test
