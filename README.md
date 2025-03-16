@@ -66,10 +66,10 @@ If a video demo is more your thing, checkout [this nice 2min introduction](https
   $ git clone git@github.com:flosell/iam-policy-json-to-terraform.git
   ```
 
-* Install dependencies and tools: 
+* Install dependencies and tools for the web build (golang tooling is automatically installed when used): 
   ```bash testcase=building
   $ cd iam-policy-json-to-terraform
-  $ ./go tools
+  $ ./go tools_web
   ```
   
 ### Development
