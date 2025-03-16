@@ -191,12 +191,19 @@ goal_web_deploy() { ## Deploy the web version to GitHub pages
 
 goal_web_visual_regression_test() { ## Test for changes in Web UI visuals
   web_serve_background
-  cd web && npx backstop test --docker
+  # docker host networking is different locally and on GitHub actions
+  if [ -z "$CI" ]; then
+    export TARGET_URL="http://host.docker.internal:8080/"
+  else
+    export TARGET_URL="http://172.17.0.1:8080/"
+  fi
+  cd web && npx backstop test --config=backstop.js --docker
 }
 
 goal_web_visual_regression_approve() { ## Accept changes in Web UI visuals
   web_serve_background
-  cd web && npx backstop approve
+  export TARGET_URL="http://host.docker.internal:8080/" # not planning to run this on CI so only local option
+  cd web && npx backstop --config=backstop.js approve
 }
 
 goal_help() { ## this help message

@@ -1,6 +1,8 @@
-{
+const targetUrl = process.env['TARGET_URL']
+
+module.exports = {
   "id": "backstop_default",
-  "dockerCommandTemplate": "docker run --rm -i --mount type=bind,source=\"{cwd}\",target=/src backstopjs/backstopjs:{version} {backstopCommand} {args}",
+  "dockerCommandTemplate": `docker run --rm -i -e TARGET_URL=${targetUrl} --mount type=bind,source="{cwd}",target=/src backstopjs/backstopjs:{version} {backstopCommand} {args}`,
   "viewports": [
     {
       "label": "phone",
@@ -19,7 +21,7 @@
     {
       "label": "Normal",
       "cookiePath": "backstop_data/engine_scripts/cookies.json",
-      "url": "http://host.docker.internal:8080/",
+      "url": targetUrl,
       "referenceUrl": "",
       "readyEvent": "",
       "readySelector": "",
@@ -38,7 +40,7 @@
     {
       "label": "With Infos Expanded",
       "cookiePath": "backstop_data/engine_scripts/cookies.json",
-      "url": "http://host.docker.internal:8080/",
+      "url": targetUrl,
       "referenceUrl": "",
       "readyEvent": "",
       "readySelector": "",
