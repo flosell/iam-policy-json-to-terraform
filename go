@@ -52,11 +52,6 @@ goal_fmt() { ## Format code
   go fmt ./...
 }
 
-goal_tools() { ## Install additional required tooling
-  goal_tools_main
-  goal_tools_web
-}
-
 goal_tools_tinygo() {
   TINYGO_VERSION="0.36.0" # cross-reference this with the referenced version in the duckdb-wasm release used by evidence (see its package-lock.json)
 
@@ -91,9 +86,6 @@ goal_tools_web() { ## Install additional required tooling for the web version
   fi
 }
 
-goal_tools_main() { ## Install additional required tooling for the main version
-  cat tools.go | grep _ | cut -f2 -d '_' | xargs -n1 go install
-}
 
 goal_iam_policy_json_to_terraform_amd64() {
   GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -o iam-policy-json-to-terraform_amd64
@@ -126,15 +118,15 @@ goal_check_format() { ## Run linter
 }
 
 goal_check_style() { ## Check code style
-  revive -config revive.toml -set_exit_status ./converter
-  revive -config revive.toml -set_exit_status .
+  go tool revive -config revive.toml -set_exit_status ./converter
+  go tool revive -config revive.toml -set_exit_status .
   go vet ./converter
   go vet .
 }
 
 goal_check_security() { ## Run security checks
-  gosec -exclude G104 ./converter
-  gosec -exclude G104 .
+  go tool gosec -exclude G104 ./converter
+  go tool gosec -exclude G104 .
 }
 
 goal_test_readme() { ## Run the commands mentioned in the README for sanity-checking

@@ -16,7 +16,6 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: "1.24"
-      - run: ./go tools_main
       - run: ./go check
   test:
     runs-on: ubuntu-24.04
