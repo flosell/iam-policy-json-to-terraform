@@ -12,7 +12,7 @@ import (
 )
 
 // AppVersion : current version
-const AppVersion = "1.9.0"
+const AppVersion = "1.9.1"
 
 func main() {
 	policyName := flag.String("name", "policy", "name of the policy in generated hcl")
