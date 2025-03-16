@@ -37,7 +37,8 @@ fi
 sed -i "" -e "s/const AppVersion = .*/const AppVersion = \"${VERSION}\"/g" iam-policy-json-to-terraform.go
 git commit -m "Release ${VERSION}: Update AppVersion constant" iam-policy-json-to-terraform.go
 
-make clean build
+./go clean
+./go cli_build
 
 chag update $VERSION
 git commit -m "Release ${VERSION}: Update CHANGELOG.md" CHANGELOG.md
