@@ -133,7 +133,8 @@ goal_check_style() { ## Check code style
 }
 
 goal_check_security() { ## Run security checks
-  gosec -exclude-dir=web -exclude G104 ./...
+  gosec -exclude G104 ./converter
+  gosec -exclude G104 .
 }
 
 goal_test_readme() { ## Run the commands mentioned in the README for sanity-checking

@@ -10,7 +10,7 @@ for x in ${testcases}; do
 
   commands=$(cat ${SCRIPT_DIR}/../README.md | sed -e 's_git@github.com:_https://github.com/_g' | sed -n "/\`\`\`bash testcase=${x}/,/\`\`\`/p" | sed -e 's/^[[:space:]]*//' | grep '^\$' | sed -e 's/^\$ //g')
   commands="apt update && apt install -y bsdmainutils; ${commands}"
-  docker run -e NO_TOOLS_WEB=true -e TERM=xterm --rm golang:1.23-bullseye bash -e -x -c "${commands}"
+  docker run -e NO_TOOLS_WEB=true -e TERM=xterm --rm golang:1.24-bullseye bash -e -x -c "${commands}"
 
   echo
   echo
