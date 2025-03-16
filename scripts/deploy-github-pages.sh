@@ -7,6 +7,9 @@ REPO_ORIGIN=$(git remote get-url origin)
 
 mkdir ${SCRIPT_DIR}/../docs
 cp ${SCRIPT_DIR}/../web/{index.html,app.css,app.js,wasm.wasm,wasm_exec.js} ${SCRIPT_DIR}/../docs
+
+echo "${GITHUB_RUN_ID} - ${GITHUB_RUN_NUMBER} - ${GITHUB_RUN_ATTEMPT}" > ${SCRIPT_DIR}/../docs/version.txt
+
 cp -r ${SCRIPT_DIR}/../web/img ${SCRIPT_DIR}/../docs
 
 pushd ${SCRIPT_DIR}/../docs
