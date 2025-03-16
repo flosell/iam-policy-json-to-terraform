@@ -61,6 +61,11 @@ jobs:
             web/wasm.wasm
             web/wasm_exec.js
             web/img/GitHub-Mark-Light-32px.png
+  docker-networking-test: # temporary to debug backstopjs stuff
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./go test_docker_networking
   web-test:
     runs-on: ubuntu-24.04
     needs: web-build
