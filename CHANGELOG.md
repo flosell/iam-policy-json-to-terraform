@@ -4,7 +4,7 @@ This changelog contains a loose collection of changes in every release. I will a
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
-## Unreleased
+## 1.9.1 - 2025-03-16
 ### Changed
 
 * Minor dependency updates
