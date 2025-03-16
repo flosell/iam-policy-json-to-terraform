@@ -61,17 +61,6 @@ jobs:
             web/wasm.wasm
             web/wasm_exec.js
             web/img/GitHub-Mark-Light-32px.png
-  docker-networking-test: # temporary to debug backstopjs stuff
-    runs-on: ubuntu-24.04
-    permissions: {}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        with:
-          limit-access-to-actor: true
-#      - run: ./go test_docker_networking
-
   web-test:
     runs-on: ubuntu-24.04
     needs: web-build
