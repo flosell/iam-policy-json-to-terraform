@@ -63,9 +63,15 @@ jobs:
             web/img/GitHub-Mark-Light-32px.png
   docker-networking-test: # temporary to debug backstopjs stuff
     runs-on: ubuntu-24.04
+    permissions: {}
     steps:
       - uses: actions/checkout@v4
-      - run: ./go test_docker_networking
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true
+#      - run: ./go test_docker_networking
+
   web-test:
     runs-on: ubuntu-24.04
     needs: web-build
