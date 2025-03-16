@@ -142,7 +142,7 @@ goal_test_readme() { ## Run the commands mentioned in the README for sanity-chec
 
 goal_test_docker_networking() {
   web_serve_background
-  docker run -it --rm --entrypoint bash backstopjs/backstopjs:6.3.25 -c 'curl http://host.docker.internal:8080'
+  docker run --rm --entrypoint bash backstopjs/backstopjs:6.3.25 -c 'curl http://host.docker.internal:8080'
 }
 
 web_serve_background() {
