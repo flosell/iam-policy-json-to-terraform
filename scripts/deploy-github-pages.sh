@@ -23,5 +23,3 @@ git commit -m "Updating website"
 git push "${REPO_ORIGIN}" master:gh-pages --force
 
 popd
-
-rm -rf ${SCRIPT_DIR}/../docs
