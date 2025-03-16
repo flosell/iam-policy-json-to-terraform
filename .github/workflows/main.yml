@@ -116,6 +116,7 @@ jobs:
           ./go tools_web
       - name: Wait for version deployed
         run: ./go wait_for_deployed
+        timeout-minutes: 5
       - name: Run E2E tests
         run: ./go web_e2e_deployed
   test-readme:
