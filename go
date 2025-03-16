@@ -169,10 +169,8 @@ goal_wait_for_deployed() {
     echo "Current version: '${current_version}', expected version: '${expected_version}'"
 
     if [ "${current_version}" != "${expected_version}" ]; then
-      echo "sleeping"
       sleep 1
     else
-      echo "found"
       return
     fi
   done
