@@ -171,7 +171,7 @@ goal_wait_for_deployed() {
     if [ "${current_version}" != "${expected_version}" ]; then
       sleep 1
     else
-      return
+      return 0
     fi
   done
 }
