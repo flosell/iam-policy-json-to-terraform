@@ -13,14 +13,18 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: asdf-vm/actions/install@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
       - run: ./go tools_main
       - run: ./go check
   test:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: asdf-vm/actions/install@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
       - name: Run tests
         run: ./go test
   cli-build:
@@ -28,7 +32,9 @@ jobs:
     needs: test
     steps:
       - uses: actions/checkout@v4
-      - uses: asdf-vm/actions/install@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
       - name: Build CLI
         run: ./go cli_build
   web-build:
@@ -36,7 +42,9 @@ jobs:
     needs: test
     steps:
       - uses: actions/checkout@v4
-      - uses: asdf-vm/actions/install@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
       - name: Install tools
         run: |
           ./go tools_web
@@ -63,7 +71,12 @@ jobs:
         with:
           name: website
           path: web
-      - uses: asdf-vm/actions/install@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: Install tools
         run: |
           ./go tools_web
@@ -100,7 +113,12 @@ jobs:
     needs: web-deploy
     steps:
       - uses: actions/checkout@v4
-      - uses: asdf-vm/actions/install@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: Install tools
         run: |
           ./go tools_web
