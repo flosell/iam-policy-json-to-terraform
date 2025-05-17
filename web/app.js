@@ -11,33 +11,41 @@ function displayErrorMessage(errorMessage) {
     errorTextBox.style.display = "block"
 }
 
+function goatcounterCount(args) {
+    if (window.goatcounter && window.goatcounter.count) {
+        window.goatcounter.count(args)
+    } else {
+        console.log("goatcounter not loaded, maybe because of adblocker. Args: ", args)
+    }
+}
+
 function countError(errorMessage) {
     if (errorMessage && errorMessage.includes("looks like CloudFormation code")) {
-        window.goatcounter.count({
+        goatcounterCount({
             path: 'error-trying-to-convert-cloudformation',
             title: 'User is trying to convert CloudFormation code and its not supported',
             event: true,
         })
     } else if (errorMessage && errorMessage.includes("did not contain any statements")) {
-        window.goatcounter.count({
+        goatcounterCount({
             path: 'error-lack-of-statements',
             title: 'User input didnt contain any statements',
             event: true,
         })
     } else if (errorMessage && errorMessage.includes("did not contain any statements")) {
-        window.goatcounter.count({
+        goatcounterCount({
             path: 'error-lack-of-statements',
             title: 'User input didnt contain any statements',
             event: true,
         })
     } else if (errorMessage && errorMessage.includes("could not parse input")) {
-        window.goatcounter.count({
+        goatcounterCount({
             path: 'error-could-not-parse',
             title: 'User input couldnt be parsed as JSON',
             event: true,
         })
     } else {
-        window.goatcounter.count({
+        goatcounterCount({
             path: 'error-unknown',
             title: 'An error that we didnt expect happened',
             event: true,
@@ -65,7 +73,7 @@ function convertToHcl() {
             return
         }
 
-        window.goatcounter.count({
+        goatcounterCount({
             path: 'convert-button-clicked',
             title: 'Convert-button was clicked',
             event: true,
@@ -83,7 +91,7 @@ function initialize() {
     let m = r.exec(h)
     if (m) {
         inputTextBox.value = decodeURIComponent(m[1])
-        window.goatcounter.count({
+        goatcounterCount({
             path: 'bookmarklet-used',
             title: 'Page was loaded using the bookmarklet',
             event: true,
@@ -93,7 +101,7 @@ function initialize() {
     convertToHcl()
     infoToggleButton.addEventListener("click",() => {
         infoExpander.toggleAttribute("open")
-        window.goatcounter.count({
+        goatcounterCount({
             path: 'info-toggle-clicked',
             title: 'Info-Toggle-button was clicked',
             event: true,
