@@ -13,13 +13,13 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: asdf-vm/actions/install@v3
+      - uses: asdf-vm/actions/install@v4
       - run: ./go check
   test:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: asdf-vm/actions/install@v3
+      - uses: asdf-vm/actions/install@v4
       - name: Run tests
         run: ./go test
   cli-build:
@@ -27,7 +27,7 @@ jobs:
     needs: test
     steps:
       - uses: actions/checkout@v4
-      - uses: asdf-vm/actions/install@v3
+      - uses: asdf-vm/actions/install@v4
       - name: Build CLI
         run: ./go cli_build
   web-build:
@@ -35,7 +35,7 @@ jobs:
     needs: test
     steps:
       - uses: actions/checkout@v4
-      - uses: asdf-vm/actions/install@v3
+      - uses: asdf-vm/actions/install@v4
       - name: Install tools
         run: |
           ./go tools_web
@@ -62,7 +62,7 @@ jobs:
         with:
           name: website
           path: web
-      - uses: asdf-vm/actions/install@v3
+      - uses: asdf-vm/actions/install@v4
       - name: Install tools
         run: |
           ./go tools_web
@@ -105,7 +105,7 @@ jobs:
     needs: web-deploy
     steps:
       - uses: actions/checkout@v4
-      - uses: asdf-vm/actions/install@v3
+      - uses: asdf-vm/actions/install@v4
       - name: Retrieve website build from previous step
         uses: actions/download-artifact@v4
         with:
