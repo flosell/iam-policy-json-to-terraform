@@ -12,13 +12,13 @@ jobs:
   check:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: asdf-vm/actions/install@v4
       - run: ./go check
   test:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: asdf-vm/actions/install@v4
       - name: Run tests
         run: ./go test
@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-24.04
     needs: test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: asdf-vm/actions/install@v4
       - name: Build CLI
         run: ./go cli_build
@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-24.04
     needs: test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: asdf-vm/actions/install@v4
       - name: Install tools
         run: |
@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-24.04
     needs: web-build
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Retrieve website build from previous step
         uses: actions/download-artifact@v5
         with:
@@ -82,7 +82,7 @@ jobs:
     needs: web-test
     if: ${{ github.ref == 'refs/heads/master' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Retrieve website build from previous step
         uses: actions/download-artifact@v5
         with:
@@ -104,7 +104,7 @@ jobs:
     runs-on: ubuntu-24.04
     needs: web-deploy
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: asdf-vm/actions/install@v4
       - name: Retrieve website build from previous step
         uses: actions/download-artifact@v5
@@ -123,6 +123,6 @@ jobs:
     runs-on: ubuntu-24.04
     needs: cli-build
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Test if readme is written well
         run: ./go test_readme
