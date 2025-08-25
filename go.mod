@@ -7,7 +7,7 @@ toolchain go1.24.1
 require (
 	github.com/flosell/hclencoder v0.0.0-20200802035130-9d8abae53260
 	github.com/mattn/go-isatty v0.0.20
-	github.com/stretchr/testify v1.10.0
+	github.com/stretchr/testify v1.11.0
 )
 
 require (
