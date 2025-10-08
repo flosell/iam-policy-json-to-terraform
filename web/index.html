@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
         referrerpolicy="no-referrer"
         crossorigin="anonymous"
-    integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" />
-    <link href="app.css" rel="stylesheet"/>
+        integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" />
+    <link href="/web/app.css" rel="stylesheet"/>
 </head>
 <body>
 <section class="wrapper">
@@ -35,11 +35,14 @@
         </dl>
     </details>
     <div class="main">
-        <textarea id="input" autofocus class="editor json-editor">
+        <div class="input-container">
+            <textarea id="input" autofocus class="editor json-editor">
 {
   "Version": "2012-10-17",
   "Statement": []
 }</textarea>
+            <button id="copy-input" class="copy-button" title="Copy JSON to clipboard">📋</button>
+        </div>
         <div id="json-error" class="error json-error"></div>
         <span class="arrow">&gt</span>
         <pre id="output" class="editor hcl-editor language-hcl" ></pre>
@@ -47,7 +50,7 @@
     </div>
     <div class="footer">
         <a href="https://github.com/flosell/iam-policy-json-to-terraform">
-            <img src="img/GitHub-Mark-Light-32px.png" alt="GitHub Logo"/> flosell/iam-policy-json-to-terraform
+            <img src="/web/img/GitHub-Mark-Light-32px.png" alt="GitHub Logo"/> flosell/iam-policy-json-to-terraform
         </a>
     </div>
 </section>
@@ -69,7 +72,8 @@
         referrerpolicy="no-referrer"
         crossorigin="anonymous"
         integrity="sha512-swbu7APQjzOJzQrot5PC5xlX+6Q45sZZpjbnUeabv/mjhF35bcYOWnaIHN6N7cxZjSVM/8kH2Vg+4vBsOnNxKw=="></script>
-<script src="wasm_exec.js"></script>
-<script type="application/javascript" src="app.js"></script>
+<!-- IMPORTANT: wasm_exec.js MUST load before app.js -->
+<script src="/wasm_exec.js"></script>
+<script type="application/javascript" src="/web/app.js"></script>
 </body>
 </html>
