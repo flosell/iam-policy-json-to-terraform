@@ -6,6 +6,8 @@ let errorTextBox = document.getElementById("json-error")
 let infoToggleButton = document.getElementById("info-toggle");
 let infoExpander = document.getElementById("info-expander");
 
+let copyInputButton = document.getElementById("copy-input");
+
 function displayErrorMessage(errorMessage) {
     errorTextBox.textContent = "Error: " + errorMessage
     errorTextBox.style.display = "block"
@@ -32,12 +34,6 @@ function countError(errorMessage) {
             title: 'User input didnt contain any statements',
             event: true,
         })
-    } else if (errorMessage && errorMessage.includes("did not contain any statements")) {
-        goatcounterCount({
-            path: 'error-lack-of-statements',
-            title: 'User input didnt contain any statements',
-            event: true,
-        })
     } else if (errorMessage && errorMessage.includes("could not parse input")) {
         goatcounterCount({
             path: 'error-could-not-parse',
@@ -54,8 +50,7 @@ function countError(errorMessage) {
 }
 
 function displayConversionResult(output) {
-    outputTextBox.textContent = output
-    Prism.highlightElement(outputTextBox)
+    setOutput(output)  
 
     errorTextBox.textContent = ""
     errorTextBox.style.display = null
@@ -84,6 +79,26 @@ function convertToHcl() {
         countError(errorMessage);
     }
 }
+function copyToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+    } else {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        return new Promise((resolve, reject) => {
+            document.execCommand('copy') ? resolve() : reject();
+            textArea.remove();
+        });
+    }
+}
+
 function initialize() {
     inputTextBox.addEventListener("input", convertToHcl)
     let h = document.location.hash
@@ -107,6 +122,89 @@ function initialize() {
             event: true,
         })
     })
+    
+    // Add copy functionality for input
+    copyInputButton.addEventListener("click", async () => {
+        try {
+            await copyToClipboard(inputTextBox.value);
+            const originalText = copyInputButton.textContent;
+            copyInputButton.textContent = '✓';
+            copyInputButton.style.background = '#4CAF50';
+            setTimeout(() => {
+                copyInputButton.textContent = originalText;
+                copyInputButton.style.background = '';
+            }, 1000);
+            
+            goatcounterCount({
+                path: 'copy-input-clicked',
+                title: 'Copy input button was clicked',
+                event: true,
+            });
+        } catch (err) {
+            console.error('Failed to copy text: ', err);
+        }
+    });
+}
+
+function setOutput(output) {
+    const outputEl = document.getElementById("output")
+    outputEl.innerHTML = ""
+    
+    // Create a container for the output with copy button
+    const outputContainer = document.createElement("div")
+    outputContainer.style.position = "relative"
+    outputContainer.style.backgroundColor = "white"
+    
+    // Create the code element
+    const code = document.createElement("code")
+    code.classList.add("language-hcl")  
+    code.textContent = output
+    
+    // Create the pre wrapper that contains the code
+    const preWrapper = document.createElement("pre")
+    preWrapper.classList.add("language-hcl")
+    preWrapper.style.margin = "0"
+    preWrapper.style.padding = "1em"
+    preWrapper.appendChild(code)
+    
+    // Create copy button
+    const copyButton = document.createElement("button")
+    copyButton.textContent = "📋"
+    copyButton.className = "copy-button"
+    copyButton.title = "Copy HCL to clipboard"
+    copyButton.style.position = "absolute"
+    copyButton.style.top = "0.3em"
+    copyButton.style.right = "0.5em"
+    copyButton.style.zIndex = "10"
+    
+    // Add copy functionality
+    copyButton.addEventListener("click", async () => {
+        try {
+            await copyToClipboard(output);
+            const originalText = copyButton.textContent;
+            copyButton.textContent = '✓';
+            copyButton.style.background = '#4CAF50';
+            setTimeout(() => {
+                copyButton.textContent = originalText;
+                copyButton.style.background = '';
+            }, 1000);
+            
+            goatcounterCount({
+                path: 'copy-output-clicked',
+                title: 'Copy output button was clicked',
+                event: true,
+            });
+        } catch (err) {
+            console.error('Failed to copy text: ', err);
+        }
+    });
+    
+    outputContainer.appendChild(preWrapper)
+    outputContainer.appendChild(copyButton)
+    outputEl.appendChild(outputContainer)
+    
+    // Highlight the code
+    Prism.highlightElement(code)
 }
 
 const go = new Go(); // Defined in wasm_exec.js

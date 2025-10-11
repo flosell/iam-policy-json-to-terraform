@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
         referrerpolicy="no-referrer"
         crossorigin="anonymous"
-    integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" />
+        integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" />
     <link href="app.css" rel="stylesheet"/>
 </head>
 <body>
@@ -35,14 +35,17 @@
         </dl>
     </details>
     <div class="main">
-        <textarea id="input" autofocus class="editor json-editor">
+        <div class="input-container">
+            <textarea id="input" autofocus class="json-editor">
 {
   "Version": "2012-10-17",
   "Statement": []
 }</textarea>
+            <button id="copy-input" class="copy-button" title="Copy JSON to clipboard">📋</button>
+        </div>
         <div id="json-error" class="error json-error"></div>
-        <span class="arrow">&gt</span>
-        <pre id="output" class="editor hcl-editor language-hcl" ></pre>
+        <span class="arrow">&gt;</span>
+        <div id="output" class="hcl-editor"></div>
         <div class="error hcl-error"></div>
     </div>
     <div class="footer">
