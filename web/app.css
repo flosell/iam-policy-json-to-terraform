@@ -88,12 +88,10 @@ h1 {
     display: grid;
     grid-gap: 0;
     grid-template-columns: 1fr 0.2fr 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: 1fr auto;
     grid-template-areas:
             "input-container arrow hcl-editor"
-            "json-error arrow hcl-error"
-;
-
+            "json-error arrow hcl-error";
     padding: 40px;
     min-height: 0;
 }
@@ -114,15 +112,25 @@ h1 {
     grid-area: input-container;
     position: relative;
     background-color: white;
+    /* display: flex; 
+    flex-direction: column;
+    min-height: 0;  */
 }
 
 .json-editor {
+    /* grid-area: input-container; */
     width: 100%;
     height: 100%;
     border: none;
     resize: none;
     outline: none;
     padding: 1em;
+    box-sizing: border-box;
+    font-family: var(--code-font-family);
+    font-weight: 400;
+    font-size: 14px;
+    /* flex: 1;
+    min-height: 0; */
 }
 
 .copy-button {
@@ -158,9 +166,15 @@ h1 {
 
 .hcl-editor {
     grid-area: hcl-editor;
+    position: relative;
+    background-color: white;
+    padding: 1em;
+    min-height: 0;
+    overflow: auto;
 }
 .hcl-error {
     grid-area: hcl-error;
+    position: relative;
 }
 .error {
     background-color: var(--error-bg-color);
@@ -180,6 +194,7 @@ h1 {
     font-size: 10vw;
     font-family: var(--display-font-family);
     font-weight: 900;
+    /* grid-row: 1; */
 }
 
 .title,.infos {
@@ -190,4 +205,5 @@ h1 {
 pre[class*=language-] {
     background-color: white;
     margin: 0;
+    /* height: 100%; */
 }
