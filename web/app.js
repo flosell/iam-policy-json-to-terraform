@@ -79,6 +79,7 @@ function convertToHcl() {
         countError(errorMessage);
     }
 }
+
 function copyToClipboard(text) {
     if (navigator.clipboard && window.isSecureContext) {
         return navigator.clipboard.writeText(text);
@@ -150,11 +151,6 @@ function setOutput(output) {
     const outputEl = document.getElementById("output")
     outputEl.innerHTML = ""
     
-    // Create a container for the output with copy button
-    const outputContainer = document.createElement("div")
-    outputContainer.style.position = "relative"
-    outputContainer.style.backgroundColor = "white"
-    
     // Create the code element
     const code = document.createElement("code")
     code.classList.add("language-hcl")  
@@ -163,8 +159,6 @@ function setOutput(output) {
     // Create the pre wrapper that contains the code
     const preWrapper = document.createElement("pre")
     preWrapper.classList.add("language-hcl")
-    preWrapper.style.margin = "0"
-    preWrapper.style.padding = "1em"
     preWrapper.appendChild(code)
     
     // Create copy button
@@ -172,10 +166,6 @@ function setOutput(output) {
     copyButton.textContent = "📋"
     copyButton.className = "copy-button"
     copyButton.title = "Copy HCL to clipboard"
-    copyButton.style.position = "absolute"
-    copyButton.style.top = "0.3em"
-    copyButton.style.right = "0.5em"
-    copyButton.style.zIndex = "10"
     
     // Add copy functionality
     copyButton.addEventListener("click", async () => {
@@ -199,9 +189,10 @@ function setOutput(output) {
         }
     });
     
-    outputContainer.appendChild(preWrapper)
-    outputContainer.appendChild(copyButton)
-    outputEl.appendChild(outputContainer)
+    // Append pre to output container
+    outputEl.appendChild(preWrapper)
+    // Append button directly to outputEl (not inside preWrapper)
+    outputEl.appendChild(copyButton)
     
     // Highlight the code
     Prism.highlightElement(code)
