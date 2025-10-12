@@ -112,13 +112,9 @@ h1 {
     grid-area: input-container;
     position: relative;
     background-color: white;
-    /* display: flex; 
-    flex-direction: column;
-    min-height: 0;  */
 }
 
 .json-editor {
-    /* grid-area: input-container; */
     width: 100%;
     height: 100%;
     border: none;
@@ -129,14 +125,12 @@ h1 {
     font-family: var(--code-font-family);
     font-weight: 400;
     font-size: 14px;
-    /* flex: 1;
-    min-height: 0; */
 }
 
 .copy-button {
     position: absolute;
     top: 0.3em;
-    right: 0.5em;
+    right: 1.2em;
     background: var(--info-bg-color);
     color: var(--title-text-color);
     padding: 6px 12px;
@@ -168,10 +162,19 @@ h1 {
     grid-area: hcl-editor;
     position: relative;
     background-color: white;
-    padding: 1em;
+    /* overflow: auto; */
+    overflow: hidden;
     min-height: 0;
-    overflow: auto;
 }
+
+.hcl-editor pre {
+    margin: 0;
+    padding: 1em;
+    overflow: auto; 
+    height: 100%;   
+    box-sizing: border-box;
+}
+
 .hcl-error {
     grid-area: hcl-error;
     position: relative;
@@ -194,7 +197,6 @@ h1 {
     font-size: 10vw;
     font-family: var(--display-font-family);
     font-weight: 900;
-    /* grid-row: 1; */
 }
 
 .title,.infos {
@@ -204,6 +206,4 @@ h1 {
 /* Align PrismJS theme to our styling */
 pre[class*=language-] {
     background-color: white;
-    margin: 0;
-    /* height: 100%; */
 }
