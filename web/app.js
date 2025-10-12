@@ -191,7 +191,7 @@ function setOutput(output) {
     
     // Append pre to output container
     outputEl.appendChild(preWrapper)
-    // Append button directly to outputEl (not inside preWrapper)
+    // Append button directly to outputEl 
     outputEl.appendChild(copyButton)
     
     // Highlight the code
