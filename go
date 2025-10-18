@@ -24,13 +24,14 @@ die() {
 goal_cli_build() { ## build all CLI variants
   goal_iam_policy_json_to_terraform_amd64
   goal_iam_policy_json_to_terraform_alpine
+  goal_iam_policy_json_to_terraform_arm64
   goal_iam_policy_json_to_terraform_darwin
   goal_iam_policy_json_to_terraform_darwin_arm
   goal_iam_policy_json_to_terraform_exe
 }
 
 goal_clean() { ## Remove build and test artifacts as well as dependencies
-  rm -f -- *_amd64 *_darwin *_alpine *.exe
+  rm -f -- *_amd64 *_darwin *_alpine *_arm64 *.exe
   rm -rf vendor
   rm -f web/web.js*
   rm -rf web/node_modules
@@ -93,6 +94,10 @@ goal_iam_policy_json_to_terraform_amd64() {
 
 goal_iam_policy_json_to_terraform_alpine() {
   GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o iam-policy-json-to-terraform_alpine
+}
+
+goal_iam_policy_json_to_terraform_arm64() {
+  GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -o iam-policy-json-to-terraform_arm64
 }
 
 goal_iam_policy_json_to_terraform_darwin() {
