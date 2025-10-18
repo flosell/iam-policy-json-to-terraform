@@ -51,7 +51,7 @@ gh release create ${VERSION} \
     --title ${VERSION} \
     --notes "$(chag contents)"
 
-for i in "${REPO}.exe" "${REPO}_alpine" "${REPO}_amd64" "${REPO}_darwin" "${REPO}_darwin_arm"; do
+for i in "${REPO}.exe" "${REPO}_alpine" "${REPO}_amd64" "${REPO}_arm64" "${REPO}_darwin" "${REPO}_darwin_arm"; do
   echo "Uploading ${i}..."
   gh release upload ${VERSION} ${i}
 done
