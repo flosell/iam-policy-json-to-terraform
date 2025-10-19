@@ -34,6 +34,11 @@ if [ ${gpg_error:-0} -eq 1 ]; then
   exit 1
 fi
 
+chag --version || chag_error=1
+if [ ${chag_error:-0} -eq 1 ]; then
+  echo "Please install chag from https://github.com/mtdowling/chag"
+  exit 1
+fi
 
 sed -i "" -e "s/const AppVersion = .*/const AppVersion = \"${VERSION}\"/g" iam-policy-json-to-terraform.go
 git commit -m "Release ${VERSION}: Update AppVersion constant" iam-policy-json-to-terraform.go
