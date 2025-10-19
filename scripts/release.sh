@@ -62,11 +62,5 @@ for i in "${REPO}.exe" "${REPO}_alpine" "${REPO}_amd64" "${REPO}_arm64" "${REPO}
   gh release upload ${VERSION} ${i}
 done
 
-HOMEBREW_GITHUB_API_TOKEN="$(gh auth token)" # homebrew often uses a readonly token, set the one already used for release instead
-export HOMEBREW_GITHUB_API_TOKEN
-
-archive_url="https://github.com/flosell/iam-policy-json-to-terraform/archive/refs/tags/${VERSION}.tar.gz"
-sha=$(curl -sSLf "${archive_url}" | sha256sum | awk '{print $1}')
-brew bump-formula-pr --strict "iam-policy-json-to-terraform" \
-                     --url "${archive_url}" \
-                     --sha256 "${sha}"
+echo "Release to GitHub done."
+echo "Homebrew should auto-update after a few hours but better double-check this."
