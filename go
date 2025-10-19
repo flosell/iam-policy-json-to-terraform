@@ -140,7 +140,7 @@ goal_test_readme() { ## Run the commands mentioned in the README for sanity-chec
 
 web_serve_background() {
   cd web
-  python -m http.server  --bind 0.0.0.0 8080 &
+  npx serve -l 8080 &
   background_pids+=("$!")
   cd ..
 }
