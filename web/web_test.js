@@ -109,6 +109,10 @@ test('update to error case', async t => {
 });
 
 test('collapse infos', async t => {
+    // somehow, on the pipeline this test is flaky;
+    // assuming this is because the code behind the info-toggle hasn't loaded yet by the time it's clicked
+    // so waiting a bit and see if that fixes the problem
+    await t.wait(1000)
     await t.expect(p.infoExpander.visible).ok()
 
     await t
