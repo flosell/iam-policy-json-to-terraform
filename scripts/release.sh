@@ -26,9 +26,9 @@ if [ ${no_correctly_scoped_token:-0} -eq 1 ]; then
 fi
 
 echo "Checking GPG signing capabilities..."
-echo "test" | gpg --sign > /dev/null
+echo "test" | gpg --sign > /dev/null || gpg_error=1
 
-if [ $? -ne 0 ]; then
+if [ ${gpg_error:-0} -eq 1 ]; then
   echo "Please configure GPG signing or ensure the key is not expired"
   exit 1
 fi
