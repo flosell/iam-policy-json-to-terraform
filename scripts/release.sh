@@ -29,7 +29,8 @@ echo "Checking GPG signing capabilities..."
 echo "test" | gpg --sign > /dev/null || gpg_error=1
 
 if [ ${gpg_error:-0} -eq 1 ]; then
-  echo "Please configure GPG signing or ensure the key is not expired"
+  echo "Please configure GPG signing or ensure the key is not expired."
+  echo "You might also need to install and configure pinentry-mac to unlock your gpg key without interaction on the terminal."
   exit 1
 fi
 
