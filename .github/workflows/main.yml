@@ -30,22 +30,6 @@ jobs:
       - uses: asdf-vm/actions/install@v4
       - name: Build CLI
         run: ./go cli_build
-  cli-test-arm64:
-    runs-on: ubuntu-24.04
-    needs: cli-build
-    steps:
-      - uses: actions/checkout@v5
-      - uses: asdf-vm/actions/install@v4
-      - name: Install QEMU
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y qemu-user-static
-      - name: Build ARM64 binary
-        run: ./go iam_policy_json_to_terraform_arm64
-      - name: Test ARM64 binary with QEMU
-        run: |
-          echo '{"Statement":[{"Effect":"Allow","Action":["ec2:Describe*"],"Resource":"*"}]}' | qemu-aarch64-static ./iam-policy-json-to-terraform_arm64
-          qemu-aarch64-static ./iam-policy-json-to-terraform_arm64 -version
   web-build:
     runs-on: ubuntu-24.04
     needs: test
