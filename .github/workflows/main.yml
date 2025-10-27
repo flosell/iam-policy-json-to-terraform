@@ -58,7 +58,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Retrieve website build from previous step
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: website
           path: web
@@ -84,7 +84,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Retrieve website build from previous step
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: website
           path: web
@@ -107,7 +107,7 @@ jobs:
       - uses: actions/checkout@v5
       - uses: asdf-vm/actions/install@v4
       - name: Retrieve website build from previous step
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: version
           path: docs
