@@ -90,6 +90,10 @@ jobs:
     if: ${{ github.ref == 'refs/heads/master' }}
     steps:
       - uses: actions/checkout@v5
+      - uses: actions/checkout@v5
+        with:
+          ref: gh-pages
+          path: /tmp/pages
       - name: Retrieve website build from previous step
         uses: actions/download-artifact@v7
         with:
@@ -100,7 +104,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Deploy to GitHub Pages
-        run: ./go web_deploy
+        run: ./go web_deploy /tmp/pages
   web-test-after-deployment:
     runs-on: ubuntu-24.04
     needs: web-deploy

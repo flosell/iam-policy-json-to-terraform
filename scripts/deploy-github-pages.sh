@@ -3,22 +3,20 @@
 set -eu -o pipefail
 
 SCRIPT_DIR=$(cd $(dirname $0) ; pwd -P)
-REPO_ORIGIN=$(git remote get-url origin)
-ASSEMBLY_DIR="${SCRIPT_DIR}/../docs"
+ASSEMBLY_DIR="$1"
 
-mkdir "${ASSEMBLY_DIR}"
+if [ -z "${ASSEMBLY_DIR}" ]; then
+  echo "Usage: $0 <directory with github pages branch checked out>"
+  exit 1
+fi
+
 cp ${SCRIPT_DIR}/../web/{index.html,app.css,app.js,wasm.wasm,wasm_exec.js,version.txt} "${ASSEMBLY_DIR}"
-
 cp -r ${SCRIPT_DIR}/../web/img "${ASSEMBLY_DIR}"
 
 pushd "${ASSEMBLY_DIR}"
 
-git init .
-
-cp ${SCRIPT_DIR}/../.git/config .git/config
-
 git add .
 git commit -m "Updating website"
-git push "${REPO_ORIGIN}" master:gh-pages --force
+git push origin gh-pages
 
 popd

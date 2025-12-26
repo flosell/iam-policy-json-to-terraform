@@ -201,7 +201,7 @@ goal_web_e2e_live() { ## Run end to end tests for web version in live mode for d
 }
 
 goal_web_deploy() { ## Deploy the web version to GitHub pages
-  scripts/deploy-github-pages.sh
+  scripts/deploy-github-pages.sh $1
 }
 
 goal_web_visual_regression_test() { ## Test for changes in Web UI visuals
