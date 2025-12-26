@@ -152,6 +152,12 @@ goal_web_serve() { ## Serve the web version on a local development server
 
 goal_web_build() { ## Build the web version
   ${SCRIPT_DIR}/.bin/tinygo/bin/tinygo build -o web/wasm.wasm -target=wasm web/web.go
+
+  if [ -n "${GITHUB_RUN_ID}${GITHUB_RUN_NUMBER}${GITHUB_RUN_ATTEMPT}" ]; then
+    echo "${GITHUB_RUN_ID} - ${GITHUB_RUN_NUMBER} - ${GITHUB_RUN_ATTEMPT}" > "web/version.txt"
+  else
+    echo "local build" > "web/version.txt"
+  fi
 }
 
 goal_web_build_watch() {
@@ -168,7 +174,7 @@ goal_web_e2e() { ## Run end to end tests for web version (requires web-build)
 goal_wait_for_deployed() {
   TARGET_URL="https://flosell.github.io/iam-policy-json-to-terraform/version.txt"
 
-  expected_version="$(cat docs/version.txt)" # this should come from artifact
+  expected_version="$(cat web/version.txt)" # this should come from artifact
   while true; do
     current_version=$(curl -s "${TARGET_URL}")
     echo "Current version: '${current_version}', expected version: '${expected_version}'"

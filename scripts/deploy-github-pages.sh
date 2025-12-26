@@ -7,9 +7,7 @@ REPO_ORIGIN=$(git remote get-url origin)
 ASSEMBLY_DIR="${SCRIPT_DIR}/../docs"
 
 mkdir "${ASSEMBLY_DIR}"
-cp ${SCRIPT_DIR}/../web/{index.html,app.css,app.js,wasm.wasm,wasm_exec.js} "${ASSEMBLY_DIR}"
-
-echo "${GITHUB_RUN_ID} - ${GITHUB_RUN_NUMBER} - ${GITHUB_RUN_ATTEMPT}" > "${ASSEMBLY_DIR}/version.txt"
+cp ${SCRIPT_DIR}/../web/{index.html,app.css,app.js,wasm.wasm,wasm_exec.js,version.txt} "${ASSEMBLY_DIR}"
 
 cp -r ${SCRIPT_DIR}/../web/img "${ASSEMBLY_DIR}"
 

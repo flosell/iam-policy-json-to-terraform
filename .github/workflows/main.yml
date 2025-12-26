@@ -46,12 +46,19 @@ jobs:
         with:
           name: website
           path: |
+            web/version.txt
             web/index.html
             web/app.css
             web/app.js
             web/wasm.wasm
             web/wasm_exec.js
             web/img/GitHub-Mark-Light-32px.png
+      - name: Store build version
+        uses: actions/upload-artifact@v6
+        with:
+          name: version
+          path: |
+            web/version.txt
   web-test:
     runs-on: ubuntu-24.04
     needs: web-build
@@ -94,23 +101,17 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Deploy to GitHub Pages
         run: ./go web_deploy
-      - name: Store website build
-        uses: actions/upload-artifact@v6
-        with:
-          name: version
-          path: |
-            docs/version.txt
   web-test-after-deployment:
     runs-on: ubuntu-24.04
     needs: web-deploy
     steps:
       - uses: actions/checkout@v5
       - uses: asdf-vm/actions/install@v4
-      - name: Retrieve website build from previous step
+      - name: Retrieve website build version from previous step
         uses: actions/download-artifact@v7
         with:
           name: version
-          path: docs
+          path: web
       - name: Install tools
         run: |
           ./go tools_web
