@@ -42,7 +42,7 @@ jobs:
       - name: Build web version
         run: ./go web_build
       - name: Store website build
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: website
           path: |
@@ -72,7 +72,7 @@ jobs:
         run: ./go web_visual_regression_test
       - name: Store Visual Regression test report
         if: ${{failure()}}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: visual regression test report
           path: |
@@ -95,7 +95,7 @@ jobs:
       - name: Deploy to GitHub Pages
         run: ./go web_deploy
       - name: Store website build
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: version
           path: |
