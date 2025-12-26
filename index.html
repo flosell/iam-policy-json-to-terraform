@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>iam-policy-json-to-terraform - Easily convert AWS IAM policies to Terraform HCL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This tool converts standard IAM policies in JSON format (like what you'd find in the AWS docs) into more terraform native aws_iam_policy_document data source code">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&family=Source+Code+Pro:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+        referrerpolicy="no-referrer"
+        crossorigin="anonymous"
+        integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" />
+    <link href="app.css" rel="stylesheet"/>
+</head>
+<body>
+<section class="wrapper">
+    <h1 class="title">IAM JSON to Terraform HCL</h1>
+    <h1 id="info-toggle" class="infos">?</h1>
+    <details id="info-expander" class="details" open>
+        <summary>Learn more about this tool</summary>
+        <dl>
+            <dt>What is this?</dt>
+            <dd>This tool converts standard IAM policies in JSON format (like what you'd find in the AWS docs) into Terraform native aws_iam_policy_document data source code</dd>
+
+            <dt>I'm not a fan of the web or have a lot of files to convert, can I use this on the command line?</dt>
+            <dd>Yes you can! The tool exists as a <a href="https://github.com/flosell/iam-policy-json-to-terraform">CLI version</a> as well as a web version</dd>
+
+            <dt>I often copy-paste policies from documentation on the Web, is there an easier way to do this?</dt>
+            <dd>Yes! Drag this <a href="javascript:if(document.getSelection){s=document.getSelection();}else{s= '{}';};document.location='https://flosell.github.io/iam-policy-json-to-terraform/#content='+encodeURIComponent(s)">
+                bookmarklet
+            </a>to your bookmark bar to convert in one click, on any page</dd>
+        </dl>
+    </details>
+    <div class="main">
+        <div class="input-container">
+            <textarea id="input" autofocus class="json-editor">
+{
+  "Version": "2012-10-17",
+  "Statement": []
+}</textarea>
+            <button id="copy-input" class="copy-button" title="Copy JSON to clipboard">📋</button>
+        </div>
+        <div id="json-error" class="error json-error"></div>
+        <span class="arrow">&gt;</span>
+        <div id="output" class="hcl-editor"></div>
+        <div class="error hcl-error"></div>
+    </div>
+    <div class="footer">
+        <a href="https://github.com/flosell/iam-policy-json-to-terraform">
+            <img src="img/GitHub-Mark-Light-32px.png" alt="GitHub Logo"/> flosell/iam-policy-json-to-terraform
+        </a>
+    </div>
+</section>
+<script type="application/javascript">
+    window.Prism = window.Prism || {};
+    Prism.manual = true;
+    // allow local if we are running inside a test (to be able to mock out and assert on requests)
+    window.goatcounter = {allow_local: window.navigator && window.navigator.webdriver === true};
+</script>
+<script data-goatcounter="https://flosell.goatcounter.com/count"
+        src="https://gc.zgo.at/count.v2.js"
+        crossorigin="anonymous"
+        integrity="sha384-PeYXrhTyEaBBz91ANMgpSbfN1kjioQNPHNDbMvevUVLJoWrVEjDCpKb71TehNAlj"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-core.min.js"
+        referrerpolicy="no-referrer"
+        crossorigin="anonymous"
+        integrity="sha512-TbHaMJHEmRBDf9W3P7VcRGwEmVEJu7MO6roAE0C4yqoNHeIVo3otIX3zj1DOLtn7YCD+U8Oy1T9eMtG/M9lxRw=="></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-hcl.min.js"
+        referrerpolicy="no-referrer"
+        crossorigin="anonymous"
+        integrity="sha512-swbu7APQjzOJzQrot5PC5xlX+6Q45sZZpjbnUeabv/mjhF35bcYOWnaIHN6N7cxZjSVM/8kH2Vg+4vBsOnNxKw=="></script>
+<script src="wasm_exec.js"></script>
+<script type="application/javascript" src="app.js"></script>
+</body>
+</html>
