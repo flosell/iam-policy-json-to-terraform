@@ -4,15 +4,16 @@ set -eu -o pipefail
 
 SCRIPT_DIR=$(cd $(dirname $0) ; pwd -P)
 REPO_ORIGIN=$(git remote get-url origin)
+ASSEMBLY_DIR="${SCRIPT_DIR}/../docs"
 
-mkdir ${SCRIPT_DIR}/../docs
-cp ${SCRIPT_DIR}/../web/{index.html,app.css,app.js,wasm.wasm,wasm_exec.js} ${SCRIPT_DIR}/../docs
+mkdir "${ASSEMBLY_DIR}"
+cp ${SCRIPT_DIR}/../web/{index.html,app.css,app.js,wasm.wasm,wasm_exec.js} "${ASSEMBLY_DIR}"
 
-echo "${GITHUB_RUN_ID} - ${GITHUB_RUN_NUMBER} - ${GITHUB_RUN_ATTEMPT}" > ${SCRIPT_DIR}/../docs/version.txt
+echo "${GITHUB_RUN_ID} - ${GITHUB_RUN_NUMBER} - ${GITHUB_RUN_ATTEMPT}" > "${ASSEMBLY_DIR}/version.txt"
 
-cp -r ${SCRIPT_DIR}/../web/img ${SCRIPT_DIR}/../docs
+cp -r ${SCRIPT_DIR}/../web/img "${ASSEMBLY_DIR}"
 
-pushd ${SCRIPT_DIR}/../docs
+pushd "${ASSEMBLY_DIR}"
 
 git init .
 
