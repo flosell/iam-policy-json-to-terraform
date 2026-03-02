@@ -42,7 +42,7 @@ jobs:
       - name: Build web version
         run: ./go web_build
       - name: Store website build
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: website
           path: |
@@ -54,7 +54,7 @@ jobs:
             web/wasm_exec.js
             web/img/GitHub-Mark-Light-32px.png
       - name: Store build version
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: version
           path: |
@@ -79,7 +79,7 @@ jobs:
         run: ./go web_visual_regression_test
       - name: Store Visual Regression test report
         if: ${{failure()}}
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: visual regression test report
           path: |
