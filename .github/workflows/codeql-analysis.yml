@@ -1,6 +1,7 @@
 name: "CodeQL"
 
-permissions: {}
+permissions:
+  security-events: read
 on:
   push:
     branches: [master, ]
