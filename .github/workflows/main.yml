@@ -12,37 +12,41 @@ jobs:
   check:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
-      - uses: asdf-vm/actions/install@v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+      - uses: asdf-vm/actions/install@b7bcd026f18772e44fe1026d729e1611cc435d47 # v4
       - run: ./go check
   test:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
-      - uses: asdf-vm/actions/install@v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+      - uses: asdf-vm/actions/install@b7bcd026f18772e44fe1026d729e1611cc435d47 # v4
       - name: Run tests
         run: ./go test
   cli-build:
     runs-on: ubuntu-24.04
     needs: test
     steps:
-      - uses: actions/checkout@v6
-      - uses: asdf-vm/actions/install@v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: asdf-vm/actions/install@b7bcd026f18772e44fe1026d729e1611cc435d47 # v4
       - name: Build CLI
         run: ./go cli_build
   web-build:
     runs-on: ubuntu-24.04
     needs: test
     steps:
-      - uses: actions/checkout@v6
-      - uses: asdf-vm/actions/install@v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: asdf-vm/actions/install@b7bcd026f18772e44fe1026d729e1611cc435d47 # v4
       - name: Install tools
         run: |
           ./go tools_web
       - name: Build web version
         run: ./go web_build
       - name: Store website build
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: website
           path: |
@@ -54,7 +58,7 @@ jobs:
             web/wasm_exec.js
             web/img/GitHub-Mark-Light-32px.png
       - name: Store build version
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: version
           path: |
@@ -63,13 +67,13 @@ jobs:
     runs-on: ubuntu-24.04
     needs: web-build
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - name: Retrieve website build from previous step
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: website
           path: web
-      - uses: asdf-vm/actions/install@v4
+      - uses: asdf-vm/actions/install@b7bcd026f18772e44fe1026d729e1611cc435d47 # v4
       - name: Install tools
         run: |
           ./go tools_web
@@ -79,7 +83,7 @@ jobs:
         run: ./go web_visual_regression_test
       - name: Store Visual Regression test report
         if: ${{failure()}}
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: visual regression test report
           path: |
@@ -92,13 +96,13 @@ jobs:
       pages: write
       contents: write
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           ref: gh-pages
           path: pages
       - name: Retrieve website build from previous step
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: website
           path: web
@@ -112,10 +116,10 @@ jobs:
     runs-on: ubuntu-24.04
     needs: web-deploy
     steps:
-      - uses: actions/checkout@v6
-      - uses: asdf-vm/actions/install@v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: asdf-vm/actions/install@b7bcd026f18772e44fe1026d729e1611cc435d47 # v4
       - name: Retrieve website build version from previous step
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: version
           path: web
@@ -131,6 +135,6 @@ jobs:
     runs-on: ubuntu-24.04
     needs: cli-build
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - name: Test if readme is written well
         run: ./go test_readme
