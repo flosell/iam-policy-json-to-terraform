@@ -90,7 +90,6 @@ jobs:
     if: ${{ github.ref == 'refs/heads/master' }}
     permissions:
       pages: write
-      contents: write
     steps:
       - uses: actions/checkout@v6
       - uses: actions/checkout@v6
