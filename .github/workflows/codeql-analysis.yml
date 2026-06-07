@@ -1,8 +1,7 @@
 name: "CodeQL"
 
 permissions:
-  security-events: read
-  statuses: write
+  security-events: write
 on:
   push:
     branches: [master, ]
