@@ -165,11 +165,30 @@ goal_test_readme() { ## Run the commands mentioned in the README for sanity-chec
   scripts/test-readme.sh
 }
 
+wait_for_server() {
+  local url="${1}"
+  local timeout_seconds="${2:-60}"
+  local deadline=$((SECONDS + timeout_seconds))
+
+  echo "Waiting for server at ${url} to accept connections..."
+  until curl -sSf -o /dev/null "${url}"; do
+    if [ "${SECONDS}" -ge "${deadline}" ]; then
+      die "Server at ${url} did not become ready within ${timeout_seconds}s"
+    fi
+    sleep 0.5
+  done
+  echo "Server at ${url} is ready"
+}
+
 web_serve_background() {
   cd web
   npx serve -l 8080 &
   background_pids+=("$!")
   cd ..
+  # Wait until the server actually accepts connections before returning.
+  # Otherwise callers (e2e / visual regression) start hitting the server
+  # before it is listening, causing flaky navigation timeouts.
+  wait_for_server "http://localhost:8080/" 60
 }
 
 goal_web_serve() { ## Serve the web version on a local development server
