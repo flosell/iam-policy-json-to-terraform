@@ -109,10 +109,12 @@ test('update to error case', async t => {
 });
 
 test('collapse infos', async t => {
-    // somehow, on the pipeline this test is flaky;
-    // assuming this is because the code behind the info-toggle hasn't loaded yet by the time it's clicked
-    // so waiting a bit and see if that fixes the problem
-    await t.wait(1000)
+    // The #info-toggle click handler is only wired up once the WASM module has
+    // loaded and initialize() has run. initialize() populates #output with the
+    // converted document immediately before attaching that handler, so waiting
+    // for the output to appear deterministically guarantees the handler is bound
+    // before we click - more reliable than a fixed sleep.
+    await t.expect(p.output.textContent).contains('data "aws_iam_policy_document" "hello"')
     await t.expect(p.infoExpander.visible).ok()
 
     await t
