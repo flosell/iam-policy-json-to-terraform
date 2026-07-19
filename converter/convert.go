@@ -2,6 +2,7 @@ package converter
 
 import (
 	"regexp"
+	"sort"
 	"strconv"
 )
 
@@ -18,16 +19,26 @@ func escapePolicyVariables(s string) string {
 
 func convertConditions(conditions map[string]map[string]stringOrStringArray) []hclCondition {
 	result := make([]hclCondition, 0)
-	for k, v := range conditions {
-		for k2, v2 := range v {
+	for _, k := range sortedKeys(conditions) {
+		v := conditions[k]
+		for _, k2 := range sortedKeys(v) {
 			result = append(result, hclCondition{
 				Test:     k,
 				Variable: k2,
-				Values:   convertStringOrStringArray(v2),
+				Values:   convertStringOrStringArray(v[k2]),
 			})
 		}
 	}
 	return result
+}
+
+func sortedKeys[V any](m map[string]V) []string {
+	keys := make([]string, 0, len(m))
+	for k := range m {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	return keys
 }
 
 func convertPrincipals(v stringOrMapWithStringOrStringArray) []hclPrincipal {
@@ -40,12 +51,13 @@ func convertPrincipals(v stringOrMapWithStringOrStringArray) []hclPrincipal {
 			},
 		}
 	case map[string]interface{}:
-		result := make([]hclPrincipal, 0)
 		// revive:disable:unchecked-type-assertion
-		for k, v := range v.(map[string]interface{}) {
+		m := v.(map[string]interface{})
+		result := make([]hclPrincipal, 0)
+		for _, k := range sortedKeys(m) {
 			result = append(result, hclPrincipal{
 				Type:        k,
-				Identifiers: convertStringOrStringArray(v),
+				Identifiers: convertStringOrStringArray(m[k]),
 			})
 		}
 		return result
