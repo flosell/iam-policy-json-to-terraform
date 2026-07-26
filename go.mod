@@ -4,7 +4,7 @@ go 1.25.11
 
 require (
 	github.com/flosell/hclencoder v0.0.0-20200802035130-9d8abae53260
-	github.com/mattn/go-isatty v0.0.22
+	github.com/mattn/go-isatty v0.0.23
 	github.com/stretchr/testify v1.11.1
 )
 
