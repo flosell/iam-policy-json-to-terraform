@@ -5,7 +5,7 @@ go 1.25.11
 require (
 	github.com/flosell/hclencoder v0.0.0-20200802035130-9d8abae53260
 	github.com/mattn/go-isatty v0.0.23
-	github.com/stretchr/testify v1.11.1
+	github.com/stretchr/testify v1.12.0
 )
 
 require (
@@ -19,7 +19,6 @@ require (
 	github.com/ccojocar/zxcvbn-go v1.0.2 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/chavacava/garif v0.1.0 // indirect
-	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/fatih/structtag v1.2.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
@@ -38,7 +37,6 @@ require (
 	github.com/mgechev/dots v0.0.0-20210922191527-e955255bf517 // indirect
 	github.com/mgechev/revive v1.7.0 // indirect
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
-	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/securego/gosec/v2 v2.22.2 // indirect
 	github.com/spf13/afero v1.12.0 // indirect
