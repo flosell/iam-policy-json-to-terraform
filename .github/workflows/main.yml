@@ -50,7 +50,7 @@ jobs:
       - name: Build web version
         run: ./go web_build
       - name: Store website build
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: website
           path: |
@@ -62,7 +62,7 @@ jobs:
             web/wasm_exec.js
             web/img/GitHub-Mark-Light-32px.png
       - name: Store build version
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: version
           path: |
@@ -89,7 +89,7 @@ jobs:
         run: ./go web_visual_regression_test
       - name: Store Visual Regression test report
         if: ${{failure()}}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: visual regression test report
           path: |
